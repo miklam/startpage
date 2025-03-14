@@ -27,7 +27,9 @@ var cards = [
 			"The StoryGraph": "https://app.thestorygraph.com/",
 			"Garmin Connect": "https://connect.garmin.com/modern/",
 			"Strava": "https://www.strava.com/dashboard",
-			"Smashrun": "https://smashrun.com/miklam"
+			"Smashrun": "https://smashrun.com/miklam",
+			"Gemini": "https://gemini.google.com/app",
+			"ChatGPT": "https://chatgpt.com/"
 		}
 	},
 	{
