@@ -151,7 +151,7 @@ body {
 .header #greeting {
   font-family: var(--fontHeader); /* Using Inter now */
   font-weight: 700; /* UPDATED: Make bold */
-  font-size: 3em;  /* UPDATED: Increase size (adjust as needed) */
+  font-size: 2.5em;  /* UPDATED: Increase size (adjust as needed) */
   display: block; /* Ensure it takes its own line */
   margin-bottom: 0.5em; /* Space below greeting */
   color: var(--fg); /* Keep main text color */
@@ -164,14 +164,14 @@ body {
 
 /* Style the Time */
 .header #time {
-    font-size: 1.8em; /* UPDATED: Increase size (adjust as needed) */
+    font-size: 1.6em; /* UPDATED: Increase size (adjust as needed) */
     font-weight: 500; /* Keep regular weight */
     color: var(--ctp-subtext1); /* Slightly dimmer color */
 }
 
 /* Style the Date (including uppercase) */
 .header #date {
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: var(--ctp-subtext0);
     text-transform: uppercase; /* Keep date uppercase */
 }
