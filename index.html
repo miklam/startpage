@@ -6,85 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title>Mikael's Custom Homepage</title>
+    <title>Mikael's Homepage</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
     <div class="container">
 
       <div class="header">
-          <span id="greeting"></span> <span id="username" onclick="toggleMode()"></span> <div> <span id="time"></span> | <span id="date"></span> </div>
+        <span id="greeting"></span>
+        <span id="username" onclick="toggleMode()"></span>
+        <div>
+          <span id="time"></span> | <span id="date"></span>
+        </div>
       </div>
 
       <div class="content-grid">
-          <div class="link-box" id="box-social"> <h2 class="box-title">Social</h2>
-              <ul>
-                  </ul>
-          </div>
 
-          <div class="link-box" id="box-fun">
-              <h2 class="box-title">Fun</h2>
-              <ul>
-                  </ul>
-          </div>
-
-          <div class="link-box" id="box-cloud">
-              <h2 class="box-title">Cloud</h2>
-              <ul>
-                  </ul>
-          </div>
-
-          <div class="link-box" id="box-money">
-              <h2 class="box-title">Money</h2>
-              <ul>
-                  </ul>
-          </div>
-
-          <div class="link-box" id="box-other">
-              <h2 class="box-title">Other</h2>
-              <ul>
-                  </ul>
-          </div>
-
-           </div> </div> <div class="footer">
-      <div id="footer-inner">
-        <div id="hideDiv">
-          <a href="https://github.com/gabeweb/gabestart" target="_blank"
-            >GABEstart</a
-          >
-          is a startpage forked by
-          <a href="https://gabeweb.github.io" target="_blank">GABEweb</a> from
-          <a href="https://github.com/MrAlpha786/getstarted" target="_blank"
-            >GetStarted</a
-          >
-          including some elements from
-          <a href="https://codepen.io/andyfitz/pen/aZrKdV" target="_blank"
-            >The Deep Blue (waves)</a
-          >. Fonts are
-          <a href="https://github.com/IBM/plex" target="_blank">IBM Plex</a> and
-          <a href="https://github.com/IdreesInc/Monocraft" target="_blank"
-            >Monocraft</a
-          >.
-          <br />
-          Released under a
-          <a
-            href="https://github.com/gabeweb/gabestart/blob/main/LICENSE"
-            target="_blank"
-            >GPL-3.0 license</a
-          >.
+        <div class="link-box" id="box-social">
+          <h2 class="box-title">Social</h2>
+          <ul>
+            </ul>
         </div>
-        <button title="Info" alt="Info" onclick="buttonClicked()">
-          &#9432;
-        </button>
+
+        <div class="link-box" id="box-fun">
+          <h2 class="box-title">Fun</h2>
+          <ul>
+            </ul>
+        </div>
+
+        <div class="link-box" id="box-cloud">
+          <h2 class="box-title">Cloud</h2>
+          <ul>
+            </ul>
+        </div>
+
+        <div class="link-box" id="box-money">
+          <h2 class="box-title">Money</h2>
+          <ul>
+            </ul>
+        </div>
+
+        <div class="link-box" id="box-other">
+          <h2 class="box-title">Other</h2>
+          <ul>
+            </ul>
+        </div>
+
+      </div> <div class="footer">
+        <div id="footer-inner">
+          <div id="hideDiv" style="display: none;"> <a href="https://github.com/gabeweb/gabestart" target="_blank">GABEstart</a>
+             is a startpage forked by
+             <a href="https://gabeweb.github.io" target="_blank">GABEweb</a> from
+             <a href="https://github.com/MrAlpha786/getstarted" target="_blank">GetStarted</a>
+             including some elements from
+             <a href="https://codepen.io/andyfitz/pen/aZrKdV" target="_blank">The Deep Blue (waves)</a>.
+             Font is <a href="https://fonts.google.com/specimen/Inter" target="_blank">Inter</a>.
+             <br />
+             Released under a
+             <a href="https://github.com/gabeweb/gabestart/blob/main/LICENSE" target="_blank">GPL-3.0 license</a>.
+          </div>
+          <button title="Info" alt="Info" onclick="buttonClicked()">
+            &#9432;
+          </button>
+        </div>
       </div>
-    </div>
-
-
-    <div id="waveform-collage">
+      </div> <div id="waveform-collage">
       <svg
         class="waves"
         xmlns="http://www.w3.org/2000/svg"
@@ -95,12 +87,7 @@
         <defs>
           <path
             id="gentle-wave"
-            d="M-160 44c30 0
-      58-18 88-18s
-      58 18 88 18
-      58-18 88-18
-      58 18 88 18
-      v44h-352z"
+            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
           />
         </defs>
         <g class="parallax">
@@ -113,5 +100,6 @@
 
     <script src="config.js"></script>
     <script src="main.js"></script>
-    </body>
+
+  </body>
 </html>
