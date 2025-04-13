@@ -126,14 +126,13 @@ body {
 
 /* UPDATED: Main container alignment */
 .container {
-  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin: auto;
   padding-top: 3vmax; /* Increased top padding slightly */
-  padding-left: 20px; /* Added padding */
-  padding-right: 20px; /* Added padding */
+  padding-left: 20px; /* This padding defines the alignment edge */
+  padding-right: 20px; /* This padding defines the alignment edge */
   width: 100%;
 }
 
@@ -172,6 +171,7 @@ body {
 .header #date {
     font-size: 1.2em; /* Keep base size or adjust */
     color: var(--ctp-subtext0); /* Even dimmer color */
+    text-transform: uppercase; /* ADDED: Make date uppercase */
 }
 
 /* Kept: Styling for specific username element if used */
