@@ -153,13 +153,24 @@ body {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  /* Removed default color */
+  color: var(--ctp-text); /* Use main text color */
   margin: 0 0 1em 0;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1);
-  /* ADDED: Make titles uppercase */
-  text-transform: uppercase;
+  padding-bottom: 0.2em; /* Small padding */
+  border-bottom: none; /* Remove bottom border */
+  padding-left: 0.8em; /* Add padding for the border */
+  border-left-width: 4px; /* Example border thickness */
+  border-left-style: solid;
+  /* Default border color (optional) */
+  /* border-left-color: var(--ctp-surface1); */
+  text-transform: none;
 }
+
+/* Apply specific border colors */
+#box-social .box-title { border-left-color: var(--ctp-mauve); }
+#box-fun .box-title { border-left-color: var(--ctp-red); }
+#box-cloud .box-title { border-left-color: var(--ctp-yellow); }
+#box-money .box-title { border-left-color: var(--ctp-green); }
+#box-other .box-title { border-left-color: var(--ctp-blue); }
 
 /* --- Category Title Colors --- */
 #box-social .box-title {
