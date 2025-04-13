@@ -156,7 +156,10 @@ body {
   margin: 0 0 1em 0;
   padding-bottom: 0.5em; /* RE-ADDED padding */
   border-bottom: 1px solid var(--ctp-surface1); /* RE-ADDED border */
-  /* REMOVED border-left-width, border-left-style, padding-left */
+  padding-left: 0.8em;      /* Space for the side border */
+  border-left-width: 4px;   /* Thickness of side border */
+  border-left-style: solid;
+  /* Border color is set per category below */
   text-transform: none;
 }
 
