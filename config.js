@@ -39,7 +39,7 @@ const cards = [
     }
   },
   {
-    name: "Cloud", // Combined Email/Cloud and Google Core Apps
+    name: "Web Apps", // Combined Email/Cloud and Google Core Apps
     bookmarks: {
       // Email/Cloud
       "Proton Mail": "https://mail.proton.me",
@@ -56,7 +56,7 @@ const cards = [
     }
   },
   {
-    name: "Money", // Kept Finances separate
+    name: "Finances", // Kept Finances separate
     bookmarks: {
       "Swedbank": "https://online.swedbank.se/app/ib/logga-in",
       "Budget 2025": "https://docs.google.com/spreadsheets/d/1ysoJcr2J0Tx0bMlGVVw5fr_dCdHJiI5YBNpFZSsGIc8/edit?resourcekey=&gid=586151987#gid=586151987",
@@ -76,6 +76,8 @@ const cards = [
       "Försäkringskassan": "https://www.forsakringskassan.se/logga-in#/",
       "Kivra": "https://accounts.kivra.com/?locale=sv",
       "Marks Kommun Login": "https://home2.mark.se/",
+      "Vklass": "https://auth.vklass.se/",
+      "SchoolSoft": "https://sms.schoolsoft.se/letebo/jsp/Login.jsp",
       // Shopping
       "Prisjakt": "https://www.prisjakt.nu/",
       "Pricerunner": "https://www.pricerunner.se/",
@@ -83,9 +85,7 @@ const cards = [
       "Tradera": "https://www.tradera.com/",
       "Inet": "https://www.inet.se/",
       // Utility / Misc
-      "GitHub": "https://github.com",
-      "Vklass": "https://auth.vklass.se/",
-      "SchoolSoft": "https://sms.schoolsoft.se/letebo/jsp/Login.jsp"
+      "GitHub": "https://github.com"
     }
   }
 ];
