@@ -1,6 +1,6 @@
-/* styles.css - Catppuccin Frappé Theme Applied (April 14, 2025) */
+/* styles.css - Catppuccin Mocha Theme with Side Border Titles (April 14, 2025) */
 
-/* Keep @font-face rules if needed, though not used if Inter is primary */
+/* Keep @font-face rules if needed */
 @font-face {
   font-family: "IBM Plex Mono";
   src: url("asset/fonts/IBM Plex Mono/IBMPlexMono-Regular.ttf");
@@ -10,59 +10,51 @@
   src: url("asset/fonts/Monocraft/Monocraft.otf");
 }
 
-/* --- Catppuccin Frappé Palette & Mapped Core Variables --- */
+/* Catppuccin Mocha Palette & Core Variables */
 :root {
-  /* Catppuccin Frappé Palette */
-  --ctp-rosewater: #f2d5cf;
-  --ctp-flamingo: #eebebe;
-  --ctp-pink: #f4b8e4;
-  --ctp-mauve: #ca9ee6;      /* Accent & Social Title */
-  --ctp-red: #e78284;        /* Fun Title */
-  --ctp-maroon: #ea999c;
-  --ctp-peach: #ef9f76;
-  --ctp-yellow: #e5c890;     /* Web-Apps Title */
-  --ctp-green: #a6d189;      /* Finances Title */
-  --ctp-teal: #81c8be;
-  --ctp-sky: #99d1db;
-  --ctp-sapphire: #85c1dc;
-  --ctp-blue: #8caaee;       /* Other Title */
-  --ctp-lavender: #babbf1;
-  --ctp-text: #c6d0f5;       /* Main text */
-  --ctp-subtext1: #b5bfe2;   /* Time color */
-  --ctp-subtext0: #a5adce;   /* Date color */
-  --ctp-overlay2: #949cbb;
-  --ctp-overlay1: #838ba7;
-  --ctp-overlay0: #737994;
-  --ctp-surface2: #626880;
-  --ctp-surface1: #51576d;   /* Box/Title borders */
-  --ctp-surface0: #414559;   /* Box backgrounds */
-  --ctp-base: #303446;       /* Main background */
-  --ctp-mantle: #292c3c;
-  --ctp-crust: #232634;
-
-  /* --- Apply Frappé to existing variable names --- */
+  /* Catppuccin Mocha Palette */
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;   /* Accent & Social Border */
+  --ctp-red: #f38ba8;     /* Fun Border */
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;  /* Cloud/Web-Apps Border */
+  --ctp-green: #a6e3a1;   /* Money/Finances Border */
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;    /* Other Border */
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;     /* Main text */
+  --ctp-subtext1: #bac2de; /* Header Time color */
+  --ctp-subtext0: #a6adc8; /* Header Date color */
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a; /* Box borders */
+  --ctp-surface0: #313244; /* Box backgrounds */
+  --ctp-base: #1e1e2e;     /* Main background */
+  --ctp-mantle: #181825;   /* Slightly darker bg */
+  --ctp-crust: #11111b;    /* Darkest bg */
 
   /* Core Variables */
   --bg: var(--ctp-base);
   --fg: var(--ctp-text);
   --secondaryBg: var(--ctp-surface0); /* Box backgrounds */
-  /* Keep using --ctp-surface1 for consistency in rules below */
 
-  /* Font Variables (Keep Inter) */
+  /* Font Variables (Using Inter) */
   --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  /* Accents */
-  --accentColor: var(--ctp-mauve); /* Keep Mauve as main accent */
+  --accentColor: var(--ctp-mauve); /* General accent */
   --scrollbar: var(--accentColor);
-
-  /* Keep border radius */
   --bdradius: 0.75em;
 }
-/* --- End Theme Variables --- */
-
 
 /* Body base styles */
 body {
@@ -116,7 +108,7 @@ body {
   font-size: 2em;
   display: block;
   margin-bottom: 0.5em;
-  color: var(--fg); /* Uses Frappé Text */
+  color: var(--fg);
 }
 
 .time-date-stack {
@@ -126,67 +118,59 @@ body {
 .header #time {
     font-size: 1.3em;
     font-weight: 400;
-    color: var(--ctp-subtext1); /* Uses Frappé Subtext1 */
+    color: var(--ctp-subtext1);
 }
 
 .header #date {
     font-size: 1em;
-    color: var(--ctp-subtext0); /* Uses Frappé Subtext0 */
-    text-transform: uppercase;
+    color: var(--ctp-subtext0);
+    text-transform: uppercase; /* Keep uppercase */
 }
 
 /* Grid Layout for Link Boxes (5 columns) */
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr); /* 5 Columns */
   gap: 20px;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto 2em auto;
+  margin: 0 auto 2em auto; /* Center grid block, add bottom margin */
 }
 
 /* Link Box Styling (Visible boxes) */
 .link-box {
-  background-color: var(--secondaryBg); /* Uses Frappé Surface0 */
-  border: 1px solid var(--ctp-surface1); /* Uses Frappé Surface1 */
+  background-color: var(--secondaryBg);
+  border: 1px solid var(--ctp-surface1);
   border-radius: var(--bdradius);
   padding: 1.5em;
   display: flex;
   flex-direction: column;
 }
 
-/* Link Box Title Styling (Base - No default color, uses border bottom) */
+/* Link Box Title Styling (Base - Side Border Style) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
+  color: var(--ctp-text);     /* Consistent TEXT color (main foreground) */
   margin: 0 0 1em 0;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1); /* Uses Frappé Surface1 */
-  text-transform: none;
+  padding-bottom: 0.2em;    /* Space below text before implicit bottom */
+  border-bottom: none;      /* REMOVED bottom border */
+  padding-left: 0.8em;      /* Space for the side border */
+  border-left-width: 4px;   /* Thickness of side border */
+  border-left-style: solid;
+  /* Border color is set per category below */
+  text-transform: none;     /* Titles not uppercase by default */
 }
 
-/* --- Category Title Colors (Catppuccin Frappé) --- */
-#box-social .box-title {
-  color: var(--ctp-mauve);
-}
-#box-fun .box-title,
-#box-media-tools .box-title { /* Use correct ID */
-  color: var(--ctp-red);
-}
-#box-web-apps .box-title,
-#box-cloud-google .box-title { /* Use correct ID */
-  color: var(--ctp-yellow);
-}
-#box-finances .box-title,
-#box-money .box-title { /* Use correct ID */
-  color: var(--ctp-green);
-}
-#box-other .box-title,
-#box-services-shop .box-title { /* Use correct ID */
-  color: var(--ctp-blue);
-}
-/* --- End Category Title Colors --- */
+/* --- Apply specific BORDER colors --- */
+/* NOTE: Ensure these IDs match your index.html */
+#box-social .box-title { border-left-color: var(--ctp-mauve); }
+#box-fun .box-title { border-left-color: var(--ctp-red); }
+#box-web-apps .box-title { border-left-color: var(--ctp-yellow); } /* Assuming ID is box-web-apps */
+#box-finances .box-title { border-left-color: var(--ctp-green); } /* Assuming ID is box-finances */
+#box-other .box-title { border-left-color: var(--ctp-blue); }
+/* --- End Title Border Colors --- */
 
 
 /* Link List Styling */
@@ -203,33 +187,33 @@ body {
 
 /* Link Styling */
 .link-box a {
-  color: var(--fg); /* Use Frappé Text */
+  color: var(--ctp-text);
   text-decoration: none;
   display: block;
   padding: 2px 0;
   transition: color 0.2s ease;
 }
 .link-box a:hover {
-  color: var(--accentColor); /* Use Frappé Mauve for hover */
+  color: var(--accentColor); /* Use general accent (Mauve) for hover */
 }
 
 /* Footer styles */
 .footer {
   font-size: 0.9em;
-  margin: auto auto 1em auto;
+  margin: auto auto 1em auto; /* Pushes footer down */
   padding: 0.5em;
   position: relative;
   text-align: center;
   width: 90%;
-  color: var(--ctp-subtext0); /* Use Frappé Subtext0 */
+  color: var(--ctp-subtext0);
 }
-.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; } /* Footer links use Subtext1 */
-.footer a:hover { color: var(--accentColor); } /* Hover uses Mauve */
+.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
+.footer a:hover { color: var(--accentColor); }
 
 #footer-inner { position: fixed; bottom: 1em; right: 1em; }
-#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; } /* Uses Frappé Overlay1 */
-#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); } /* Hover uses Text */
-#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface1); text-align: right; } /* Uses Frappé Mantle/Subtext1/Surface1 */
+#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
+#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
+#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
 
 /* Media queries */
 @media screen and (min-width: 800px) {
