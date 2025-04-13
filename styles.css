@@ -1,5 +1,7 @@
 /* GetStarted - A simple responsive Startpage
- * Author: MrAlpha786 (github.con/MrAlpha786) */
+ * Author: MrAlpha786 (github.con/MrAlpha786)
+ * Modified based on user request with Catppuccin Mocha theme and layout changes.
+ */
 
 @font-face {
   font-family: "IBM Plex Mono";
@@ -11,74 +13,81 @@
   src: url("asset/fonts/Monocraft/Monocraft.otf");
 }
 
-/* TODO: Create Custom Theme Template to be imported */
-/* Colors and other var*/
+/* UPDATED: Catppuccin Mocha Palette & Core Variables */
 :root {
-  /* GLOBAL  COLORS  */
-  --bg: #2b2a33;
-  --fg: #eff1f5;
+  /* Catppuccin Mocha Palette */
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7; /* Using this as accent */
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;     /* Main text */
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a; /* Box borders, secondary elements */
+  --ctp-surface0: #313244; /* Box backgrounds */
+  --ctp-base: #1e1e2e;     /* Main background */
+  --ctp-mantle: #181825;   /* Slightly darker bg */
+  --ctp-crust: #11111b;    /* Darkest bg */
 
-  --secondaryBg: #1c1b22;
+  /* Core Variables using Catppuccin */
+  --bg: var(--ctp-base);
+  --fg: var(--ctp-text);
+  --secondaryBg: var(--ctp-surface0); /* Used for boxes now */
 
-  --black: #1c1b22;
-  --blue: #8caaee;
-  --cyan: #81c8be;
-  --green: #a6d189;
-  --orange: #ef9f76;
-  --purple: #ca9ee6;
-  --red: #e78284;
-  --white: #eff1f5;
-  --yellow: #e5c890;
-  --rosewater: #f2d5cf;
+  --black: var(--ctp-crust); /* Map old names to new palette */
+  --blue: var(--ctp-blue);
+  --cyan: var(--ctp-teal); /* Previous accent */
+  --green: var(--ctp-green);
+  --orange: var(--ctp-peach);
+  --purple: var(--ctp-mauve);
+  --red: var(--ctp-red);
+  --white: var(--ctp-text); /* Map old white */
+  --yellow: var(--ctp-yellow);
+  --rosewater: var(--ctp-rosewater);
 
   --fontBody: "IBM Plex Mono", "Menlo", "DejaVu Sans Mono",
-    "Bitstream Vera Sans Mono", Courier, monospace;
-  --fontHeader: "Monocraft", monospace;
-  --invert: 1;
-  /* In light mode is vice-versa */
+    "Bitstream Vera Sans Mono", Courier, monospace; /* Kept */
+  --fontHeader: "Monocraft", monospace; /* Kept */
+
+  --accentColor: var(--ctp-mauve); /* NEW: Set main accent */
   --scrollbar: var(--accentColor);
 
-  /* PREFERRED ACCENT */
+  /* CUSTOM USERNAME COLORS (If #username element is kept) */
+  --usernameBg: var(--ctp-surface1); /* Example */
+  --usernameFg: var(--ctp-text); /* Example */
 
-  --accentColor: var(--cyan);
-
-  /* CUSTOM USERNAME COLORS */
-
-  --usernameBg: var(--bg);
-  /* In light mode is vice-versa */
-  --usernameFg: var(--white);
-
-  --bdradius: 0.75em;
+  --bdradius: 0.75em; /* Kept */
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root,
-  .dark-mode {
-    --bg: #1e1e2e;
-    --fg: #cdd6f4;
-
-    --secondaryBg: #44475a;
-
-    --black: #1e1e2e;
-    --invert: 1;
-
-    --usernameBg: var(--accentColor);
-    --usernameFg: #1e1e2e;
-  }
-} */
-
+/* UPDATED: Body base styles */
 body {
   background-color: var(--bg);
   margin: 0;
   font-family: var(--fontBody);
+  color: var(--fg); /* Set default text color */
 }
 
+/* Kept: Global reset and scrollbar base */
 * {
   -ms-overflow-style: none;
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
-  color: var(--fg);
+  color: var(--fg); /* Ensures all text inherits correctly */
   outline-style: none;
   scrollbar-color: #00000000 #00000000;
   scrollbar-width: thin;
@@ -108,354 +117,138 @@ body {
 .visible-scrollbar::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar);
 }
+/* End Scrollbar */
 
+
+/* UPDATED: Main container alignment */
 .container {
   align-items: center;
   display: flex;
   flex-direction: column;
-  /*height: 100vh;*/
   justify-content: flex-start;
   margin: auto;
   padding-top: 2vmax;
+  padding-left: 20px; /* Added padding */
+  padding-right: 20px; /* Added padding */
   width: 100%;
+  max-width: 1200px; /* Optional: Limit max width */
 }
 
-/* Greeting */
-h1#main_header {
-  text-align: center;
-  font-family: var(--fontHeader);
+/* NEW: Header for Greeting/Time/Date */
+.header {
+    text-align: center;
+    margin-bottom: 2em;
+    font-size: 1.1em;
+    color: var(--ctp-subtext1); /* Use a subtext color */
 }
 
-#weather {
-  display: block;
-  position: absolute;
-  top: 26px;
+.header #greeting {
+    font-family: var(--fontHeader);
+    color: var(--fg); /* Make greeting main text color */
+    font-size: 1.5em; /* Make greeting larger */
+    display: block; /* Put greeting on its own line */
+    margin-bottom: 0.5em;
 }
 
-/* Weather */
-#weather-icon {
-  height: 30px;
-  width: 33px;
-  opacity: 0.6;
-  display: block;
-  position: absolute;
-}
-
-#weather-container {
-  font-size: 0.4em;
-  font-weight: 300;
-  display: inline-block;
-  position: relative;
-  width: 36px;
-  height: 36px;
-  text-align: center;
-}
-
-.fade-in-weather {
-  opacity: 1;
-  animation-name: fadeInWeatherOpacity;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-duration: 2s;
-}
-
+/* Kept: Styling for specific username element if used */
 #username {
   background-color: var(--usernameBg);
   border-radius: var(--bdradius);
   color: var(--usernameFg);
-  /*cursor: pointer;*/
   padding: 0 0.5em;
+  font-weight: bold; /* Example addition */
 }
 
-/* Vertical scroll box */
 
-#vertical-scroll-box {
-  position: relative;
-  display: block;
-  max-width: 720px;
-  width: 85%;
+/* --- REMOVED SECTIONS --- */
+
+/* REMOVED: #weather, #weather-icon, #weather-container, .fade-in-weather */
+/* REMOVED: #vertical-scroll-box and related styles */
+/* REMOVED: #search, #searchbar, #search-favicon, #searchInput, #search button, #clear-field, #suggestions */
+/* REMOVED: #nowPlaying-container and all related styles (.playing-info, .bars, etc.) */
+/* REMOVED: Specific time styles like #date-time, #time-date, #dottime (handled by .header now) */
+/* REMOVED: Old Tab styling (.tab-container, .tab, .content, specific tab colors) */
+/* REMOVED: Old Table/Col container styles if not repurposed */
+/* --- END REMOVED SECTIONS --- */
+
+
+/* NEW: Grid Layout for Link Boxes */
+.content-grid {
+  display: grid;
+  /* Adjust minmax(200px, 1fr) for desired box size and responsiveness */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px; /* Space between boxes */
+  width: 90%; /* Container for the boxes */
+  max-width: 1000px; /* Optional max width */
+  margin: 0 auto; /* Center the grid */
 }
 
-.vertical-scroll-box {
-  height: 30px;
-  line-height: 32px;
-  overflow: Hidden;
-  padding: 0px;
-  font-size: 1.5em;
+/* NEW: Link Box Styling */
+.link-box {
+  background-color: var(--secondaryBg); /* Use surface0 for box background */
+  border: 1px solid var(--ctp-surface1); /* Subtle border */
+  border-radius: var(--bdradius);
+  padding: 1.5em; /* Adjust padding */
+  display: flex; /* Use flexbox for content alignment inside the box */
+  flex-direction: column;
 }
 
-.vertical-scroll-box ul,
-.vertical-scroll-box > li {
+/* NEW: Link Box Title Styling */
+.box-title {
+  font-family: var(--fontHeader); /* Use header font */
+  font-size: 1.2em;
+  color: var(--accentColor); /* Use accent color for titles */
+  margin: 0 0 1em 0; /* Remove default top/bottom margin, add bottom margin */
+  padding-bottom: 0.5em; /* Space below title */
+  border-bottom: 1px solid var(--ctp-surface1); /* Separator line */
+}
+
+/* NEW: Link List Styling inside Boxes */
+.link-box ul {
+  list-style: none;
   padding: 0;
   margin: 0;
-  list-style: none;
-  text-align: center;
+  flex-grow: 1; /* Allows box to grow if needed */
 }
 
-.vertical-scroll-box .item-1 {
-  animation: scroll-left 30s linear infinite;
-  -webkit-animation: scroll-left 30s linear infinite;
+.link-box li {
+  margin-bottom: 0.6em; /* Space between links */
 }
 
-/* SEARCH REVAMPED */
-
-#search {
-  width: 90%;
-  margin: 1.5em auto 2em auto;
-  position: relative;
+.link-box a {
+  color: var(--ctp-text); /* Default link color */
+  text-decoration: none;
+  display: block; /* Make links easier to click */
+  padding: 2px 0; /* Small padding */
+  transition: color 0.2s ease; /* Smooth hover transition */
 }
 
-#searchbar {
-  border: 0;
-  border-radius: var(--bdradius);
-  display: flex;
-  background-color: var(--secondaryBg);
-  height: 50px;
-  padding: 2px;
-  padding-left: 20px;
+.link-box a:hover {
+  color: var(--accentColor); /* Link hover color */
 }
 
-#search-favicon {
-  --favicon-bing: url("asset/icons/favicon-bing.svg");
-  --favicon-duckduckgo: url("asset/icons/favicon-duckduckgo.svg");
-  --favicon-google: url("asset/icons/favicon-google.svg");
-  --favicon-yahoo: url("asset/icons/favicon-yahoo.svg");
-  --favicon-yandex: url("asset/icons/favicon-yandex.svg");
-  --faviconSearch: var(--favicon-duckduckgo);
-  filter: invert(0.4);
-}
-
-/* COOL FAVICON SEARCH ENGINE */
-#search-favicon::before {
-  content: var(--faviconSearch);
-  display: inline;
-  filter: invert(var(--invert)) grayscale(100%) saturate(1);
-}
-
-#search-favicon {
-  height: 32px;
-  width: 32px;
-  margin: 10px 6px 5px -8px;
-  position: relative;
-}
-
-#searchInput {
-  width: 100%;
-  flex-grow: 2;
-  border: none;
-  background-color: transparent;
-  font-family: var(--fontBody);
-  font-size: 1.1em;
-  color: inherit;
-}
-
-input:focus {
-  outline: none;
-}
-
-#search button,
-#clear-field input {
-  background-color: transparent;
-  cursor: pointer;
-  margin: 0 0.5em 0 0;
-  padding: 0.75em 0.5em;
-}
-
-#search button img,
-input#clear-field img {
-  filter: invert(0.7);
-  height: 1.2em;
-  width: 1.2em;
-}
-
-#search button:hover img,
-input#clear-field img {
-  filter: invert(var(--invert));
-}
-
-form input:placeholder-shown + button#clear-field {
-  opacity: 0;
-  pointer-events: none;
-}
-
-button#clear-field img {
-  height: 0.9em;
-  width: 0.9em;
-}
-
-#suggestions {
-  background-color: var(--bg);
-  width: 100%;
-  position: absolute;
-  display: none;
-  color: var(--fg);
-  z-index: 1;
-  text-align: left;
-  border-radius: 0 0 var(--bdradius) var(--bdradius);
-  padding-bottom: 15px;
-}
-
-#suggestions hr {
-  margin: 0;
-  margin-bottom: 15px;
-  opacity: 0.5;
-}
-
-#suggestions p {
-  padding-left: 60px;
-  cursor: pointer;
-  margin: 0;
-  padding: 10px 10px 10px 60px;
-}
-
-#suggestions p:hover {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Link Table */
-.table-container {
-  align-items: space-between;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 5%;
-  width: 90%;
-}
-
-.col-container {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  overflow: hidden;
-  width: 100%;
-}
-
-/* Tabs */
-#tab-container {
-  background-color: var(--secondaryBg);
-  border-radius: var(--bdradius) var(--bdradius) 0 0;
-}
-
-.tab {
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  padding: 0.75em;
-  width: 25%;
-}
-
-/* Tab Content */
-#content-container {
-  align-items: flex-start;
-  background-color: var(--Bg);
-  border-radius: 0 0 var(--bdradius) var(--bdradius);
-}
-
-.content {
-  background-color: var(--secondaryBg);
-  display: none;
-  flex-direction: column;
-  height: 36vh;
-  overflow: auto;
-  padding-bottom: 0.75em;
-}
-
-.content.active {
-  display: flex;
-  width: 100%;
-}
-
-.content > a {
-  align-items: center;
-  cursor: pointer;
-  /*display: flex;*/
-  text-align: center;
-  padding: 0.5em;
-}
-
-/* Colors */
-.tab.active[data-tab*="1"],
-.content[data-tab*="1"] a:hover,
-.tab[data-tab*="1"]:hover {
-  background-color: var(--purple);
-  color: var(--black);
-  /* FIX FOR DRACULA-EST THEME */
-}
-
-.tab.active[data-tab*="2"],
-.content[data-tab*="2"] a:hover,
-.tab[data-tab*="2"]:hover {
-  background-color: var(--red);
-  color: var(--black);
-  /* FIX FOR DRACULA-EST THEME */
-}
-
-.tab.active[data-tab*="3"],
-.content[data-tab*="3"] a:hover,
-.tab[data-tab*="3"]:hover {
-  background-color: var(--yellow);
-  color: var(--black);
-  /* FIX FOR DRACULA-EST THEME */
-}
-
-.tab.active[data-tab*="4"],
-.content[data-tab*="4"] a:hover,
-.tab[data-tab*="4"]:hover {
-  background-color: var(--green);
-  color: var(--black);
-  /* FIX FOR DRACULA-EST THEME */
-}
-
-.tab.active[data-tab*="5"],
-.content[data-tab*="5"] a:hover,
-.tab[data-tab*="5"]:hover {
-  background-color: var(--blue);
-  color: var(--black);
-  /* FIX FOR DRACULA-EST THEME */
-}
-
-/* FIX FOR DRACULA-EST THEME */
-.tab.active[data-tab*="1"] a:hover {
-  color: var(--black);
-}
-
-.tab.active[data-tab*="2"] a:hover {
-  color: var(--black);
-}
-
-.tab.active[data-tab*="3"] a:hover {
-  color: var(--black);
-}
-
-/* SPACER TEMPORARY FIX
-/* Betweem table container and footer
-/* For landscape and portrait modes
-*/
-
+/* UPDATED: Footer styles */
 .footer {
-  font-size: 90%;
+  font-size: 0.9em; /* Slightly smaller */
   margin: 5vh auto 1em auto;
   padding: 0.5em;
   position: relative;
   text-align: center;
   width: 90%;
+  color: var(--ctp-subtext0); /* Dimmer text color */
 }
 
 .footer a {
-  filter: opacity(0.5);
-}
-
-.footer a {
-  text-decoration: underline;
-  filter: opacity(0.5);
+  color: var(--ctp-subtext1); /* Slightly brighter link */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.2s ease;
 }
 
 .footer a:hover {
-  filter: opacity(1);
+  color: var(--accentColor); /* Hover color */
 }
 
+/* Kept: Footer inner button if needed, updated colors */
 #footer-inner {
   position: fixed;
   bottom: 1em;
@@ -470,15 +263,17 @@ button#clear-field img {
   right: 0px;
   background-color: transparent;
   font-size: 1.5em;
-  filter: opacity(0.6);
+  color: var(--ctp-overlay1); /* Use a subtle color */
+  transition: color 0.2s ease;
 }
 
 #footer-inner button:hover,
 #footer-inner button:active {
-  filter: opacity(1);
+  color: var(--ctp-text); /* Brighter on hover */
 }
 
 #footer-inner > #hideDiv {
+  /* Kept structure, updated colors */
   display: none;
   position: fixed;
   bottom: 46px;
@@ -487,131 +282,76 @@ button#clear-field img {
   font-size: 0.9em;
   font-weight: 300;
   max-width: 600px;
-  background: var(--bg);
+  background: var(--ctp-mantle); /* Slightly darker bg */
+  color: var(--ctp-subtext1);
   padding: 10px;
   border-radius: var(--bdradius);
-  filter: opacity(0.9);
+  border: 1px solid var(--ctp-surface0);
   text-align: right;
 }
 
+/* Kept: Media queries structure - content might need adjustment based on new layout */
 /* Screens larger than a average phone */
 @media screen and (min-width: 800px) {
-  #tab-container {
-    background-color: transparent;
-  }
-
-  .tab,
-  .tab.active[data-tab^="tab"],
-  .tab[data-tab^="tab"]:hover {
-    background-color: var(--secondaryBg);
-    border-radius: var(--bdradius) var(--bdradius) 0 0;
-    font-size: 1.5em;
-    margin: 0 1%;
-    padding: 0.5em;
-    width: 24%;
-  }
-
-  .tab[data-tab*="1"] {
-    color: var(--purple) !important;
-    /* FIX FOR DRACULA-EST THEME */
-  }
-
-  .tab[data-tab*="2"] {
-    color: var(--red) !important;
-    /* FIX FOR DRACULA-EST THEME */
-  }
-
-  .tab[data-tab*="3"] {
-    color: var(--yellow) !important;
-    /* FIX FOR DRACULA-EST THEME */
-  }
-
-  .tab[data-tab*="4"] {
-    color: var(--green) !important;
-    /* FIX FOR DRACULA-EST THEME */
-  }
-
-  .tab[data-tab*="5"] {
-    color: var(--blue) !important;
-    /* FIX FOR DRACULA-EST THEME */
-  }
-
-  .content,
-  .content.active {
-    border-radius: 0 0 var(--bdradius) var(--bdradius);
-    display: flex;
-    margin: 0 1%;
-    width: 24%;
-  }
-
-  .content > a {
-    padding: 0.25em;
+  /* Example: Adjust grid or box sizes for larger screens if needed */
+  .content-grid {
+     /* Example: Maybe increase gap or change column definition */
+     gap: 25px;
   }
 }
 
 /* Screens larger than a average tab */
-@media screen and (min-width: 800px) {
-  #search {
-    width: 60%;
-  }
-
-  .table-container {
-    width: 75%;
-  }
+@media screen and (min-width: 1024px) { /* Adjusted breakpoint */
+   .content-grid {
+     width: 80%; /* Example: Make grid wider */
+   }
 }
 
 /* DeskTop Screen */
-@media screen and (min-width: 7200px) {
-  #search {
-    width: 40%;
-  }
-
-  .table-container {
-    width: 75%;
-  }
+@media screen and (min-width: 1440px) { /* Adjusted breakpoint */
+   .content-grid {
+     width: 70%; /* Example: Constrain width more */
+     max-width: 1200px;
+   }
 }
 
-/* WAVE PARALLAX ANIMATION TAKEN FROM
-/* https://codepen.io/andyfitz/pen/aZrKdV
-/* Copyright (c) 2022 Andy Fitzsimon
-/* Licensed under The MIT License (MIT)
-*/
-
+/* UPDATED: Waveform color */
 #waveform-collage {
   bottom: 0;
   position: fixed;
-  z-index: -1;
+  z-index: -1; /* Keep behind content */
   width: 100%;
+  pointer-events: none; /* Prevent interaction */
 }
 
 .parallax > use {
   animation: move-forever 30s linear infinite;
   -webkit-animation: move-forever 30s linear infinite;
-  fill: var(--accentColor);
+  fill: var(--accentColor); /* Use accent color */
 }
 
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
-  opacity: 0.15;
+  opacity: 0.1; /* Adjusted opacity */
 }
 
 .parallax > use:nth-child(2) {
   animation-delay: -2s;
   animation-duration: 15s;
-  opacity: 0.25;
+  opacity: 0.15; /* Adjusted opacity */
 }
 
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 5s;
-  opacity: 0.5;
+  opacity: 0.2; /* Adjusted opacity */
 }
 
+/* Kept: Keyframes */
 @-webkit-keyframes move-forever {
   0% {
     transform: translate(-90px, 0%);
   }
-
   100% {
     transform: translate(85px, 0%);
   }
@@ -621,7 +361,6 @@ button#clear-field img {
   0% {
     transform: translate(-90px, 0%);
   }
-
   100% {
     transform: translate(85px, 0%);
   }
@@ -630,195 +369,9 @@ button#clear-field img {
 .waves {
   display: block;
   width: 100%;
-  height: 10em;
+  height: 10em; /* Adjust height if needed */
   max-height: 100vh;
   margin: 0;
 }
 
-/* LAST.FM NOW PLAYING WIDGET */
-
-div#nowPlaying-container {
-  transition: all 4s cubic-bezier(1, 0.835, 0, 0.945);
-  width: 90%;
-  max-width: 640px;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  display: inline-block;
-}
-
-.playing-info {
-  margin-left: 40px;
-}
-
-div#nowPlaying-container #playingInfo p {
-  margin: 0px 15px;
-}
-
-#playingInfo p.playing-now,
-#playingInfo .playing-not {
-  font-size: 1.1em;
-  text-transform: uppercase;
-  animation: scroll-left 30s linear infinite;
-  -webkit-animation: scroll-left 30s linear infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  position: relative;
-}
-
-#playingInfo p.playing-now:hover,
-#playingInfo .playing-not:hover {
-  animation-play-state: paused;
-}
-
-span.titleNowPlaying {
-  animation: none !important;
-  -webkit-animation: none !important;
-  text-transform: lowercase;
-  font-style: italic;
-  display: block;
-  text-align: center;
-}
-
-span.info-connector {
-  font-size: 0.65em;
-  text-transform: lowercase;
-  font-style: italic;
-  font-weight: 300;
-  margin-bottom: 0.1em;
-}
-
-#playingInfo p.playing-not {
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-flex;
-  text-transform: lowercase;
-  color: var(--cyan);
-  padding: 0 0.5em;
-  margin: 0 0.75em;
-  font-weight: bold;
-}
-
-.playing-not a {
-  text-decoration: underline;
-}
-
-#date-time,
-#time-date {
-  color: var(--cyan);
-  background-color: var(--bg);
-  padding: 0 0.5em;
-  margin: 0 0.75em;
-  font-weight: bold;
-}
-
-#dottime {
-  color: var(--cyan);
-  animation-name: blink;
-  animation-duration: 1s;
-  animation-direction: linear;
-  animation-iteration-count: infinite;
-  animation-delay: -0.5s;
-  -webkit-animation-name: blink;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-direction: linear;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-delay: -0.5s;
-}
-
-@-webkit-keyframes blink {
-  0% {
-    filter: opacity(0);
-  }
-
-  100% {
-    filter: opacity(1);
-  }
-}
-
-@keyframes blink {
-  0% {
-    filter: opacity(0);
-  }
-
-  100% {
-    filter: opacity(1);
-  }
-}
-
-@-webkit-keyframes scroll-left {
-  from {
-    transform: translateX(100%);
-  }
-}
-@keyframes scroll-left {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-/* BARS EQUALIZER */
-
-.bars {
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
-  width: 30px;
-  height: 24px;
-  position: absolute;
-  bottom: 5px;
-}
-
-.bars .bar {
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
-  animation-name: oscillator;
-  animation-timing-function: linear;
-  width: 10px;
-  padding: 3px;
-  margin-right: 4px;
-  background-color: var(--usernameBg);
-}
-
-.bars .bar.bar1 {
-  animation-duration: 400ms;
-}
-
-.bars .bar.bar2 {
-  animation-duration: 700ms;
-}
-
-.bars .bar.bar3 {
-  animation-duration: 200ms;
-}
-
-@-webkit-keyframes oscillator {
-  0% {
-    height: 20%;
-    opacity: 0.5;
-  }
-
-  to {
-    height: 100%;
-    opacity: 1;
-  }
-}
-
-@keyframes oscillator {
-  0% {
-    height: 20%;
-    opacity: 0.5;
-  }
-
-  to {
-    height: 100%;
-    opacity: 1;
-  }
-}
-
-/* END EQUALIZER */
+/* REMOVED: Keyframes blink, scroll-left, oscillator as related elements were removed */
