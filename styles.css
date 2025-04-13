@@ -135,15 +135,12 @@ body {
   padding-left: 20px; /* Added padding */
   padding-right: 20px; /* Added padding */
   width: 100%;
-  max-width: 1200px; /* Optional: Limit max width */
 }
 
 /* NEW: Header for Greeting/Time/Date */
 .header {
   text-align: left; /* UPDATED: Align text to the left */
-  width: 90%; /* Match content-grid width */
-  max-width: 1000px; /* Match content-grid max-width */
-  margin: 0 auto 2em auto; /* Center the header block like the grid, add bottom margin */
+  margin-bottom: 2.5em; /* ADDED: Ensure space below header */
   padding: 0; /* Remove default padding if any, rely on container padding */
   /* border-bottom: 1px solid var(--ctp-surface1); Optional: Add a separator below header */
   /* margin-bottom: 2em; */ /* Add space below header */
@@ -153,7 +150,7 @@ body {
 .header #greeting {
   font-family: var(--fontHeader); /* Using Inter now */
   font-weight: 700; /* UPDATED: Make bold */
-  font-size: 2em;  /* UPDATED: Increase size (adjust as needed) */
+  font-size: 3em;  /* UPDATED: Increase size (adjust as needed) */
   display: block; /* Ensure it takes its own line */
   margin-bottom: 0.5em; /* Space below greeting */
   color: var(--fg); /* Keep main text color */
@@ -166,14 +163,14 @@ body {
 
 /* Style the Time */
 .header #time {
-    font-size: 1.3em; /* UPDATED: Increase size (adjust as needed) */
-    font-weight: 400; /* Keep regular weight */
+    font-size: 1.8em; /* UPDATED: Increase size (adjust as needed) */
+    font-weight: 500; /* Keep regular weight */
     color: var(--ctp-subtext1); /* Slightly dimmer color */
 }
 
 /* Style the Date */
 .header #date {
-    font-size: 1em; /* Keep base size or adjust */
+    font-size: 1.2em; /* Keep base size or adjust */
     color: var(--ctp-subtext0); /* Even dimmer color */
 }
 
