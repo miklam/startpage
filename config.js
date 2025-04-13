@@ -32,10 +32,10 @@ const cards = [
       // Health/Fitness
       "Garmin Connect": "https://connect.garmin.com/modern/",
       "Strava": "https://www.strava.com/dashboard",
-      "Smashrun": "https://smashrun.com/miklam"
+      "Smashrun": "https://smashrun.com/miklam",
        // AI Tools
       "Gemini": "https://gemini.google.com/app",
-      "ChatGPT": "https://chatgpt.com/",
+      "ChatGPT": "https://chatgpt.com/"
     }
   },
   {
