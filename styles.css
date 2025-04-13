@@ -1,4 +1,4 @@
-/* styles.css - Reverted to 5-Box Style (April 13, 2025) */
+/* styles.css - Reverted to 5-Box Style with Colored Titles (April 13, 2025) */
 
 /* Keep @font-face rules if needed, though not used if Inter is primary */
 @font-face {
@@ -16,16 +16,16 @@
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7; /* Using this as accent */
-  --ctp-red: #f38ba8;
+  --ctp-mauve: #cba6f7; /* Using this as accent & Social Title */
+  --ctp-red: #f38ba8;   /* Fun Title */
   --ctp-maroon: #eba0ac;
   --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af;
-  --ctp-green: #a6e3a1;
+  --ctp-yellow: #f9e2af; /* Cloud Title */
+  --ctp-green: #a6e3a1;  /* Money Title */
   --ctp-teal: #94e2d5;
   --ctp-sky: #89dceb;
   --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;
+  --ctp-blue: #89b4fa;   /* Other Title */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
   --ctp-subtext1: #bac2de;
@@ -51,7 +51,7 @@
   --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  --accentColor: var(--ctp-mauve);
+  --accentColor: var(--ctp-mauve); /* General accent, used for hover etc. */
   --scrollbar: var(--accentColor);
   --bdradius: 0.75em;
 }
@@ -99,7 +99,6 @@ body {
 /* Header Styling (Reverted to Centered) */
 .header {
   text-align: center; /* REVERTED: Center align header text */
-  /* REMOVED: width, max-width, margin: 0 auto */
   margin-bottom: 2.5em; /* Space below header */
   padding: 0;
 }
@@ -107,7 +106,7 @@ body {
 .header #greeting {
   font-family: var(--fontHeader);
   font-weight: 700;
-  font-size: 2em; /* Keep size adjustments */
+  font-size: 2em;
   display: block;
   margin-bottom: 0.5em;
   color: var(--fg);
@@ -118,51 +117,66 @@ body {
 }
 
 .header #time {
-    font-size: 1.3em; /* Keep size adjustments */
+    font-size: 1.3em;
     font-weight: 400;
     color: var(--ctp-subtext1);
 }
 
 .header #date {
-    font-size: 1em; /* Keep size adjustments */
+    font-size: 1em;
     color: var(--ctp-subtext0);
     text-transform: uppercase; /* Keep uppercase */
 }
 
-/* Grid Layout for Link Boxes (Reverted to 5 columns) */
+/* Grid Layout for Link Boxes (5 columns) */
 .content-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 Columns */
   gap: 20px; /* Space between boxes */
   width: 90%;
-  max-width: 1000px; /* Adjust if needed */
-  margin: 0 auto; /* Center the grid block */
-  /* REMOVED align-items: start; -> boxes stretch vertically now */
+  max-width: 1000px;
+  margin: 0 auto 2em auto; /* Center the grid block, add bottom margin */
 }
 
-/* Link Box Styling (Reverted to visible boxes) */
+/* Link Box Styling (Visible boxes) */
 .link-box {
-  background-color: var(--secondaryBg); /* ADDED BACK */
-  border: 1px solid var(--ctp-surface1); /* ADDED BACK */
-  border-radius: var(--bdradius); /* ADDED BACK */
-  padding: 1.5em; /* ADDED BACK */
+  background-color: var(--secondaryBg);
+  border: 1px solid var(--ctp-surface1);
+  border-radius: var(--bdradius);
+  padding: 1.5em;
   display: flex;
   flex-direction: column;
-  /* Height will stretch by default */
 }
 
-/* Link Box Title Styling (Reverted) */
+/* Link Box Title Styling (Base) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--accentColor); /* Using accent color */
+  /* REMOVED default color: var(--accentColor); */
   margin: 0 0 1em 0;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1); /* ADDED BACK */
-  text-transform: none; /* REVERTED: Removed uppercase from titles */
+  border-bottom: 1px solid var(--ctp-surface1);
+  text-transform: none;
 }
-/* REMOVED: .box-title::before */
+
+/* --- Category Title Colors --- */
+#box-social .box-title {
+  color: var(--ctp-mauve); /* Purple */
+}
+#box-fun .box-title {
+  color: var(--ctp-red);    /* Red */
+}
+#box-cloud .box-title {
+  color: var(--ctp-yellow);/* Yellow */
+}
+#box-money .box-title {
+  color: var(--ctp-green); /* Green */
+}
+#box-other .box-title {
+  color: var(--ctp-blue);  /* Blue */
+}
+/* --- End Category Title Colors --- */
 
 /* Link List Styling */
 .link-box ul {
@@ -176,7 +190,7 @@ body {
   margin-bottom: 0.6em;
 }
 
-/* Link Styling (Reverted) */
+/* Link Styling */
 .link-box a {
   color: var(--ctp-text);
   text-decoration: none;
@@ -185,10 +199,8 @@ body {
   transition: color 0.2s ease;
 }
 .link-box a:hover {
-  color: var(--accentColor);
+  color: var(--accentColor); /* Use general accent for hover */
 }
-/* REMOVED: .link-box a::before */
-
 
 /* Footer styles */
 .footer {
@@ -208,7 +220,7 @@ body {
 #footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
 #footer-inner > #hideDiv { /* display: none; set inline now */ position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
 
-/* Media queries (kept structure, may need adjustments) */
+/* Media queries */
 @media screen and (min-width: 800px) {
    .content-grid { gap: 25px; }
 }
