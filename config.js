@@ -21,7 +21,7 @@ var cards = [
 			"Crunchyroll": "https://crunchyroll.com",
 			"SVT Play": "https://www.svtplay.se/",
 			"D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663",
-			"Foundry": "http://83.251.197.65:30000/auth",
+			"Foundry": "http://83.251.196.97:30000/join",
 			"Nexus Mods": "https://www.nexusmods.com/",
 			"Last FM": "https://www.last.fm",
 			"The StoryGraph": "https://app.thestorygraph.com/",
