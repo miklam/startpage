@@ -147,21 +147,41 @@ body {
   flex-direction: column;
 }
 
-/* Link Box Title Styling (Base - Side Border Style) */
+/* Link Box Title Styling (Base - Reverted to Bottom Border) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--ctp-text);     /* Consistent TEXT color (main foreground) */
+  /* Color is set per category below */
   margin: 0 0 1em 0;
-  padding-bottom: 0.2em;    /* Space below text before implicit bottom */
-  border-bottom: none;      /* REMOVED bottom border */
-  padding-left: 0.8em;      /* Space for the side border */
-  border-left-width: 4px;   /* Thickness of side border */
-  border-left-style: solid;
-  /* Border color is set per category below */
-  text-transform: none;     /* Titles not uppercase by default */
+  padding-bottom: 0.5em; /* RE-ADDED padding */
+  border-bottom: 1px solid var(--ctp-surface1); /* RE-ADDED border */
+  /* REMOVED border-left-width, border-left-style, padding-left */
+  text-transform: none;
 }
+
+/* --- Category Title Colors (Mocha Text Colors) --- */
+/* NOTE: Ensure these IDs match your index.html */
+#box-social .box-title {
+  color: var(--ctp-mauve); /* Set text color */
+}
+#box-fun .box-title,
+#box-media-tools .box-title {
+  color: var(--ctp-red); /* Set text color */
+}
+#box-web-apps .box-title,
+#box-cloud-google .box-title {
+  color: var(--ctp-yellow); /* Set text color */
+}
+#box-finances .box-title,
+#box-money .box-title {
+  color: var(--ctp-green); /* Set text color */
+}
+#box-other .box-title,
+#box-services-shop .box-title {
+  color: var(--ctp-blue); /* Set text color */
+}
+/* --- End Category Title Colors --- */
 
 /* --- Apply specific BORDER colors --- */
 /* NOTE: Ensure these IDs match your index.html */
