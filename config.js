@@ -18,27 +18,22 @@ const cards = [
     name: "Fun", // Combined Streaming, Gaming, Entertainment, Health/Fitness, AI
     bookmarks: {
       // Streaming
-      "----------": null, // Add marker like this
       "YouTube": "https://www.youtube.com/feed/subscriptions",
       "Crunchyroll": "https://crunchyroll.com",
       "SVT Play": "https://www.svtplay.se/",
       "Netflix": "https://www.netflix.com/browse",
       // Gaming
-      "----------": null, // Add marker
       "D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663",
       "Foundry": "http://83.251.196.97:30000/join",
       "Nexus Mods": "https://www.nexusmods.com/",
        // Entertainment
-      "----------": null, // Add marker
       "Last FM": "https://www.last.fm",
       "The StoryGraph": "https://app.thestorygraph.com/",
       // Health/Fitness
-       "----------": null, // Add marker
       "Garmin Connect": "https://connect.garmin.com/modern/",
       "Strava": "https://www.strava.com/dashboard",
       "Smashrun": "https://smashrun.com/miklam",
        // AI Tools
-       "----------": null, // Add marker
       "Gemini": "https://gemini.google.com/app",
       "ChatGPT": "https://chatgpt.com/"
     }
