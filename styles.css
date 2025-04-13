@@ -206,8 +206,9 @@ body {
   gap: 20px;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto; /* This centers the grid */
-  /* margin-top: 0; /* Optional */
+  margin: 0 auto;
+  margin-top: 0;
+  align-items: start; /* ADDED: Align boxes to top, height based on content */
 }
 
 /* NEW: Link Box Styling */
