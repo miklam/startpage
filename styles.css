@@ -153,11 +153,12 @@ body {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  /* REMOVED default color: var(--accentColor); */
+  /* Removed default color */
   margin: 0 0 1em 0;
   padding-bottom: 0.5em;
   border-bottom: 1px solid var(--ctp-surface1);
-  text-transform: none;
+  /* ADDED: Make titles uppercase */
+  text-transform: uppercase;
 }
 
 /* --- Category Title Colors --- */
