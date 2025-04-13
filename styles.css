@@ -165,20 +165,16 @@ body {
 #box-social .box-title {
   color: var(--ctp-mauve); /* Set text color */
 }
-#box-fun .box-title,
-#box-media-tools .box-title {
+#box-fun .box-title {
   color: var(--ctp-red); /* Set text color */
 }
-#box-web-apps .box-title,
-#box-cloud-google .box-title {
+#box-web-apps .box-title {
   color: var(--ctp-yellow); /* Set text color */
 }
-#box-finances .box-title,
-#box-money .box-title {
+#box-finances .box-title {
   color: var(--ctp-green); /* Set text color */
 }
-#box-other .box-title,
-#box-services-shop .box-title {
+#box-other .box-title {
   color: var(--ctp-blue); /* Set text color */
 }
 /* --- End Category Title Colors --- */
