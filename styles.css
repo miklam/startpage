@@ -179,10 +179,10 @@ body {
 #box-fun .box-title {
   color: var(--ctp-red);    /* Red */
 }
-#box-cloud .box-title {
+#box-web-apps .box-title {
   color: var(--ctp-yellow);/* Yellow */
 }
-#box-money .box-title {
+#box-finances .box-title {
   color: var(--ctp-green); /* Green */
 }
 #box-other .box-title {
