@@ -202,13 +202,33 @@ body {
 /* Content Grid centering rules remain */
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  /* UPDATED: Define a fixed number of columns (e.g., 6) */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px; /* Adjusted gap slightly, feel free to change */
   width: 90%;
-  max-width: 1000px;
+  max-width: 1000px; /* Or adjust max-width if needed */
   margin: 0 auto;
-  margin-top: 0;
-  align-items: start; /* ADDED: Align boxes to top, height based on content */
+  align-items: start; /* Keep this for variable height */
+  /* ADDED: Encourage filling empty spots */
+  grid-auto-flow: row dense;
+}
+
+/* NEW: Classes for grid spanning */
+.grid-span-2 {
+  grid-column: span 2; /* Box will take up 2 columns */
+}
+
+.grid-span-3 {
+  grid-column: span 3; /* Box will take up 3 columns */
+}
+
+.grid-span-4 {
+  grid-column: span 4; /* Box will take up 4 columns */
+}
+
+/* Add more spans if needed (e.g., span 6 for full width) */
+.grid-span-6 {
+  grid-column: span 6;
 }
 
 /* NEW: Link Box Styling */
