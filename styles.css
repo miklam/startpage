@@ -137,11 +137,11 @@ body {
   width: 100%;
 }
 
-/* UPDATED: Header Alignment Rules */
+/* Header Alignment Rules */
 .header {
   text-align: left;       /* Text aligns left within the block */
-  width: 90%;             /* Same width as grid */
-  max-width: 1000px;      /* Same max-width as grid */
+  width: 90%;             /* Same width as columns block */
+  max-width: 1000px;      /* Same max-width as columns block */
   margin: 0 auto 2.5em auto; /* Centers the block, adds bottom margin */
   padding: 0;
 }
@@ -208,6 +208,22 @@ body {
   margin: 0 auto; /* Keep grid centered */
   align-items: start; /* Keep variable height */
   /* REMOVED: grid-auto-flow: row dense; */
+}
+
+/* --- 5-COLUMN LAYOUT --- */
+.content-columns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Create 5 equal columns */
+  gap: 25px; /* Adjust gap between columns */
+  width: 90%; /* Container width */
+  max-width: 1000px; /* Max width */
+  margin: 0 auto; /* Center the whole block */
+  align-items: start; /* Align columns to the top */
+}
+
+/* Add space between link boxes *within* the same column */
+.column .link-box + .link-box {
+  margin-top: 2em; /* Adjust vertical space between categories in a column */
 }
 
 /* NEW: Classes for grid spanning */
