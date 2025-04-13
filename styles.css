@@ -124,25 +124,27 @@ body {
 /* End Scrollbar */
 
 
-/* UPDATED: Main container alignment */
+/* Container should NOT have align-items: center */
 .container {
+  /* align-items: center; */ /* Ensure this is still removed or commented out */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin: auto;
-  padding-top: 3vmax; /* Increased top padding slightly */
-  padding-left: 20px; /* This padding defines the alignment edge */
-  padding-right: 20px; /* This padding defines the alignment edge */
+  padding-top: 3vmax;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
 }
 
-/* NEW: Header for Greeting/Time/Date */
+/* UPDATED: Header Alignment Rules */
 .header {
-  text-align: left; /* UPDATED: Align text to the left */
-  margin-bottom: 2.5em; /* ADDED: Ensure space below header */
-  padding: 0; /* Remove default padding if any, rely on container padding */
-  /* border-bottom: 1px solid var(--ctp-surface1); Optional: Add a separator below header */
-  /* margin-bottom: 2em; */ /* Add space below header */
+  text-align: left;       /* Keep text aligned left */
+  width: 90%;             /* ADD BACK: Match content-grid width */
+  max-width: 1000px;      /* ADD BACK: Match content-grid max-width */
+  margin: 0 auto 2.5em auto; /* ADD BACK: Center the header block like the grid, add bottom margin */
+  padding: 0;             /* Keep padding 0 */
+  /* border-bottom: 1px solid var(--ctp-surface1); /* Optional separator */
 }
 
 /* Style the Greeting */
@@ -167,11 +169,11 @@ body {
     color: var(--ctp-subtext1); /* Slightly dimmer color */
 }
 
-/* Style the Date */
+/* Style the Date (including uppercase) */
 .header #date {
-    font-size: 1.2em; /* Keep base size or adjust */
-    color: var(--ctp-subtext0); /* Even dimmer color */
-    text-transform: uppercase; /* ADDED: Make date uppercase */
+    font-size: 1.2em;
+    color: var(--ctp-subtext0);
+    text-transform: uppercase; /* Keep date uppercase */
 }
 
 /* Kept: Styling for specific username element if used */
@@ -197,15 +199,15 @@ body {
 
 
 /* NEW: Grid Layout for Link Boxes */
+/* Content Grid centering rules remain */
 .content-grid {
   display: grid;
-  /* Adjust minmax(200px, 1fr) for desired box size and responsiveness */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px; /* Space between boxes */
-  width: 90%; /* Container for the boxes */
-  max-width: 1000px; /* Optional max width */
-  margin: 0 auto; /* Center the grid */
-  margin-top: 0; /* Remove top margin if header provides enough space */
+  gap: 20px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto; /* This centers the grid */
+  /* margin-top: 0; /* Optional */
 }
 
 /* NEW: Link Box Styling */
