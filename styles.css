@@ -1,4 +1,4 @@
-/* styles.css - Reverted to 5-Box Style with Colored Titles (April 13, 2025) */
+/* styles.css - Dracula Theme Applied (April 14, 2025) */
 
 /* Keep @font-face rules if needed, though not used if Inter is primary */
 @font-face {
@@ -10,51 +10,48 @@
   src: url("asset/fonts/Monocraft/Monocraft.otf");
 }
 
-/* Catppuccin Mocha Palette & Core Variables */
+/* --- Dracula Theme Palette & Mapped Core Variables --- */
 :root {
-  /* Catppuccin Mocha Palette */
-  --ctp-rosewater: #f5e0dc;
-  --ctp-flamingo: #f2cdcd;
-  --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7; /* Using this as accent & Social Title */
-  --ctp-red: #f38ba8;   /* Fun Title */
-  --ctp-maroon: #eba0ac;
-  --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af; /* Cloud Title */
-  --ctp-green: #a6e3a1;  /* Money Title */
-  --ctp-teal: #94e2d5;
-  --ctp-sky: #89dceb;
-  --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;   /* Other Title */
-  --ctp-lavender: #b4befe;
-  --ctp-text: #cdd6f4;     /* Main text */
-  --ctp-subtext1: #bac2de;
-  --ctp-subtext0: #a6adc8;
-  --ctp-overlay2: #9399b2;
-  --ctp-overlay1: #7f849c;
-  --ctp-overlay0: #6c7086;
-  --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Box borders, secondary elements */
-  --ctp-surface0: #313244; /* Box backgrounds */
-  --ctp-base: #1e1e2e;     /* Main background */
-  --ctp-mantle: #181825;   /* Slightly darker bg */
-  --ctp-crust: #11111b;    /* Darkest bg */
+  /* Dracula Official Palette */
+  --drac-bg: #282a36;          /* Background */
+  --drac-current-line: #44475a; /* Current Line (Box background) */
+  --drac-foreground: #f8f8f2;   /* Foreground (Main text) */
+  --drac-comment: #6272a4;     /* Comment (Subtle text, borders) */
+  --drac-cyan: #8be9fd;       /* Cyan (Other title) */
+  --drac-green: #50fa7b;       /* Green (Finances title) */
+  --drac-orange: #ffb86c;      /* Orange (Not mapped by default) */
+  --drac-pink: #ff79c6;       /* Pink (General accent) */
+  --drac-purple: #bd93f9;      /* Purple (Social title) */
+  --drac-red: #ff5555;         /* Red (Fun/Media-Tools title) */
+  --drac-yellow: #f1fa8c;      /* Yellow (Web-Apps title) */
+
+  /* --- Apply Dracula to existing variable names --- */
 
   /* Core Variables */
-  --bg: var(--ctp-base);
-  --fg: var(--ctp-text);
-  --secondaryBg: var(--ctp-surface0); /* Box backgrounds */
+  --bg: var(--drac-bg);
+  --fg: var(--drac-foreground);
+  --secondaryBg: var(--drac-current-line); /* Box backgrounds */
+  --ctp-surface1: var(--drac-comment);     /* Box/Title borders */ /* Using ctp var name for convenience */
 
-  /* Font Variables (Using Inter) */
+  /* Font Variables (Keep Inter) */
   --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  --accentColor: var(--ctp-mauve); /* General accent, used for hover etc. */
+  /* Accents */
+  --accentColor: var(--drac-pink); /* Use Pink as the main accent */
   --scrollbar: var(--accentColor);
+
+  /* Header Text colors (Using Foreground/Comment for contrast) */
+  --ctp-subtext1: var(--drac-foreground); /* Time color */ /* Using ctp var name for convenience */
+  --ctp-subtext0: var(--drac-comment);    /* Date color */ /* Using ctp var name for convenience */
+
+  /* Keep border radius */
   --bdradius: 0.75em;
 }
+/* --- End Theme Variables --- */
+
 
 /* Body base styles */
 body {
@@ -86,20 +83,19 @@ body {
 
 /* Main container alignment */
 .container {
-  /* REMOVED align-items: center; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin: auto;
-  padding: 3vmax 20px 1em 20px; /* Adjusted padding */
+  padding: 3vmax 20px 1em 20px;
   width: 100%;
-  min-height: 100vh; /* Ensure footer doesn't overlap content on short pages */
+  min-height: 100vh;
 }
 
-/* Header Styling (Reverted to Centered) */
+/* Header Styling (Centered) */
 .header {
-  text-align: center; /* REVERTED: Center align header text */
-  margin-bottom: 2.5em; /* Space below header */
+  text-align: center;
+  margin-bottom: 2.5em;
   padding: 0;
 }
 
@@ -119,12 +115,12 @@ body {
 .header #time {
     font-size: 1.3em;
     font-weight: 400;
-    color: var(--ctp-subtext1);
+    color: var(--ctp-subtext1); /* Uses Dracula Foreground now */
 }
 
 .header #date {
     font-size: 1em;
-    color: var(--ctp-subtext0);
+    color: var(--ctp-subtext0); /* Uses Dracula Comment now */
     text-transform: uppercase; /* Keep uppercase */
 }
 
@@ -132,63 +128,57 @@ body {
 .content-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 Columns */
-  gap: 20px; /* Space between boxes */
+  gap: 20px;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto 2em auto; /* Center the grid block, add bottom margin */
+  margin: 0 auto 2em auto; /* Center grid block, add bottom margin */
 }
 
 /* Link Box Styling (Visible boxes) */
 .link-box {
-  background-color: var(--secondaryBg);
-  border: 1px solid var(--ctp-surface1);
+  background-color: var(--secondaryBg); /* Uses Dracula Current Line */
+  border: 1px solid var(--ctp-surface1); /* Uses Dracula Comment */
   border-radius: var(--bdradius);
   padding: 1.5em;
   display: flex;
   flex-direction: column;
 }
 
-/* Link Box Title Styling (Base) */
+/* Link Box Title Styling (Base - No default color, uses border bottom) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--ctp-text); /* Use main text color */
+  /* Color is set per category below */
   margin: 0 0 1em 0;
-  padding-bottom: 0.2em; /* Small padding */
-  border-bottom: none; /* Remove bottom border */
-  padding-left: 0.8em; /* Add padding for the border */
-  border-left-width: 4px; /* Example border thickness */
-  border-left-style: solid;
-  /* Default border color (optional) */
-  /* border-left-color: var(--ctp-surface1); */
-  text-transform: none;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--ctp-surface1); /* Uses Dracula Comment */
+  text-transform: none; /* Titles not uppercase by default */
 }
 
-/* Apply specific border colors */
-#box-social .box-title { border-left-color: var(--ctp-mauve); }
-#box-fun .box-title { border-left-color: var(--ctp-red); }
-#box-web-apps .box-title { border-left-color: var(--ctp-yellow); }
-#box-finances .box-title { border-left-color: var(--ctp-green); }
-#box-other .box-title { border-left-color: var(--ctp-blue); }
-
-/* --- Category Title Colors --- */
+/* --- Category Title Colors (Dracula) --- */
+/* NOTE: Ensure the IDs here match your index.html (e.g., #box-web-apps or #box-cloud) */
 #box-social .box-title {
-  color: var(--ctp-mauve); /* Purple */
+  color: var(--drac-purple);
 }
-#box-fun .box-title {
-  color: var(--ctp-red);    /* Red */
+#box-fun .box-title, /* Assuming 'fun' or 'media-tools' */
+#box-media-tools .box-title {
+  color: var(--drac-red);
 }
-#box-web-apps .box-title {
-  color: var(--ctp-yellow);/* Yellow */
+#box-web-apps .box-title, /* Assuming 'web-apps' or 'cloud-google' */
+#box-cloud-google .box-title {
+  color: var(--drac-yellow);
 }
-#box-finances .box-title {
-  color: var(--ctp-green); /* Green */
+#box-finances .box-title, /* Assuming 'finances' or 'money' */
+#box-money .box-title {
+  color: var(--drac-green);
 }
-#box-other .box-title {
-  color: var(--ctp-blue);  /* Blue */
+#box-other .box-title, /* Assuming 'other' or 'services-shop' */
+#box-services-shop .box-title {
+  color: var(--drac-cyan); /* Using Cyan */
 }
 /* --- End Category Title Colors --- */
+
 
 /* Link List Styling */
 .link-box ul {
@@ -204,33 +194,33 @@ body {
 
 /* Link Styling */
 .link-box a {
-  color: var(--ctp-text);
+  color: var(--fg); /* Use Dracula Foreground */
   text-decoration: none;
   display: block;
   padding: 2px 0;
   transition: color 0.2s ease;
 }
 .link-box a:hover {
-  color: var(--accentColor); /* Use general accent for hover */
+  color: var(--accentColor); /* Use Dracula Pink for hover */
 }
 
 /* Footer styles */
 .footer {
   font-size: 0.9em;
-  margin: auto auto 1em auto; /* Pushes footer down */
+  margin: auto auto 1em auto;
   padding: 0.5em;
   position: relative;
   text-align: center;
   width: 90%;
-  color: var(--ctp-subtext0);
+  color: var(--ctp-subtext0); /* Uses Dracula Comment */
 }
-.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
-.footer a:hover { color: var(--accentColor); }
+.footer a { color: var(--fg); text-decoration: none; transition: color 0.2s ease; } /* Footer links use main text color */
+.footer a:hover { color: var(--accentColor); } /* Hover uses Pink */
 
 #footer-inner { position: fixed; bottom: 1em; right: 1em; }
-#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
-#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
-#footer-inner > #hideDiv { /* display: none; set inline now */ position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
+#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--drac-comment); transition: color 0.2s ease; } /* Button uses Comment color */
+#footer-inner button:hover, #footer-inner button:active { color: var(--drac-foreground); } /* Hover uses Foreground */
+#footer-inner > #hideDiv { display: none; /* Keep display:none; remove inline style if added */ position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--drac-current-line); color: var(--drac-foreground); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--drac-comment); text-align: right; }
 
 /* Media queries */
 @media screen and (min-width: 800px) {
