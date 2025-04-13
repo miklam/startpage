@@ -168,8 +168,8 @@ body {
 /* Apply specific border colors */
 #box-social .box-title { border-left-color: var(--ctp-mauve); }
 #box-fun .box-title { border-left-color: var(--ctp-red); }
-#box-cloud .box-title { border-left-color: var(--ctp-yellow); }
-#box-money .box-title { border-left-color: var(--ctp-green); }
+#box-web-apps .box-title { border-left-color: var(--ctp-yellow); }
+#box-finances .box-title { border-left-color: var(--ctp-green); }
 #box-other .box-title { border-left-color: var(--ctp-blue); }
 
 /* --- Category Title Colors --- */
