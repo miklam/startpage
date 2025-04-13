@@ -39,7 +39,7 @@ const cards = [
     }
   },
   {
-    name: "Web Apps", // Combined Email/Cloud and Google Core Apps
+    name: "Web-Apps", // Combined Email/Cloud and Google Core Apps
     bookmarks: {
       // Email/Cloud
       "Proton Mail": "https://mail.proton.me",
