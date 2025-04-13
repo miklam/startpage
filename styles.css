@@ -139,12 +139,11 @@ body {
 
 /* UPDATED: Header Alignment Rules */
 .header {
-  text-align: left;       /* Keep text aligned left */
-  width: 90%;             /* ADD BACK: Match content-grid width */
-  max-width: 1000px;      /* ADD BACK: Match content-grid max-width */
-  margin: 0 auto 2.5em auto; /* ADD BACK: Center the header block like the grid, add bottom margin */
-  padding: 0;             /* Keep padding 0 */
-  /* border-bottom: 1px solid var(--ctp-surface1); /* Optional separator */
+  text-align: left;       /* Text aligns left within the block */
+  width: 90%;             /* Same width as grid */
+  max-width: 1000px;      /* Same max-width as grid */
+  margin: 0 auto 2.5em auto; /* Centers the block, adds bottom margin */
+  padding: 0;
 }
 
 /* Style the Greeting */
@@ -199,18 +198,16 @@ body {
 
 
 /* NEW: Grid Layout for Link Boxes */
-/* Content Grid centering rules remain */
 .content-grid {
   display: grid;
-  /* UPDATED: Define a fixed number of columns (e.g., 6) */
-  grid-template-columns: repeat(6, 1fr);
-  gap: 15px; /* Adjusted gap slightly, feel free to change */
+  /* REVERTED: Use auto-fit for simpler columns */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px; /* Increased gap slightly, adjust if needed */
   width: 90%;
-  max-width: 1000px; /* Or adjust max-width if needed */
-  margin: 0 auto;
-  align-items: start; /* Keep this for variable height */
-  /* ADDED: Encourage filling empty spots */
-  grid-auto-flow: row dense;
+  max-width: 1000px;
+  margin: 0 auto; /* Keep grid centered */
+  align-items: start; /* Keep variable height */
+  /* REMOVED: grid-auto-flow: row dense; */
 }
 
 /* NEW: Classes for grid spanning */
@@ -231,49 +228,62 @@ body {
   grid-column: span 6;
 }
 
-/* NEW: Link Box Styling */
+/* Link Box Styling - Make it disappear */
 .link-box {
-  background-color: var(--secondaryBg); /* Use surface0 for box background */
-  border: 1px solid var(--ctp-surface1); /* Subtle border */
-  border-radius: var(--bdradius);
-  padding: 1.5em; /* Adjust padding */
-  display: flex; /* Use flexbox for content alignment inside the box */
+  /* REMOVED: background-color, border, border-radius */
+  padding: 0.5em; /* Reduced padding, adjust as needed */
+  display: flex;
   flex-direction: column;
 }
 
-/* NEW: Link Box Title Styling */
+/* Link Box Title Styling - Directory Look */
 .box-title {
-  font-family: var(--fontHeader); /* Use the header font */
-  font-size: 1.2em;
-  font-weight: 700; /* Use the bold weight */
-  color: var(--accentColor);
-  margin: 0 0 1em 0;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1);
+  font-family: var(--fontHeader); /* Or switch back to monospace below */
+  font-size: 1.1em; /* Adjust size */
+  font-weight: 700; /* Keep bold */
+  color: var(--ctp-green); /* Example: Use Catppuccin Green */
+  margin: 0 0 0.8em 0;
+  padding-bottom: 0; /* Removed padding */
+  border-bottom: none; /* Removed border */
+  text-transform: uppercase; /* Keep titles uppercase */
+  /* Optional: Add slashes for directory look */
+  /* content: "/ " counter(section) " /"; /* If using counters */
+  /* Or simply add manually in H2 if preferred, or use ::before */
+}
+.box-title::before { /* Example: Adding decoration */
+    content: "# ";
+    color: var(--ctp-mauve); /* Use a different accent */
 }
 
-/* NEW: Link List Styling inside Boxes */
+
+/* Link List Styling */
 .link-box ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Allows box to grow if needed */
+  flex-grow: 1;
 }
 
 .link-box li {
-  margin-bottom: 0.6em; /* Space between links */
+  margin-bottom: 0.5em; /* Adjust spacing */
 }
 
+/* Link Styling - Terminal Look */
 .link-box a {
-  color: var(--ctp-text); /* Default link color */
+  color: var(--ctp-text); /* Use main text color */
   text-decoration: none;
-  display: block; /* Make links easier to click */
-  padding: 2px 0; /* Small padding */
-  transition: color 0.2s ease; /* Smooth hover transition */
+  display: block;
+  padding: 0; /* Removed padding */
+  transition: color 0.2s ease;
 }
-
 .link-box a:hover {
-  color: var(--accentColor); /* Link hover color */
+  color: var(--ctp-sky); /* Example: Use brighter hover color */
+}
+/* Optional: Add prompt character before links */
+.link-box a::before {
+    content: "> ";
+    color: var(--ctp-overlay1); /* Dim character color */
+    margin-right: 0.3em;
 }
 
 /* UPDATED: Footer styles */
