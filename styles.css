@@ -154,13 +154,13 @@ body {
   font-weight: 700;
   /* Color is set per category below */
   margin: 0 0 1em 0;
-  padding-bottom: 0.5em; /* RE-ADDED padding */
-  border-bottom: 1px solid var(--ctp-surface1); /* RE-ADDED border */
+  padding-bottom: 0.2em;    /* Space below text before implicit bottom */
+  border-bottom: none;      /* REMOVED bottom border */
   padding-left: 0.8em;      /* Space for the side border */
   border-left-width: 4px;   /* Thickness of side border */
   border-left-style: solid;
   /* Border color is set per category below */
-  text-transform: none;
+  text-transform: uppercase;
 }
 
 /* --- Category Title Colors (Mocha Text Colors) --- */
