@@ -1,4 +1,4 @@
-/* styles.css - Dracula Theme Applied (April 14, 2025) */
+/* styles.css - Catppuccin Frappé Theme Applied (April 14, 2025) */
 
 /* Keep @font-face rules if needed, though not used if Inter is primary */
 @font-face {
@@ -10,28 +10,43 @@
   src: url("asset/fonts/Monocraft/Monocraft.otf");
 }
 
-/* --- Dracula Theme Palette & Mapped Core Variables --- */
+/* --- Catppuccin Frappé Palette & Mapped Core Variables --- */
 :root {
-  /* Dracula Official Palette */
-  --drac-bg: #282a36;          /* Background */
-  --drac-current-line: #44475a; /* Current Line (Box background) */
-  --drac-foreground: #f8f8f2;   /* Foreground (Main text) */
-  --drac-comment: #6272a4;     /* Comment (Subtle text, borders) */
-  --drac-cyan: #8be9fd;       /* Cyan (Other title) */
-  --drac-green: #50fa7b;       /* Green (Finances title) */
-  --drac-orange: #ffb86c;      /* Orange (Not mapped by default) */
-  --drac-pink: #ff79c6;       /* Pink (General accent) */
-  --drac-purple: #bd93f9;      /* Purple (Social title) */
-  --drac-red: #ff5555;         /* Red (Fun/Media-Tools title) */
-  --drac-yellow: #f1fa8c;      /* Yellow (Web-Apps title) */
+  /* Catppuccin Frappé Palette */
+  --ctp-rosewater: #f2d5cf;
+  --ctp-flamingo: #eebebe;
+  --ctp-pink: #f4b8e4;
+  --ctp-mauve: #ca9ee6;      /* Accent & Social Title */
+  --ctp-red: #e78284;        /* Fun Title */
+  --ctp-maroon: #ea999c;
+  --ctp-peach: #ef9f76;
+  --ctp-yellow: #e5c890;     /* Web-Apps Title */
+  --ctp-green: #a6d189;      /* Finances Title */
+  --ctp-teal: #81c8be;
+  --ctp-sky: #99d1db;
+  --ctp-sapphire: #85c1dc;
+  --ctp-blue: #8caaee;       /* Other Title */
+  --ctp-lavender: #babbf1;
+  --ctp-text: #c6d0f5;       /* Main text */
+  --ctp-subtext1: #b5bfe2;   /* Time color */
+  --ctp-subtext0: #a5adce;   /* Date color */
+  --ctp-overlay2: #949cbb;
+  --ctp-overlay1: #838ba7;
+  --ctp-overlay0: #737994;
+  --ctp-surface2: #626880;
+  --ctp-surface1: #51576d;   /* Box/Title borders */
+  --ctp-surface0: #414559;   /* Box backgrounds */
+  --ctp-base: #303446;       /* Main background */
+  --ctp-mantle: #292c3c;
+  --ctp-crust: #232634;
 
-  /* --- Apply Dracula to existing variable names --- */
+  /* --- Apply Frappé to existing variable names --- */
 
   /* Core Variables */
-  --bg: var(--drac-bg);
-  --fg: var(--drac-foreground);
-  --secondaryBg: var(--drac-current-line); /* Box backgrounds */
-  --ctp-surface1: var(--drac-comment);     /* Box/Title borders */ /* Using ctp var name for convenience */
+  --bg: var(--ctp-base);
+  --fg: var(--ctp-text);
+  --secondaryBg: var(--ctp-surface0); /* Box backgrounds */
+  /* Keep using --ctp-surface1 for consistency in rules below */
 
   /* Font Variables (Keep Inter) */
   --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -40,12 +55,8 @@
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   /* Accents */
-  --accentColor: var(--drac-pink); /* Use Pink as the main accent */
+  --accentColor: var(--ctp-mauve); /* Keep Mauve as main accent */
   --scrollbar: var(--accentColor);
-
-  /* Header Text colors (Using Foreground/Comment for contrast) */
-  --ctp-subtext1: var(--drac-foreground); /* Time color */ /* Using ctp var name for convenience */
-  --ctp-subtext0: var(--drac-comment);    /* Date color */ /* Using ctp var name for convenience */
 
   /* Keep border radius */
   --bdradius: 0.75em;
@@ -105,7 +116,7 @@ body {
   font-size: 2em;
   display: block;
   margin-bottom: 0.5em;
-  color: var(--fg);
+  color: var(--fg); /* Uses Frappé Text */
 }
 
 .time-date-stack {
@@ -115,29 +126,29 @@ body {
 .header #time {
     font-size: 1.3em;
     font-weight: 400;
-    color: var(--ctp-subtext1); /* Uses Dracula Foreground now */
+    color: var(--ctp-subtext1); /* Uses Frappé Subtext1 */
 }
 
 .header #date {
     font-size: 1em;
-    color: var(--ctp-subtext0); /* Uses Dracula Comment now */
-    text-transform: uppercase; /* Keep uppercase */
+    color: var(--ctp-subtext0); /* Uses Frappé Subtext0 */
+    text-transform: uppercase;
 }
 
 /* Grid Layout for Link Boxes (5 columns) */
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 Columns */
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   width: 90%;
   max-width: 1000px;
-  margin: 0 auto 2em auto; /* Center grid block, add bottom margin */
+  margin: 0 auto 2em auto;
 }
 
 /* Link Box Styling (Visible boxes) */
 .link-box {
-  background-color: var(--secondaryBg); /* Uses Dracula Current Line */
-  border: 1px solid var(--ctp-surface1); /* Uses Dracula Comment */
+  background-color: var(--secondaryBg); /* Uses Frappé Surface0 */
+  border: 1px solid var(--ctp-surface1); /* Uses Frappé Surface1 */
   border-radius: var(--bdradius);
   padding: 1.5em;
   display: flex;
@@ -149,33 +160,31 @@ body {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  /* Color is set per category below */
   margin: 0 0 1em 0;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1); /* Uses Dracula Comment */
-  text-transform: none; /* Titles not uppercase by default */
+  border-bottom: 1px solid var(--ctp-surface1); /* Uses Frappé Surface1 */
+  text-transform: none;
 }
 
-/* --- Category Title Colors (Dracula) --- */
-/* NOTE: Ensure the IDs here match your index.html (e.g., #box-web-apps or #box-cloud) */
+/* --- Category Title Colors (Catppuccin Frappé) --- */
 #box-social .box-title {
-  color: var(--drac-purple);
+  color: var(--ctp-mauve);
 }
-#box-fun .box-title, /* Assuming 'fun' or 'media-tools' */
-#box-media-tools .box-title {
-  color: var(--drac-red);
+#box-fun .box-title,
+#box-media-tools .box-title { /* Use correct ID */
+  color: var(--ctp-red);
 }
-#box-web-apps .box-title, /* Assuming 'web-apps' or 'cloud-google' */
-#box-cloud-google .box-title {
-  color: var(--drac-yellow);
+#box-web-apps .box-title,
+#box-cloud-google .box-title { /* Use correct ID */
+  color: var(--ctp-yellow);
 }
-#box-finances .box-title, /* Assuming 'finances' or 'money' */
-#box-money .box-title {
-  color: var(--drac-green);
+#box-finances .box-title,
+#box-money .box-title { /* Use correct ID */
+  color: var(--ctp-green);
 }
-#box-other .box-title, /* Assuming 'other' or 'services-shop' */
-#box-services-shop .box-title {
-  color: var(--drac-cyan); /* Using Cyan */
+#box-other .box-title,
+#box-services-shop .box-title { /* Use correct ID */
+  color: var(--ctp-blue);
 }
 /* --- End Category Title Colors --- */
 
@@ -194,14 +203,14 @@ body {
 
 /* Link Styling */
 .link-box a {
-  color: var(--fg); /* Use Dracula Foreground */
+  color: var(--fg); /* Use Frappé Text */
   text-decoration: none;
   display: block;
   padding: 2px 0;
   transition: color 0.2s ease;
 }
 .link-box a:hover {
-  color: var(--accentColor); /* Use Dracula Pink for hover */
+  color: var(--accentColor); /* Use Frappé Mauve for hover */
 }
 
 /* Footer styles */
@@ -212,15 +221,15 @@ body {
   position: relative;
   text-align: center;
   width: 90%;
-  color: var(--ctp-subtext0); /* Uses Dracula Comment */
+  color: var(--ctp-subtext0); /* Use Frappé Subtext0 */
 }
-.footer a { color: var(--fg); text-decoration: none; transition: color 0.2s ease; } /* Footer links use main text color */
-.footer a:hover { color: var(--accentColor); } /* Hover uses Pink */
+.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; } /* Footer links use Subtext1 */
+.footer a:hover { color: var(--accentColor); } /* Hover uses Mauve */
 
 #footer-inner { position: fixed; bottom: 1em; right: 1em; }
-#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--drac-comment); transition: color 0.2s ease; } /* Button uses Comment color */
-#footer-inner button:hover, #footer-inner button:active { color: var(--drac-foreground); } /* Hover uses Foreground */
-#footer-inner > #hideDiv { display: none; /* Keep display:none; remove inline style if added */ position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--drac-current-line); color: var(--drac-foreground); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--drac-comment); text-align: right; }
+#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; } /* Uses Frappé Overlay1 */
+#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); } /* Hover uses Text */
+#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface1); text-align: right; } /* Uses Frappé Mantle/Subtext1/Surface1 */
 
 /* Media queries */
 @media screen and (min-width: 800px) {
