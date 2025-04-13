@@ -131,7 +131,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   margin: auto;
-  padding-top: 2vmax;
+  padding-top: 3vmax; /* Increased top padding slightly */
   padding-left: 20px; /* Added padding */
   padding-right: 20px; /* Added padding */
   width: 100%;
@@ -140,18 +140,41 @@ body {
 
 /* NEW: Header for Greeting/Time/Date */
 .header {
-    text-align: center;
-    margin-bottom: 2em;
-    font-size: 1.1em;
-    color: var(--ctp-subtext1); /* Use a subtext color */
+  text-align: left; /* UPDATED: Align text to the left */
+  width: 90%; /* Match content-grid width */
+  max-width: 1000px; /* Match content-grid max-width */
+  margin: 0 auto 2em auto; /* Center the header block like the grid, add bottom margin */
+  padding: 0; /* Remove default padding if any, rely on container padding */
+  /* border-bottom: 1px solid var(--ctp-surface1); Optional: Add a separator below header */
+  /* margin-bottom: 2em; */ /* Add space below header */
 }
 
+/* Style the Greeting */
 .header #greeting {
-    font-family: var(--fontHeader);
-    color: var(--fg); /* Make greeting main text color */
-    font-size: 1.5em; /* Make greeting larger */
-    display: block; /* Put greeting on its own line */
-    margin-bottom: 0.5em;
+  font-family: var(--fontHeader); /* Using Inter now */
+  font-weight: 700; /* UPDATED: Make bold */
+  font-size: 2em;  /* UPDATED: Increase size (adjust as needed) */
+  display: block; /* Ensure it takes its own line */
+  margin-bottom: 0.5em; /* Space below greeting */
+  color: var(--fg); /* Keep main text color */
+}
+
+/* NEW: Wrapper for time/date stack */
+.time-date-stack {
+    line-height: 1.4; /* Adjust line height for stacked elements */
+}
+
+/* Style the Time */
+.header #time {
+    font-size: 1.3em; /* UPDATED: Increase size (adjust as needed) */
+    font-weight: 400; /* Keep regular weight */
+    color: var(--ctp-subtext1); /* Slightly dimmer color */
+}
+
+/* Style the Date */
+.header #date {
+    font-size: 1em; /* Keep base size or adjust */
+    color: var(--ctp-subtext0); /* Even dimmer color */
 }
 
 /* Kept: Styling for specific username element if used */
@@ -185,6 +208,7 @@ body {
   width: 90%; /* Container for the boxes */
   max-width: 1000px; /* Optional max width */
   margin: 0 auto; /* Center the grid */
+  margin-top: 0; /* Remove top margin if header provides enough space */
 }
 
 /* NEW: Link Box Styling */
