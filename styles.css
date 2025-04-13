@@ -1,9 +1,6 @@
-/* GetStarted - A simple responsive Startpage
- * Author: MrAlpha786 (github.con/MrAlpha786)
- * Modified based on user request with Catppuccin Mocha theme and layout changes.
- */
+/* styles.css - Reverted to 5-Box Style (April 13, 2025) */
 
-/* Keep existing @font-face rules for now, unless you're sure you won't use them */
+/* Keep @font-face rules if needed, though not used if Inter is primary */
 @font-face {
   font-family: "IBM Plex Mono";
   src: url("asset/fonts/IBM Plex Mono/IBMPlexMono-Regular.ttf");
@@ -13,7 +10,7 @@
   src: url("asset/fonts/Monocraft/Monocraft.otf");
 }
 
-/* UPDATED: Catppuccin Mocha Palette & Core Variables */
+/* Catppuccin Mocha Palette & Core Variables */
 :root {
   /* Catppuccin Mocha Palette */
   --ctp-rosewater: #f5e0dc;
@@ -43,234 +40,129 @@
   --ctp-mantle: #181825;   /* Slightly darker bg */
   --ctp-crust: #11111b;    /* Darkest bg */
 
-  /* Core Variables using Catppuccin */
+  /* Core Variables */
   --bg: var(--ctp-base);
   --fg: var(--ctp-text);
-  --secondaryBg: var(--ctp-surface0); /* Used for boxes now */
+  --secondaryBg: var(--ctp-surface0); /* Box backgrounds */
 
-  --black: var(--ctp-crust); /* Map old names to new palette */
-  --blue: var(--ctp-blue);
-  --cyan: var(--ctp-teal); /* Previous accent */
-  --green: var(--ctp-green);
-  --orange: var(--ctp-peach);
-  --purple: var(--ctp-mauve);
-  --red: var(--ctp-red);
-  --white: var(--ctp-text); /* Map old white */
-  --yellow: var(--ctp-yellow);
-  --rosewater: var(--ctp-rosewater);
-
-  /* UPDATED: Use "Inter" font from Google Fonts */
+  /* Font Variables (Using Inter) */
   --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  
-  /* UPDATED: Use "Inter" for headers too */
   --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --accentColor: var(--ctp-mauve); /* NEW: Set main accent */
+
+  --accentColor: var(--ctp-mauve);
   --scrollbar: var(--accentColor);
-
-  /* CUSTOM USERNAME COLORS (If #username element is kept) */
-  --usernameBg: var(--ctp-surface1); /* Example */
-  --usernameFg: var(--ctp-text); /* Example */
-
-  --bdradius: 0.75em; /* Kept */
+  --bdradius: 0.75em;
 }
 
-/* UPDATED: Body base styles */
+/* Body base styles */
 body {
   font-family: var(--fontBody);
-  font-weight: 400; /* Use the regular weight */
+  font-weight: 400;
   background-color: var(--bg);
   margin: 0;
   color: var(--fg);
 }
 
-/* Kept: Global reset and scrollbar base */
+/* Global reset and scrollbar base */
 * {
   -ms-overflow-style: none;
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
-  color: var(--fg); /* Ensures all text inherits correctly */
+  color: var(--fg);
   outline-style: none;
   scrollbar-color: #00000000 #00000000;
   scrollbar-width: thin;
   text-decoration: none;
 }
-
-::-webkit-scrollbar {
-  width: 0.3em;
-}
-
-::-webkit-scrollbar-track {
-  background: #00000000;
-  margin-bottom: 0.75em;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #00000000;
-  border-radius: 1em;
-}
-
-:hover,
-.visible-scrollbar {
-  scrollbar-color: var(--scrollbar) #00000000;
-}
-
-:hover::-webkit-scrollbar-thumb,
-.visible-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar);
-}
+::-webkit-scrollbar { width: 0.3em; }
+::-webkit-scrollbar-track { background: #00000000; margin-bottom: 0.75em; }
+::-webkit-scrollbar-thumb { background-color: #00000000; border-radius: 1em; }
+:hover, .visible-scrollbar { scrollbar-color: var(--scrollbar) #00000000; }
+:hover::-webkit-scrollbar-thumb, .visible-scrollbar::-webkit-scrollbar-thumb { background-color: var(--scrollbar); }
 /* End Scrollbar */
 
-
-/* Container should NOT have align-items: center */
+/* Main container alignment */
 .container {
-  /* align-items: center; */ /* Ensure this is still removed or commented out */
+  /* REMOVED align-items: center; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin: auto;
-  padding-top: 3vmax;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 3vmax 20px 1em 20px; /* Adjusted padding */
   width: 100%;
+  min-height: 100vh; /* Ensure footer doesn't overlap content on short pages */
 }
 
-/* Header Alignment Rules */
+/* Header Styling (Reverted to Centered) */
 .header {
-  text-align: left;       /* Text aligns left within the block */
-  width: 90%;             /* Same width as columns block */
-  max-width: 1000px;      /* Same max-width as columns block */
-  margin: 0 auto 2.5em auto; /* Centers the block, adds bottom margin */
+  text-align: center; /* REVERTED: Center align header text */
+  /* REMOVED: width, max-width, margin: 0 auto */
+  margin-bottom: 2.5em; /* Space below header */
   padding: 0;
 }
 
-/* Style the Greeting */
 .header #greeting {
-  font-family: var(--fontHeader); /* Using Inter now */
-  font-weight: 700; /* UPDATED: Make bold */
-  font-size: 2.5em;  /* UPDATED: Increase size (adjust as needed) */
-  display: block; /* Ensure it takes its own line */
-  margin-bottom: 0.5em; /* Space below greeting */
-  color: var(--fg); /* Keep main text color */
+  font-family: var(--fontHeader);
+  font-weight: 700;
+  font-size: 2em; /* Keep size adjustments */
+  display: block;
+  margin-bottom: 0.5em;
+  color: var(--fg);
 }
 
-/* NEW: Wrapper for time/date stack */
 .time-date-stack {
-    line-height: 1.4; /* Adjust line height for stacked elements */
+    line-height: 1.4;
 }
 
-/* Style the Time */
 .header #time {
-    font-size: 1.6em; /* UPDATED: Increase size (adjust as needed) */
-    font-weight: 500; /* Keep regular weight */
-    color: var(--ctp-subtext1); /* Slightly dimmer color */
+    font-size: 1.3em; /* Keep size adjustments */
+    font-weight: 400;
+    color: var(--ctp-subtext1);
 }
 
-/* Style the Date (including uppercase) */
 .header #date {
-    font-size: 1.1em;
+    font-size: 1em; /* Keep size adjustments */
     color: var(--ctp-subtext0);
-    text-transform: uppercase; /* Keep date uppercase */
+    text-transform: uppercase; /* Keep uppercase */
 }
 
-/* Kept: Styling for specific username element if used */
-#username {
-  background-color: var(--usernameBg);
-  border-radius: var(--bdradius);
-  color: var(--usernameFg);
-  padding: 0 0.5em;
-  font-weight: bold; /* Example addition */
-}
-
-
-/* --- REMOVED SECTIONS --- */
-
-/* REMOVED: #weather, #weather-icon, #weather-container, .fade-in-weather */
-/* REMOVED: #vertical-scroll-box and related styles */
-/* REMOVED: #search, #searchbar, #search-favicon, #searchInput, #search button, #clear-field, #suggestions */
-/* REMOVED: #nowPlaying-container and all related styles (.playing-info, .bars, etc.) */
-/* REMOVED: Specific time styles like #date-time, #time-date, #dottime (handled by .header now) */
-/* REMOVED: Old Tab styling (.tab-container, .tab, .content, specific tab colors) */
-/* REMOVED: Old Table/Col container styles if not repurposed */
-/* --- END REMOVED SECTIONS --- */
-
-
-/* NEW: Grid Layout for Link Boxes */
+/* Grid Layout for Link Boxes (Reverted to 5 columns) */
 .content-grid {
   display: grid;
-  /* REVERTED: Use auto-fit for simpler columns */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px; /* Increased gap slightly, adjust if needed */
+  grid-template-columns: repeat(5, 1fr); /* 5 Columns */
+  gap: 20px; /* Space between boxes */
   width: 90%;
-  max-width: 1000px;
-  margin: 0 auto; /* Keep grid centered */
-  align-items: start; /* Keep variable height */
-  /* REMOVED: grid-auto-flow: row dense; */
+  max-width: 1000px; /* Adjust if needed */
+  margin: 0 auto; /* Center the grid block */
+  /* REMOVED align-items: start; -> boxes stretch vertically now */
 }
 
-/* --- 5-COLUMN LAYOUT --- */
-.content-columns {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Create 5 equal columns */
-  gap: 25px; /* Adjust gap between columns */
-  width: 90%; /* Container width */
-  max-width: 1000px; /* Max width */
-  margin: 0 auto; /* Center the whole block */
-  align-items: start; /* Align columns to the top */
-}
-
-/* Add space between link boxes *within* the same column */
-.column .link-box + .link-box {
-  margin-top: 2em; /* Adjust vertical space between categories in a column */
-}
-
-/* NEW: Classes for grid spanning */
-.grid-span-2 {
-  grid-column: span 2; /* Box will take up 2 columns */
-}
-
-.grid-span-3 {
-  grid-column: span 3; /* Box will take up 3 columns */
-}
-
-.grid-span-4 {
-  grid-column: span 4; /* Box will take up 4 columns */
-}
-
-/* Add more spans if needed (e.g., span 6 for full width) */
-.grid-span-6 {
-  grid-column: span 6;
-}
-
-/* Link Box Styling - Make it disappear */
+/* Link Box Styling (Reverted to visible boxes) */
 .link-box {
-  /* REMOVED: background-color, border, border-radius */
-  padding: 0.5em; /* Reduced padding, adjust as needed */
+  background-color: var(--secondaryBg); /* ADDED BACK */
+  border: 1px solid var(--ctp-surface1); /* ADDED BACK */
+  border-radius: var(--bdradius); /* ADDED BACK */
+  padding: 1.5em; /* ADDED BACK */
   display: flex;
   flex-direction: column;
+  /* Height will stretch by default */
 }
 
-/* Link Box Title Styling - Directory Look */
+/* Link Box Title Styling (Reverted) */
 .box-title {
-  font-family: var(--fontHeader); /* Or switch back to monospace below */
-  font-size: 1.1em; /* Adjust size */
-  font-weight: 700; /* Keep bold */
-  color: var(--ctp-green); /* Example: Use Catppuccin Green */
-  margin: 0 0 0.8em 0;
-  padding-bottom: 0; /* Removed padding */
-  border-bottom: none; /* Removed border */
-  text-transform: uppercase; /* Keep titles uppercase */
-  /* Optional: Add slashes for directory look */
-  /* content: "/ " counter(section) " /"; /* If using counters */
-  /* Or simply add manually in H2 if preferred, or use ::before */
+  font-family: var(--fontHeader);
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--accentColor); /* Using accent color */
+  margin: 0 0 1em 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--ctp-surface1); /* ADDED BACK */
+  text-transform: none; /* REVERTED: Removed uppercase from titles */
 }
-.box-title::before { /* Example: Adding decoration */
-    content: "# ";
-    color: var(--ctp-mauve); /* Use a different accent */
-}
-
+/* REMOVED: .box-title::before */
 
 /* Link List Styling */
 .link-box ul {
@@ -281,113 +173,48 @@ body {
 }
 
 .link-box li {
-  margin-bottom: 0.5em; /* Adjust spacing */
+  margin-bottom: 0.6em;
 }
 
-/* Link Styling - Terminal Look */
+/* Link Styling (Reverted) */
 .link-box a {
-  color: var(--ctp-text); /* Use main text color */
+  color: var(--ctp-text);
   text-decoration: none;
   display: block;
-  padding: 0; /* Removed padding */
+  padding: 2px 0;
   transition: color 0.2s ease;
 }
 .link-box a:hover {
-  color: var(--ctp-sky); /* Example: Use brighter hover color */
+  color: var(--accentColor);
 }
-/* Optional: Add prompt character before links */
-.link-box a::before {
-    content: "> ";
-    color: var(--ctp-overlay1); /* Dim character color */
-    margin-right: 0.3em;
-}
+/* REMOVED: .link-box a::before */
 
-/* UPDATED: Footer styles */
+
+/* Footer styles */
 .footer {
-  font-size: 0.9em; /* Slightly smaller */
-  margin: 5vh auto 1em auto;
+  font-size: 0.9em;
+  margin: auto auto 1em auto; /* Pushes footer down */
   padding: 0.5em;
   position: relative;
   text-align: center;
   width: 90%;
-  color: var(--ctp-subtext0); /* Dimmer text color */
+  color: var(--ctp-subtext0);
 }
+.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
+.footer a:hover { color: var(--accentColor); }
 
-.footer a {
-  color: var(--ctp-subtext1); /* Slightly brighter link */
-  text-decoration: none; /* Remove underline */
-  transition: color 0.2s ease;
-}
+#footer-inner { position: fixed; bottom: 1em; right: 1em; }
+#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
+#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
+#footer-inner > #hideDiv { /* display: none; set inline now */ position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
 
-.footer a:hover {
-  color: var(--accentColor); /* Hover color */
-}
-
-/* Kept: Footer inner button if needed, updated colors */
-#footer-inner {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-}
-
-#footer-inner button {
-  cursor: pointer;
-  display: block;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  background-color: transparent;
-  font-size: 1.5em;
-  color: var(--ctp-overlay1); /* Use a subtle color */
-  transition: color 0.2s ease;
-}
-
-#footer-inner button:hover,
-#footer-inner button:active {
-  color: var(--ctp-text); /* Brighter on hover */
-}
-
-#footer-inner > #hideDiv {
-  /* Kept structure, updated colors */
-  display: none;
-  position: fixed;
-  bottom: 46px;
-  right: 10px;
-  width: 80%;
-  font-size: 0.9em;
-  font-weight: 300;
-  max-width: 600px;
-  background: var(--ctp-mantle); /* Slightly darker bg */
-  color: var(--ctp-subtext1);
-  padding: 10px;
-  border-radius: var(--bdradius);
-  border: 1px solid var(--ctp-surface0);
-  text-align: right;
-}
-
-/* Kept: Media queries structure - content might need adjustment based on new layout */
-/* Screens larger than a average phone */
+/* Media queries (kept structure, may need adjustments) */
 @media screen and (min-width: 800px) {
-  /* Example: Adjust grid or box sizes for larger screens if needed */
-  .content-grid {
-     /* Example: Maybe increase gap or change column definition */
-     gap: 25px;
-  }
+   .content-grid { gap: 25px; }
 }
-
-/* Screens larger than a average tab */
-@media screen and (min-width: 1024px) { /* Adjusted breakpoint */
-   .content-grid {
-     width: 80%; /* Example: Make grid wider */
-   }
+@media screen and (min-width: 1024px) {
+   .content-grid { width: 80%; }
 }
-
-/* DeskTop Screen */
-@media screen and (min-width: 1440px) { /* Adjusted breakpoint */
-   .content-grid {
-     width: 70%; /* Example: Constrain width more */
-     max-width: 1200px;
-   }
+@media screen and (min-width: 1440px) {
+   .content-grid { width: 70%; max-width: 1200px; }
 }
-
-/* REMOVED: Keyframes blink, scroll-left, oscillator as related elements were removed */
