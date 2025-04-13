@@ -5,27 +5,12 @@
 // --- Initialization Function ---
 // Ensures the DOM is loaded before we manipulate it.
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Display Username ---
-    // Assumes 'userName' is defined globally, likely in config.js
-    if (typeof userName !== 'undefined' && document.getElementById("username")) {
-        document.getElementById("username").innerHTML = userName;
-    }
-
     // --- Load Links into Boxes ---
     populateLinkBoxes();
 
     // --- Initialize Date, Time, and Greeting ---
     updateDateTime(); // Call once immediately
     setInterval(updateDateTime, 1000); // Update time every second, greeting less critical but updates too
-
-    // --- Dark Mode Check ---
-    // Check if dark-mode preference is stored
-    // NOTE: This assumes your CSS uses a .dark-mode class on the body.
-    // If you're *only* using Catppuccin dark theme now, you might not need this toggle.
-    // Consider if the toggleMode function is still needed.
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark-mode");
-    }
 
     // --- Add Scrollbar Visibility Listeners ---
     // Kept this feature, but might be less necessary with the new layout.
@@ -147,21 +132,6 @@ function showScrollbar(e) {
     }
 }
 // NOTE: The old implementation applied this globally. Now it's applied to .link-box elements via the DOMContentLoaded listener.
-
-
-// --- Dark Mode Toggle ---
-// Toggle dark-mode class on body (if CSS is set up for it)
-// Consider removing if you *only* want the Catppuccin dark theme.
-function toggleMode() {
-    document.body.classList.toggle("dark-mode"); // Assumes .dark-mode class exists in CSS
-
-    // Save mode preference to local storage
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkMode", "enabled");
-    } else {
-        localStorage.setItem("darkMode", "disabled");
-    }
-}
 
 
 // --- Footer Info Toggle ---
