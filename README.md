@@ -30,7 +30,7 @@ Most configuration is done in the `config.js` file:
         name: "Category Title", // This MUST match the id="box-..." in index.html (lowercase, hyphens for spaces) and the <h2> text
         bookmarks: {
           "Link Display Name": "[https://link-url.com/](https://link-url.com/)",
-          "Another Link": "[https://another-url.com/](https://another-url.com/)",
+          "Another Link": "[https://another-url.com/](https://another-url.com/)"
           // Add more bookmarks here
         }
       },
@@ -40,20 +40,15 @@ Most configuration is done in the `config.js` file:
     * Make sure the `name` property exactly matches the intended category title and corresponds to the `id` used in `index.html` (e.g., `name: "Web-Apps"` corresponds to `id="box-web-apps"`).
     * Add/edit/remove links within the `bookmarks` object for each category.
 
-*Note: Sections for configuring Last.fm, Weather, and specific color variables from the original README have been removed as those features/methods are no longer used.*
-
 ## Credits
 
 This project is a personalized version based on:
 
-* **GABEstart** by GABEweb (The direct fork source).
+* **GABEstart** by [GABEweb](https://github.com/gabeweb) (The direct fork source).
 * **GetStarted** by [MrAlpha786](https://github.com/MrAlpha786) (The original base template).
 
 It also uses:
 
 * **Catppuccin Theme Palette:** Colors adapted from the [Catppuccin Mocha theme](https://github.com/catppuccin/catppuccin).
 * **Inter Font:** Served via [Google Fonts](https://fonts.google.com/specimen/Inter).
-
-*(Credits for removed features like the original waves animation, suggestion script, scroll text script, Last.fm plugin, weather API/icons, and previously used fonts like IBM Plex/Monocraft have been removed).*
-
 ---
