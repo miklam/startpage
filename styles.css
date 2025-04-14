@@ -172,20 +172,18 @@ body {
   display: flex;
 }
 
-/* --- Link Box Title Styling (Side Border Style Corrected) --- */
+/* Link Box Title Styling (Centered) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
+  /* Color is set per category below */
   margin: 0 0 1em 0;
-  padding-bottom: 0.2em;    /* Space below text */
-  border-bottom: none;      /* NO bottom border */
-  padding-left: 0.8em;      /* Space for the side border */
-  border-left-width: 4px;   /* Thickness of side border */
-  border-left-style: solid;
-  /* Border color is set per category below */
-  text-transform: uppercase;     /* Titles not uppercase */
+  padding-bottom: 0.5em;    /* Restore padding for bottom border */
+  border-bottom: 1px solid var(--ctp-surface1); /* Restore bottom border */
+  text-transform: none;
   text-align: center;     /* ADDED: Center the title text */
+  /* REMOVED border-left-width, border-left-style, padding-left */
 }
 
 /* --- Category Title Colors (Mocha Text Colors) --- */
