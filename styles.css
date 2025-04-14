@@ -219,33 +219,6 @@ body {
 /* Removed styles for #footer-inner etc. */
 
 /* ==========================================================================
-   Accessibility Focus Styles (Using box-shadow for rounded corners)
-   ========================================================================== */
-
-/* Default focus style for links and the footer button */
-a:focus,
-#footer-inner button:focus { /* Target footer button specifically */
-  /* Remove default outline and use box-shadow */
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accentColor); /* 0 offset H, 0 offset V, 0 blur, 2px spread, Color */
-  /* Optional: Add border-radius if the base element doesn't have one (links usually don't) */
-  /* border-radius: 3px; */ /* Small radius for standalone links */
-}
-
-/* Specific focus style for mobile tab buttons */
-/* Assuming tab buttons themselves might have border-radius from .tabs-mobile */
-.tab-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--ctp-sky); /* 0 offset H, 0 offset V, 0 blur, 2px spread, Sky color */
-  /* The box-shadow should follow the button's border-radius */
-}
-
-/* Ensure base button style has no unwanted borders on focus */
-button {
-    border: none; /* Already in global reset, but good to be sure */
-}
-
-/* ==========================================================================
    Desktop Layout Override (min-width: 800px)
    ========================================================================== */
 
