@@ -1,6 +1,6 @@
 # Mikael's Personal Homepage
 
-![Screenshot of Homepage](asset/homepage-screenshot.png)
+![Screenshot of Homepage](assets/homepage-screenshot.png)
 A clean, responsive, personalized startpage based on GABEstart/GetStarted. Displays categorized links and dynamic time/date information with a Catppuccin Mocha theme.
 
 ## Features
