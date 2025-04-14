@@ -85,10 +85,12 @@ body {
   min-height: 100vh;
 }
 
-/* Header Styling (Centered) */
+/* Header Styling (Matching Wider Grid) */
 .header {
-  text-align: center;
-  margin-bottom: 2.5em;
+  text-align: center; /* Keeping centered text based on last step */
+  width: 90%;         /* Keep relative width */
+  max-width: 1200px;  /* UPDATED: Match grid max-width */
+  margin: 0 auto 2.5em auto; /* Centers block, keeps bottom margin */
   padding: 0;
 }
 .header #greeting { 
