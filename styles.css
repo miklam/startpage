@@ -204,17 +204,34 @@ body {
   margin-bottom: 0.6em;
 }
 
-/* Link Styling */
-.link-box a {
-  color: var(--ctp-text);
-  text-decoration: none;
-  display: block;
-  padding: 2px 0;
-  transition: color 0.2s ease;
+/* --- Category Link Hover Colors --- */
+/* NOTE: Ensure these IDs match your index.html */
+
+#box-social a:hover {
+  color: var(--ctp-mauve); /* Match Social title color */
+  font-weight: 700; /* Make hover bold */
 }
-.link-box a:hover {
-  color: var(--accentColor); /* Use general accent (Mauve) for hover */
+
+#box-fun a:hover {
+  color: var(--ctp-red); /* Match Fun title color */
+  font-weight: 700;
 }
+
+#box-web-apps a:hover {
+  color: var(--ctp-yellow); /* Match Web-Apps title color */
+  font-weight: 700;
+}
+
+#box-finances a:hover {
+  color: var(--ctp-green); /* Match Finances title color */
+  font-weight: 700;
+}
+
+#box-other a:hover {
+  color: var(--ctp-blue); /* Match Other title color */
+  font-weight: 700;
+}
+/* --- End Category Link Hover Colors --- */
 
 /* Footer styles */
 .footer {
