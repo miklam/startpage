@@ -280,64 +280,25 @@ body {
    ========================================================================== */
 
 .footer {
-  position: relative; /* [cite: 50] */
-  width: 90%; /* [cite: 50] */
-  margin: auto auto 1em auto; /* [cite: 49] */
-  padding: 0.5em; /* [cite: 50] */
-  font-size: 0.9em; /* [cite: 49] */
-  color: var(--ctp-subtext0); /* [cite: 50] */
-  text-align: center; /* [cite: 50] */
+  font-size: 0.9em;
+  margin: auto auto 1em auto; /* Pushes footer down */
+  padding: 0.5em;
+  position: relative; /* Keep relative if needed, might not be necessary now */
+  text-align: center; /* Center the link */
+  width: 90%;
+  color: var(--ctp-subtext0);
 }
 
 .footer a {
-  color: var(--ctp-subtext1); /* [cite: 50] */
-  text-decoration: none; /* [cite: 50] */
-  transition: color 0.2s ease; /* [cite: 51] */
+  color: var(--ctp-subtext1); /* Link color */
+  text-decoration: none;
+  transition: color 0.2s ease;
+  /* Optional: add underline on hover? */
+  /* text-decoration: underline; */
 }
 
 .footer a:hover {
-  color: var(--accentColor); /* [cite: 51] */
-}
-
-/* --- Footer Inner Button & Popup --- */
-#footer-inner {
-  position: fixed; /* [cite: 51] */
-  bottom: 1em; /* [cite: 51] */
-  right: 1em; /* [cite: 51] */
-}
-
-#footer-inner button {
-  position: absolute; /* [cite: 52] */
-  bottom: 0px; /* [cite: 52] */
-  right: 0px; /* [cite: 52] */
-  display: block; /* [cite: 52] */
-  background-color: transparent; /* [cite: 52] */
-  font-size: 1.5em; /* [cite: 52] */
-  color: var(--ctp-overlay1); /* [cite: 52] */
-  cursor: pointer; /* [cite: 52] */
-  transition: color 0.2s ease; /* [cite: 53] */
-}
-
-#footer-inner button:hover,
-#footer-inner button:active {
-  color: var(--ctp-text); /* [cite: 53] */
-}
-
-#footer-inner > #hideDiv {
-  display: none; /* Hidden by default [cite: 53] */
-  position: fixed; /* [cite: 53] */
-  bottom: 46px; /* [cite: 54] */
-  right: 10px; /* [cite: 54] */
-  width: 80%; /* [cite: 54] */
-  max-width: 600px; /* [cite: 54] */
-  background: var(--ctp-mantle); /* [cite: 54] */
-  color: var(--ctp-subtext1); /* [cite: 54] */
-  border: 1px solid var(--ctp-surface0); /* [cite: 55] */
-  border-radius: var(--bdradius); /* [cite: 54] */
-  padding: 10px; /* [cite: 54] */
-  font-size: 0.9em; /* [cite: 54] */
-  font-weight: 300; /* [cite: 54] */
-  text-align: right; /* [cite: 55] */
+  color: var(--accentColor); /* Link hover color */
 }
 
 /* ==========================================================================
