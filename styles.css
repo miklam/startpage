@@ -1,4 +1,4 @@
-/* styles.css - Catppuccin Mocha Theme, 5-Box Layout, Mobile Tabs (April 14, 2025) */
+/* styles.css - Catppuccin Mocha Theme, 5-Box Layout, Mobile Tabs, Side Border Titles (April 14, 2025) */
 
 /* Keep @font-face rules if needed */
 @font-face {
@@ -16,16 +16,16 @@
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7;   /* Accent & Social Title/Hover */
-  --ctp-red: #f38ba8;     /* Fun Title/Hover */
+  --ctp-mauve: #cba6f7;   /* Accent & Social Border */
+  --ctp-red: #f38ba8;     /* Fun Border */
   --ctp-maroon: #eba0ac;
   --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af;  /* Web-Apps Title/Hover */
-  --ctp-green: #a6e3a1;   /* Finances Title/Hover */
+  --ctp-yellow: #f9e2af;  /* Web-Apps Border */
+  --ctp-green: #a6e3a1;   /* Finances Border */
   --ctp-teal: #94e2d5;
   --ctp-sky: #89dceb;
   --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;    /* Other Title/Hover */
+  --ctp-blue: #89b4fa;    /* Other Border */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
   --ctp-subtext1: #bac2de; /* Header Time color */
@@ -34,7 +34,7 @@
   --ctp-overlay1: #7f849c;
   --ctp-overlay0: #6c7086;
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Box/Title borders */
+  --ctp-surface1: #45475a; /* Box borders */
   --ctp-surface0: #313244; /* Box backgrounds */
   --ctp-base: #1e1e2e;     /* Main background */
   --ctp-mantle: #181825;   /* Slightly darker bg */
@@ -160,25 +160,44 @@ body {
   display: flex;
 }
 
-/* Link Box Title Styling (Base - Bottom Border) */
+/* --- Link Box Title Styling (Side Border Style Corrected) --- */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  /* Color is set per category below */
+  color: var(--ctp-text);     /* Consistent TEXT color */
   margin: 0 0 1em 0;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--ctp-surface1);
-  text-transform: none;
+  padding-bottom: 0.2em;    /* Space below text */
+  border-bottom: none;      /* NO bottom border */
+  padding-left: 0.8em;      /* Space for the side border */
+  border-left-width: 4px;   /* Thickness of side border */
+  border-left-style: solid;
+  /* Border color is set per category below */
+  text-transform: none;     /* Titles not uppercase */
 }
 
-/* --- Category Title Colors (Mocha Text Colors) --- */
-#box-social .box-title { color: var(--ctp-mauve); }
-#box-fun .box-title { color: var(--ctp-red); }
-#box-web-apps .box-title { color: var(--ctp-yellow); }
-#box-finances .box-title { color: var(--ctp-green); }
-#box-other .box-title { color: var(--ctp-blue); }
-/* --- End Category Title Colors --- */
+/* --- Apply specific BORDER colors (Mocha) --- */
+/* NOTE: Ensure these IDs match your index.html */
+#box-social .box-title {
+  border-left-color: var(--ctp-mauve); /* Purple */
+}
+#box-fun .box-title,
+#box-media-tools .box-title { /* Use correct ID */
+  border-left-color: var(--ctp-red);    /* Red */
+}
+#box-web-apps .box-title,
+#box-cloud-google .box-title { /* Use correct ID */
+  border-left-color: var(--ctp-yellow);/* Yellow */
+}
+#box-finances .box-title,
+#box-money .box-title { /* Use correct ID */
+  border-left-color: var(--ctp-green); /* Green */
+}
+#box-other .box-title,
+#box-services-shop .box-title { /* Use correct ID */
+  border-left-color: var(--ctp-blue);  /* Blue */
+}
+/* --- End Title Border Colors --- */
 
 
 /* Link List Styling */
@@ -189,10 +208,10 @@ body {
 .link-box a { color: var(--ctp-text); text-decoration: none; display: block; padding: 2px 0; transition: color 0.2s ease, font-weight 0.2s ease; }
 /* --- Category Link Hover Colors --- */
 #box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
-#box-fun a:hover { color: var(--ctp-red); font-weight: 700; }
-#box-web-apps a:hover { color: var(--ctp-yellow); font-weight: 700; }
-#box-finances a:hover { color: var(--ctp-green); font-weight: 700; }
-#box-other a:hover { color: var(--ctp-blue); font-weight: 700; }
+#box-fun a:hover, #box-media-tools a:hover { color: var(--ctp-red); font-weight: 700; }
+#box-web-apps a:hover, #box-cloud-google a:hover { color: var(--ctp-yellow); font-weight: 700; }
+#box-finances a:hover, #box-money a:hover { color: var(--ctp-green); font-weight: 700; }
+#box-other a:hover, #box-services-shop a:hover { color: var(--ctp-blue); font-weight: 700; }
 /* --- End Category Link Hover Colors --- */
 
 
@@ -229,9 +248,11 @@ body {
     display: flex; /* Restore display type */
     margin-bottom: 0; /* Remove mobile stacking margin */
   }
-  /* .active class has no special effect on desktop display */
 
   /* Optional: Adjust grid gap/width for larger screens */
+  /* These nested media queries might be redundant if defined outside */
+  /* Keeping them for consistency with previous state if they worked */
+  /* Consider moving these adjustments outside this specific media query if preferred */
   @media screen and (min-width: 800px) {
      .content-grid { gap: 25px; }
   }
@@ -246,7 +267,3 @@ body {
 
 
 /* REMOVED Waveform Styles */
-/* #waveform-collage { ... } */
-/* .parallax > use { ... } */
-/* @keyframes move-forever { ... } */
-/* .waves { ... } */
