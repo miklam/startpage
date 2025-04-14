@@ -125,23 +125,23 @@ function updateDateTime() {
     const dateEl = document.getElementById('date');
     const greetingEl = document.getElementById('greeting');
 
-    // Time
+    // Time (Keep as is, using sv-SE or change locale if desired)
     if (timeEl) {
         try {
-            // Using 'sv-SE' locale for Swedish time format
             timeEl.textContent = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         } catch (e) { // Fallback
             timeEl.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
         }
     }
 
-    // Date
+    // --- Date ---
     if (dateEl) {
          try {
-             // Using 'sv-SE' locale for Swedish date format
-            dateEl.textContent = now.toLocaleDateString('sv-SE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            // UPDATED: Changed locale to 'en-GB' for English format with comma
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateEl.textContent = now.toLocaleDateString('en-GB', dateOptions);
          } catch (e) { // Fallback
-             dateEl.textContent = now.toDateString();
+             dateEl.textContent = now.toDateString(); // Fallback to basic English date
          }
     }
 
