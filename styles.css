@@ -219,6 +219,37 @@ body {
 /* Removed styles for #footer-inner etc. */
 
 /* ==========================================================================
+   Accessibility Focus Styles
+   ========================================================================== */
+
+/* Default focus style for links and the footer button */
+a:focus,
+#footer-inner button:focus { /* Target footer button specifically */
+  /* Using outline for better layout stability */
+  outline: 2px solid var(--accentColor); /* Use main accent color (Mauve) */
+  outline-offset: 2px; /* Add space between element and outline */
+  /* Optional: Slightly change background for more emphasis */
+  /* background-color: var(--ctp-surface0); */
+}
+
+/* Specific focus style for mobile tab buttons */
+.tab-button:focus {
+  outline: 2px solid var(--ctp-sky); /* Use a different color (e.g., Sky) for contrast */
+  outline-offset: 1px;
+  /* Optionally enhance the existing active style or add a background */
+  /* background-color: var(--ctp-surface1); */
+  /* color: var(--ctp-sky); */ /* Change text color on focus */
+}
+
+/* Optional: Remove default outline if you ONLY want custom style */
+/* Usually not needed if you define your own outline */
+/*
+a:focus, button:focus {
+  outline: none;
+}
+*/
+
+/* ==========================================================================
    Desktop Layout Override (min-width: 800px)
    ========================================================================== */
 
