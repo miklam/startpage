@@ -1,250 +1,387 @@
-/* styles.css - Catppuccin Mocha, 5-Box Layout, Wider Grid, Mobile Tabs, Colored Titles (April 14, 2025) */
+/* ==========================================================================
+   styles.css
+   Catppuccin Mocha Theme | 5-Box Layout | Wider Grid | Mobile Tabs | Colored Titles
+   Last updated: April 14, 2025
+   ========================================================================== */
 
-/* Keep @font-face rules if needed */
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("asset/fonts/IBM Plex Mono/IBMPlexMono-Regular.ttf");
-}
-@font-face {
-  font-family: "Monocraft";
-  src: url("asset/fonts/Monocraft/Monocraft.otf");
-}
+/* ==========================================================================
+   Root Variables (Catppuccin Mocha & Custom)
+   ========================================================================== */
 
-/* Catppuccin Mocha Palette & Core Variables */
 :root {
-  /* Catppuccin Mocha Palette */
-  --ctp-rosewater: #f5e0dc;
-  --ctp-flamingo: #f2cdcd;
-  --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7;   /* Accent & Social Title/Hover */
-  --ctp-red: #f38ba8;     /* Fun Title/Hover */
-  --ctp-maroon: #eba0ac;
-  --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af;  /* Web-Apps Title/Hover */
-  --ctp-green: #a6e3a1;   /* Finances Title/Hover */
-  --ctp-teal: #94e2d5;
-  --ctp-sky: #89dceb;
-  --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;    /* Other Title/Hover */
-  --ctp-lavender: #b4befe;
-  --ctp-text: #cdd6f4;     /* Main text */
-  --ctp-subtext1: #bac2de; /* Header Time color */
-  --ctp-subtext0: #a6adc8; /* Header Date color */
-  --ctp-overlay2: #9399b2;
-  --ctp-overlay1: #7f849c;
-  --ctp-overlay0: #6c7086;
-  --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Box/Title borders */
-  --ctp-surface0: #313244; /* Box backgrounds */
-  --ctp-base: #1e1e2e;     /* Main background */
-  --ctp-mantle: #181825;   /* Slightly darker bg */
-  --ctp-crust: #11111b;    /* Darkest bg */
+  /* --- Catppuccin Mocha Palette --- */
+  --ctp-rosewater: #f5e0dc; /* [cite: 3] */
+  --ctp-flamingo: #f2cdcd; /* [cite: 3] */
+  --ctp-pink: #f5c2e7; /* [cite: 4] */
+  --ctp-mauve: #cba6f7; /* Accent & Social Title/Hover [cite: 4] */
+  --ctp-red: #f38ba8; /* Fun Title/Hover [cite: 4] */
+  --ctp-maroon: #eba0ac; /* [cite: 4] */
+  --ctp-peach: #fab387; /* [cite: 5] */
+  --ctp-yellow: #f9e2af; /* Web-Apps Title/Hover [cite: 5] */
+  --ctp-green: #a6e3a1; /* Finances Title/Hover [cite: 5] */
+  --ctp-teal: #94e2d5; /* [cite: 5] */
+  --ctp-sky: #89dceb; /* [cite: 5] */
+  --ctp-sapphire: #74c7ec; /* [cite: 6] */
+  --ctp-blue: #89b4fa; /* Other Title/Hover [cite: 6] */
+  --ctp-lavender: #b4befe; /* [cite: 6] */
+  --ctp-text: #cdd6f4; /* Main text [cite: 6] */
+  --ctp-subtext1: #bac2de; /* [cite: 6] */
+  --ctp-subtext0: #a6adc8; /* Header Date color [cite: 7] */
+  --ctp-overlay2: #9399b2; /* [cite: 7] */
+  --ctp-overlay1: #7f849c; /* [cite: 7] */
+  --ctp-overlay0: #6c7086; /* [cite: 7] */
+  --ctp-surface2: #585b70; /* [cite: 8] */
+  --ctp-surface1: #45475a; /* Box/Title borders [cite: 8] */
+  --ctp-surface0: #313244; /* Box backgrounds [cite: 8] */
+  --ctp-base: #1e1e2e; /* Main background [cite: 8] */
+  --ctp-mantle: #181825; /* Slightly darker bg [cite: 9] */
+  --ctp-crust: #11111b; /* Darkest bg [cite: 9] */
 
-  /* Core Variables */
-  --bg: var(--ctp-base);
-  --fg: var(--ctp-text);
-  --secondaryBg: var(--ctp-surface0); /* Box backgrounds */
-
-  /* Font Variables (Using Inter) */
-  --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-  --accentColor: var(--ctp-mauve); /* General accent */
-  --scrollbar: var(--accentColor);
-  --bdradius: 0.75em;
+  /* --- Core Variables --- */
+  --bg: var(--ctp-base); /* [cite: 10] */
+  --fg: var(--ctp-text); /* [cite: 10] */
+  --secondaryBg: var(--ctp-surface0); /* Box backgrounds [cite: 10] */
+  --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* [cite: 11] */
+  --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* [cite: 12] */
+  --accentColor: var(--ctp-mauve); /* General accent [cite: 13] */
+  --scrollbar: var(--accentColor); /* [cite: 13] */
+  --bdradius: 0.75em; /* [cite: 13] */
 }
 
-/* Body base styles */
-body {
-  font-family: var(--fontBody);
-  font-weight: 400;
-  background-color: var(--bg);
-  margin: 0;
-  color: var(--fg);
-}
+/* ==========================================================================
+   Global Resets & Base Styles
+   ========================================================================== */
 
-/* Global reset and scrollbar base */
 * {
-  -ms-overflow-style: none;
-  -webkit-tap-highlight-color: transparent;
-  border: 0;
-  box-sizing: border-box;
-  color: var(--fg);
-  outline-style: none;
-  scrollbar-color: #00000000 #00000000;
-  scrollbar-width: thin;
-  text-decoration: none;
+  margin: 0; /* [cite: 14] */
+  padding: 0; /* [cite: 44] */
+  border: 0; /* [cite: 15] */
+  box-sizing: border-box; /* [cite: 15] */
+  color: var(--fg); /* [cite: 15] */
+  outline-style: none; /* [cite: 15] */
+  text-decoration: none; /* [cite: 15] */
+  -webkit-tap-highlight-color: transparent; /* [cite: 15] */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge [cite: 14] */
+  scrollbar-width: thin; /* Firefox [cite: 15] */
+  scrollbar-color: transparent transparent; /* Firefox scrollbar colors [cite: 15] */
 }
-::-webkit-scrollbar { width: 0.3em; }
-::-webkit-scrollbar-track { background: #00000000; margin-bottom: 0.75em; }
-::-webkit-scrollbar-thumb { background-color: #00000000; border-radius: 1em; }
-:hover, .visible-scrollbar { scrollbar-color: var(--scrollbar) #00000000; }
-:hover::-webkit-scrollbar-thumb, .visible-scrollbar::-webkit-scrollbar-thumb { background-color: var(--scrollbar); }
-/* End Scrollbar */
 
-/* Main container alignment */
+/* --- Webkit Scrollbar Styles --- */
+::-webkit-scrollbar {
+  width: 0.3em; /* [cite: 16] */
+}
+::-webkit-scrollbar-track {
+  background: transparent; /* [cite: 16] */
+  margin-bottom: 0.75em; /* [cite: 16] */
+}
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* [cite: 16] */
+  border-radius: 1em; /* [cite: 16] */
+}
+:hover::-webkit-scrollbar-thumb,
+.visible-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar); /* [cite: 17] */
+}
+
+/* --- Firefox Scrollbar Hover --- */
+:hover,
+.visible-scrollbar {
+  scrollbar-color: var(--scrollbar) transparent; /* [cite: 17] */
+}
+
+
+body {
+  font-family: var(--fontBody); /* [cite: 13] */
+  font-weight: 400; /* [cite: 14] */
+  background-color: var(--bg); /* [cite: 14] */
+  color: var(--fg); /* [cite: 14] */
+  min-height: 100vh; /* [cite: 19] */
+}
+
+/* ==========================================================================
+   Main Layout Container
+   ========================================================================== */
+
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: auto;
-  padding: 3vmax 20px 1em 20px;
-  width: 100%;
-  min-height: 100vh;
+  display: flex; /* [cite: 18] */
+  flex-direction: column; /* [cite: 18] */
+  justify-content: flex-start; /* [cite: 18] */
+  width: 100%; /* [cite: 19] */
+  min-height: 100vh; /* [cite: 19] */
+  margin: auto; /* [cite: 18] */
+  padding: 3vmax 20px 1em 20px; /* [cite: 19] */
 }
 
-/* Header Styling (Matching Wider Grid) */
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
 .header {
-  text-align: center; /* Keep centered text */
-  width: 90%;         /* Use relative width */
-  max-width: 1500px;  /* Match grid max-width */
-  margin: 0 auto 2.5em auto; /* Center block */
-  padding: 0;
+  width: 90%; /* Use relative width [cite: 20] */
+  max-width: 1500px; /* Match grid max-width [cite: 20] */
+  margin: 0 auto 2.5em auto; /* Center block [cite: 21] */
+  padding: 0; /* [cite: 21] */
+  text-align: center; /* [cite: 19] */
 }
-.header #greeting { font-family: var(--fontHeader); font-weight: 700; font-size: 2em; display: block; margin-bottom: 0.5em; color: var(--fg); }
-.time-date-stack { line-height: 1.4; }
-.header #time { font-size: 1.3em; font-weight: 400; color: var(--ctp-subtext1); }
-.header #date { font-size: 1em; color: var(--ctp-subtext0); text-transform: uppercase; }
 
-/* --- Mobile Tab Navigation Styles (Mobile Default) --- */
+.header #greeting {
+  display: block; /* [cite: 22] */
+  margin-bottom: 0.5em; /* [cite: 22] */
+  font-family: var(--fontHeader); /* [cite: 22] */
+  font-size: 2em; /* [cite: 22] */
+  font-weight: 700; /* [cite: 22] */
+  color: var(--fg); /* [cite: 22] */
+}
+
+.time-date-stack {
+  line-height: 1.4; /* [cite: 22] */
+}
+
+.header #time {
+  font-size: 1.3em; /* [cite: 23] */
+  font-weight: 400; /* [cite: 23] */
+  color: var(--ctp-subtext1); /* [cite: 23] */
+}
+
+.header #date {
+  font-size: 1em; /* [cite: 23] */
+  color: var(--ctp-subtext0); /* [cite: 23] */
+  text-transform: uppercase; /* [cite: 23] */
+}
+
+/* ==========================================================================
+   Mobile Tab Navigation (Mobile First)
+   ========================================================================== */
+
 .tabs-mobile {
-  display: flex;
-  justify-content: space-around;
-  background-color: var(--secondaryBg);
-  border-radius: var(--bdradius);
-  margin-bottom: 1.5em;
-  padding: 0.2em 0;
-  overflow-x: auto;
+  display: flex; /* [cite: 24] */
+  justify-content: space-around; /* [cite: 24] */
+  background-color: var(--secondaryBg); /* [cite: 24] */
+  border-radius: var(--bdradius); /* [cite: 24] */
+  margin-bottom: 1.5em; /* [cite: 25] */
+  padding: 0.2em 0; /* [cite: 25] */
+  overflow-x: auto; /* [cite: 25] */
 }
-.tab-button { background: none; border: none; border-bottom: 3px solid transparent; color: var(--ctp-subtext0); padding: 0.8em 0.5em; cursor: pointer; font-family: var(--fontHeader); font-size: 0.9em; font-weight: 700; white-space: nowrap; transition: color 0.2s ease, border-color 0.2s ease; }
-.tab-button:hover { color: var(--ctp-text); }
-.tab-button.active { color: var(--accentColor); border-bottom-color: var(--accentColor); }
-/* --- End Mobile Tab Navigation Styles --- */
 
+.tab-button {
+  padding: 0.8em 0.5em; /* [cite: 26] */
+  background: none; /* [cite: 25] */
+  border: none; /* [cite: 25] */
+  border-bottom: 3px solid transparent; /* [cite: 25] */
+  color: var(--ctp-subtext0); /* [cite: 25] */
+  font-family: var(--fontHeader); /* [cite: 26] */
+  font-size: 0.9em; /* [cite: 26] */
+  font-weight: 700; /* [cite: 26] */
+  white-space: nowrap; /* [cite: 26] */
+  cursor: pointer; /* [cite: 26] */
+  transition: color 0.2s ease, border-color 0.2s ease; /* [cite: 26] */
+}
 
-/* --- Base Content Layout (Mobile Default & Desktop Grid) --- */
+.tab-button:hover {
+  color: var(--ctp-text); /* [cite: 27] */
+}
+
+.tab-button.active {
+  color: var(--accentColor); /* [cite: 27] */
+  border-bottom-color: var(--accentColor); /* [cite: 27] */
+}
+
+/* ==========================================================================
+   Content Layout (Mobile First Stack, Desktop Grid)
+   ========================================================================== */
+
 .content-grid {
-  /* Base styles apply to mobile first if media query is below */
-  display: block; /* Stack boxes vertically by default */
-  width: 100%;
-  max-width: none;
-  margin: 0 auto 2em auto;
-  gap: 0;
-
-  /* Properties for the desktop grid view (overridden in media query) */
-  /* These are set again inside the media query for clarity */
-  /* grid-template-columns: repeat(5, 1fr); */
-  /* gap: 15px; */
-  /* width: 90%; */
-  /* max-width: 1200px; */
+  /* --- Mobile Stack (Default) --- */
+  display: block; /* Stack boxes vertically by default [cite: 28] */
+  width: 100%; /* [cite: 29] */
+  max-width: none; /* [cite: 29] */
+  margin: 0 auto 2em auto; /* [cite: 29] */
+  gap: 0; /* No gap for stacked view [cite: 29] */
 }
-/* --- End Base Content Layout --- */
 
+/* ==========================================================================
+   Link Boxes (Shared Styles & Mobile Visibility)
+   ========================================================================== */
 
-/* Link Box Styling */
 .link-box {
-  background-color: var(--secondaryBg);
-  border: 1px solid var(--ctp-surface1);
-  border-radius: var(--bdradius);
-  padding: 1.5em;
-  display: none; /* Hide all boxes by default on mobile */
-  flex-direction: column;
-  margin-bottom: 1.5em; /* Space below active box on mobile */
+  /* --- Mobile: Hidden by default, active shown --- */
+  display: none; /* Hide all boxes by default on mobile [cite: 33] */
+  flex-direction: column; /* [cite: 33] */
+  margin-bottom: 1.5em; /* Space below active box on mobile [cite: 33] */
+
+  /* --- Shared Box Styles --- */
+  background-color: var(--secondaryBg); /* [cite: 32] */
+  border: 1px solid var(--ctp-surface1); /* [cite: 32] */
+  border-radius: var(--bdradius); /* [cite: 33] */
+  padding: 1.5em; /* [cite: 33] */
 }
-/* Show only the active box on mobile */
+
 .link-box.active {
-  display: flex;
+  display: flex; /* Show active box on mobile [cite: 34] */
 }
 
-/* Link Box Title Styling (Centered Text, Bottom Border - Corrected) */
+/* ==========================================================================
+   Link Box Titles & Category Colors
+   ========================================================================== */
+
 .box-title {
-  font-family: var(--fontHeader);
-  font-size: 1.2em;
-  font-weight: 700;
+  margin: 0 0 1em 0; /* [cite: 36] */
+  padding-bottom: 0.5em; /* Space for border [cite: 36] */
+  border-bottom: 1px solid var(--ctp-surface1); /* [cite: 37] */
+  font-family: var(--fontHeader); /* [cite: 35] */
+  font-size: 1.2em; /* [cite: 35] */
+  font-weight: 700; /* [cite: 35] */
+  text-transform: uppercase; /* [cite: 37] */
+  text-align: center; /* Center title text [cite: 38] */
   /* Color is set per category below */
-  margin: 0 0 1em 0;
-  padding-bottom: 0.5em; /* Restore padding for bottom border */
-  border-bottom: 1px solid var(--ctp-surface1); /* Restore bottom border */
-  text-transform: uppercase; /* Titles not uppercase */
-  text-align: center;   /* Center the title text */
-  /* REMOVED border-left styles */
 }
 
-/* --- Category Title Colors (Mocha Text Colors - Corrected) --- */
-/* NOTE: Ensure these IDs match your index.html */
-#box-social .box-title {
-  color: var(--ctp-mauve); /* Set text color */
+/* --- Category Title Colors --- */
+#box-social .box-title { color: var(--ctp-mauve); } /* [cite: 38] */
+#box-fun .box-title { color: var(--ctp-red); } /* [cite: 39] */
+#box-web-apps .box-title { color: var(--ctp-yellow); } /* [cite: 40] */
+#box-finances .box-title { color: var(--ctp-green); } /* [cite: 41] */
+#box-other .box-title { color: var(--ctp-blue); } /* [cite: 42] */
+
+/* ==========================================================================
+   Link Lists & Items
+   ========================================================================== */
+
+.link-box ul {
+  list-style: none; /* [cite: 43] */
+  padding: 0; /* [cite: 44] */
+  margin: 0; /* [cite: 44] */
+  flex-grow: 1; /* [cite: 44] */
+  text-align: center; /* Center list items/links [cite: 44] */
 }
-#box-fun .box-title { /* Assuming ID is box-fun */
-  color: var(--ctp-red); /* Set text color */
+
+.link-box li {
+  margin-bottom: 0.6em; /* [cite: 44] */
 }
-#box-web-apps .box-title { /* Assuming ID is box-web-apps */
-  color: var(--ctp-yellow); /* Set text color */
+
+/* --- Link Styling & Hover Colors --- */
+.link-box a {
+  display: block; /* [cite: 45] */
+  padding: 2px 0; /* [cite: 45] */
+  color: var(--ctp-text); /* [cite: 45] */
+  text-decoration: none; /* [cite: 45] */
+  transition: color 0.2s ease, font-weight 0.2s ease; /* [cite: 46] */
 }
-#box-finances .box-title { /* Assuming ID is box-finances */
-  color: var(--ctp-green); /* Set text color */
+
+/* Category Link Hover Colors */
+#box-social a:hover { color: var(--ctp-mauve); font-weight: 700; } /* [cite: 46] */
+#box-fun a:hover { color: var(--ctp-red); font-weight: 700; } /* [cite: 47] */
+#box-web-apps a:hover { color: var(--ctp-yellow); font-weight: 700; } /* [cite: 47] */
+#box-finances a:hover { color: var(--ctp-green); font-weight: 700; } /* [cite: 48] */
+#box-other a:hover { color: var(--ctp-blue); font-weight: 700; } /* [cite: 48] */
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  position: relative; /* [cite: 50] */
+  width: 90%; /* [cite: 50] */
+  margin: auto auto 1em auto; /* [cite: 49] */
+  padding: 0.5em; /* [cite: 50] */
+  font-size: 0.9em; /* [cite: 49] */
+  color: var(--ctp-subtext0); /* [cite: 50] */
+  text-align: center; /* [cite: 50] */
 }
-#box-other .box-title { /* Assuming ID is box-other */
-  color: var(--ctp-blue); /* Set text color */
+
+.footer a {
+  color: var(--ctp-subtext1); /* [cite: 50] */
+  text-decoration: none; /* [cite: 50] */
+  transition: color 0.2s ease; /* [cite: 51] */
 }
-/* --- End Category Title Colors --- */
 
+.footer a:hover {
+  color: var(--accentColor); /* [cite: 51] */
+}
 
-/* Link List Styling */
-.link-box ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; text-align: center; /* Center list items/links */ }
-.link-box li { margin-bottom: 0.6em; }
+/* --- Footer Inner Button & Popup --- */
+#footer-inner {
+  position: fixed; /* [cite: 51] */
+  bottom: 1em; /* [cite: 51] */
+  right: 1em; /* [cite: 51] */
+}
 
-/* Link Styling & Hover */
-.link-box a { color: var(--ctp-text); text-decoration: none; display: block; padding: 2px 0; transition: color 0.2s ease, font-weight 0.2s ease; }
-/* --- Category Link Hover Colors --- */
-#box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
-#box-fun a:hover { color: var(--ctp-red); font-weight: 700; }
-#box-web-apps a:hover { color: var(--ctp-yellow); font-weight: 700; }
-#box-finances a:hover { color: var(--ctp-green); font-weight: 700; }
-#box-other a:hover { color: var(--ctp-blue); font-weight: 700; }
-/* --- End Category Link Hover Colors --- */
+#footer-inner button {
+  position: absolute; /* [cite: 52] */
+  bottom: 0px; /* [cite: 52] */
+  right: 0px; /* [cite: 52] */
+  display: block; /* [cite: 52] */
+  background-color: transparent; /* [cite: 52] */
+  font-size: 1.5em; /* [cite: 52] */
+  color: var(--ctp-overlay1); /* [cite: 52] */
+  cursor: pointer; /* [cite: 52] */
+  transition: color 0.2s ease; /* [cite: 53] */
+}
 
+#footer-inner button:hover,
+#footer-inner button:active {
+  color: var(--ctp-text); /* [cite: 53] */
+}
 
-/* Footer styles */
-.footer { font-size: 0.9em; margin: auto auto 1em auto; padding: 0.5em; position: relative; text-align: center; width: 90%; color: var(--ctp-subtext0); }
-.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
-.footer a:hover { color: var(--accentColor); }
-#footer-inner { position: fixed; bottom: 1em; right: 1em; }
-#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
-#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
-#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
+#footer-inner > #hideDiv {
+  display: none; /* Hidden by default [cite: 53] */
+  position: fixed; /* [cite: 53] */
+  bottom: 46px; /* [cite: 54] */
+  right: 10px; /* [cite: 54] */
+  width: 80%; /* [cite: 54] */
+  max-width: 600px; /* [cite: 54] */
+  background: var(--ctp-mantle); /* [cite: 54] */
+  color: var(--ctp-subtext1); /* [cite: 54] */
+  border: 1px solid var(--ctp-surface0); /* [cite: 55] */
+  border-radius: var(--bdradius); /* [cite: 54] */
+  padding: 10px; /* [cite: 54] */
+  font-size: 0.9em; /* [cite: 54] */
+  font-weight: 300; /* [cite: 54] */
+  text-align: right; /* [cite: 55] */
+}
 
+/* ==========================================================================
+   Desktop Layout Override (min-width: 800px)
+   ========================================================================== */
 
-/* --- Desktop Layout Override --- */
-@media screen and (min-width: 800px) { /* Adjust breakpoint if needed */
-
-  /* Hide mobile tabs on desktop */
+@media screen and (min-width: 800px) {
+  /* --- Hide Mobile Tabs --- */
   .tabs-mobile {
-    display: none;
+    display: none; /* [cite: 55] */
   }
 
-  /* Restore desktop grid layout */
+  /* --- Desktop Grid Layout --- */
   .content-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;        /* UPDATED: Increased gap (e.g., to 25px) */
-    width: 90%;
-    max-width: 1500px; /* UPDATED: Increased max-width */
-    margin: 0 auto 2em auto;
+    display: grid; /* [cite: 56] */
+    grid-template-columns: repeat(5, 1fr); /* [cite: 56] */
+    gap: 25px; /* Increased gap [cite: 57] */
+    width: 90%; /* [cite: 57] */
+    max-width: 1500px; /* Increased max-width [cite: 57] */
+    margin: 0 auto 2em auto; /* Center grid [cite: 58] */
   }
 
-  /* Show all link boxes on desktop */
+  /* --- Show All Link Boxes --- */
   .link-box {
-    display: flex;
-    margin-bottom: 0;
+    display: flex; /* Show all boxes [cite: 59] */
+    margin-bottom: 0; /* Remove mobile margin [cite: 59] */
   }
 
-  /* Remove or keep optional further overrides */
-  /* @media screen and (min-width: 1024px) { .content-grid { width: 80%; } } */
-  /* @media screen and (min-width: 1440px) { .content-grid { width: 70%; max-width: 1200px; } } */
-  /* Consider removing these nested/overriding width adjustments if you just want the 90% up to 1500px */
-
+  /* --- Optional Wider Screen Adjustments (Consider removing if 90%/1500px is sufficient) --- */
+  /*
+  @media screen and (min-width: 1024px) {
+    .content-grid {
+      width: 80%; [cite: 60]
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .content-grid {
+      width: 70%; [cite: 61]
+      max-width: 1200px; [cite: 61]
+    }
+  }
+  */
 }
-/* --- End Desktop Layout Override --- */
+
+/* ==========================================================================
+   End of styles.css
+   ========================================================================== */
