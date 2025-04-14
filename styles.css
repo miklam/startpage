@@ -146,15 +146,15 @@ body {
 /* --- End Mobile Tab Navigation Styles --- */
 
 
-/* --- Mobile Content Layout (Mobile Default) --- */
+/* Grid Layout for Link Boxes (5 columns) */
 .content-grid {
-  display: block; /* Stack boxes vertically */
-  width: 100%; /* Take full width */
-  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px; /* UPDATED: Reduced gap */
+  width: 90%;
+  max-width: 1200px; /* UPDATED: Increased max-width */
   margin: 0 auto 2em auto;
-  gap: 0;
 }
-/* --- End Mobile Content Layout --- */
 
 
 /* Link Box Styling (Visible boxes - Base Style) */
