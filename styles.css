@@ -1,4 +1,14 @@
-/* styles.css - Catppuccin Mocha Theme, 5-Box Layout, Mobile Tabs, Side Border Titles (April 14, 2025) */
+/* styles.css - Catppuccin Mocha, 5-Box Layout, Wider Grid, Mobile Tabs, Colored Titles (April 14, 2025) */
+
+/* Keep @font-face rules if needed */
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("asset/fonts/IBM Plex Mono/IBMPlexMono-Regular.ttf");
+}
+@font-face {
+  font-family: "Monocraft";
+  src: url("asset/fonts/Monocraft/Monocraft.otf");
+}
 
 /* Catppuccin Mocha Palette & Core Variables */
 :root {
@@ -6,16 +16,16 @@
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7;   /* Accent & Social Border */
-  --ctp-red: #f38ba8;     /* Fun Border */
+  --ctp-mauve: #cba6f7;   /* Accent & Social Title/Hover */
+  --ctp-red: #f38ba8;     /* Fun Title/Hover */
   --ctp-maroon: #eba0ac;
   --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af;  /* Web-Apps Border */
-  --ctp-green: #a6e3a1;   /* Finances Border */
+  --ctp-yellow: #f9e2af;  /* Web-Apps Title/Hover */
+  --ctp-green: #a6e3a1;   /* Finances Title/Hover */
   --ctp-teal: #94e2d5;
   --ctp-sky: #89dceb;
   --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;    /* Other Border */
+  --ctp-blue: #89b4fa;    /* Other Title/Hover */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
   --ctp-subtext1: #bac2de; /* Header Time color */
@@ -24,7 +34,7 @@
   --ctp-overlay1: #7f849c;
   --ctp-overlay0: #6c7086;
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Box borders */
+  --ctp-surface1: #45475a; /* Box/Title borders */
   --ctp-surface0: #313244; /* Box backgrounds */
   --ctp-base: #1e1e2e;     /* Main background */
   --ctp-mantle: #181825;   /* Slightly darker bg */
@@ -87,33 +97,16 @@ body {
 
 /* Header Styling (Matching Wider Grid) */
 .header {
-  text-align: center; /* Keeping centered text based on last step */
-  width: 90%;         /* Keep relative width */
-  max-width: 1200px;  /* UPDATED: Match grid max-width */
-  margin: 0 auto 2.5em auto; /* Centers block, keeps bottom margin */
+  text-align: center; /* Keep centered text */
+  width: 90%;         /* Use relative width */
+  max-width: 1200px;  /* Match grid max-width */
+  margin: 0 auto 2.5em auto; /* Center block */
   padding: 0;
 }
-.header #greeting { 
-  font-family: var(--fontHeader); 
-  font-weight: 700; 
-  font-size: 2em; 
-  display: block; 
-  margin-bottom: 0.5em; 
-  color: var(--fg); 
-}
-.time-date-stack { 
-  line-height: 1.4; 
-}
-.header #time { 
-  font-size: 1.3em; 
-  font-weight: 400; 
-  color: var(--ctp-subtext1); 
-}
-.header #date { 
-  font-size: 1em; 
-  color: var(--ctp-subtext0); 
-  text-transform: uppercase; 
-}
+.header #greeting { font-family: var(--fontHeader); font-weight: 700; font-size: 2em; display: block; margin-bottom: 0.5em; color: var(--fg); }
+.time-date-stack { line-height: 1.4; }
+.header #time { font-size: 1.3em; font-weight: 400; color: var(--ctp-subtext1); }
+.header #date { font-size: 1em; color: var(--ctp-subtext0); text-transform: uppercase; }
 
 /* --- Mobile Tab Navigation Styles (Mobile Default) --- */
 .tabs-mobile {
@@ -123,43 +116,34 @@ body {
   border-radius: var(--bdradius);
   margin-bottom: 1.5em;
   padding: 0.2em 0;
-  overflow-x: auto; /* Scroll if tabs don't fit */
+  overflow-x: auto;
 }
-.tab-button {
-  background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
-  color: var(--ctp-subtext0);
-  padding: 0.8em 0.5em;
-  cursor: pointer;
-  font-family: var(--fontHeader);
-  font-size: 0.9em;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.tab-button:hover { 
-  color: var(--ctp-text); 
-}
-.tab-button.active { 
-  color: var(--accentColor); 
-  border-bottom-color: var(--accentColor); 
-}
+.tab-button { background: none; border: none; border-bottom: 3px solid transparent; color: var(--ctp-subtext0); padding: 0.8em 0.5em; cursor: pointer; font-family: var(--fontHeader); font-size: 0.9em; font-weight: 700; white-space: nowrap; transition: color 0.2s ease, border-color 0.2s ease; }
+.tab-button:hover { color: var(--ctp-text); }
+.tab-button.active { color: var(--accentColor); border-bottom-color: var(--accentColor); }
 /* --- End Mobile Tab Navigation Styles --- */
 
 
-/* Grid Layout for Link Boxes (5 columns) */
+/* --- Base Content Layout (Mobile Default & Desktop Grid) --- */
 .content-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px; /* UPDATED: Reduced gap */
-  width: 90%;
-  max-width: 1200px; /* UPDATED: Increased max-width */
+  /* Base styles apply to mobile first if media query is below */
+  display: block; /* Stack boxes vertically by default */
+  width: 100%;
+  max-width: none;
   margin: 0 auto 2em auto;
+  gap: 0;
+
+  /* Properties for the desktop grid view (overridden in media query) */
+  /* These are set again inside the media query for clarity */
+  /* grid-template-columns: repeat(5, 1fr); */
+  /* gap: 15px; */
+  /* width: 90%; */
+  /* max-width: 1200px; */
 }
+/* --- End Base Content Layout --- */
 
 
-/* Link Box Styling (Visible boxes - Base Style) */
+/* Link Box Styling */
 .link-box {
   background-color: var(--secondaryBg);
   border: 1px solid var(--ctp-surface1);
@@ -174,170 +158,67 @@ body {
   display: flex;
 }
 
-/* Link Box Title Styling (Centered) */
+/* Link Box Title Styling (Centered Text, Bottom Border - Corrected) */
 .box-title {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
   /* Color is set per category below */
   margin: 0 0 1em 0;
-  padding-bottom: 0.5em;    /* Restore padding for bottom border */
+  padding-bottom: 0.5em; /* Restore padding for bottom border */
   border-bottom: 1px solid var(--ctp-surface1); /* Restore bottom border */
-  text-transform: uppercase;
-  text-align: center;     /* ADDED: Center the title text */
-  /* REMOVED border-left-width, border-left-style, padding-left */
+  text-transform: none; /* Titles not uppercase */
+  text-align: center;   /* Center the title text */
+  /* REMOVED border-left styles */
 }
 
-/* --- Category Title Colors (Mocha Text Colors) --- */
+/* --- Category Title Colors (Mocha Text Colors - Corrected) --- */
 /* NOTE: Ensure these IDs match your index.html */
 #box-social .box-title {
   color: var(--ctp-mauve); /* Set text color */
 }
-#box-fun .box-title,
-#box-media-tools .box-title { /* Use correct ID */
+#box-fun .box-title { /* Assuming ID is box-fun */
   color: var(--ctp-red); /* Set text color */
 }
-#box-web-apps .box-title,
-#box-cloud-google .box-title { /* Use correct ID */
+#box-web-apps .box-title { /* Assuming ID is box-web-apps */
   color: var(--ctp-yellow); /* Set text color */
 }
-#box-finances .box-title,
-#box-money .box-title { /* Use correct ID */
+#box-finances .box-title { /* Assuming ID is box-finances */
   color: var(--ctp-green); /* Set text color */
 }
-#box-other .box-title,
-#box-services-shop .box-title { /* Use correct ID */
+#box-other .box-title { /* Assuming ID is box-other */
   color: var(--ctp-blue); /* Set text color */
 }
 /* --- End Category Title Colors --- */
 
-/* --- Apply specific BORDER colors (Mocha) --- */
-/* NOTE: Ensure these IDs match your index.html */
-#box-social .box-title {
-  border-left-color: var(--ctp-mauve); /* Purple */
-}
-#box-fun .box-title,
-#box-media-tools .box-title { /* Use correct ID */
-  border-left-color: var(--ctp-red);    /* Red */
-}
-#box-web-apps .box-title,
-#box-cloud-google .box-title { /* Use correct ID */
-  border-left-color: var(--ctp-yellow);/* Yellow */
-}
-#box-finances .box-title,
-#box-money .box-title { /* Use correct ID */
-  border-left-color: var(--ctp-green); /* Green */
-}
-#box-other .box-title,
-#box-services-shop .box-title { /* Use correct ID */
-  border-left-color: var(--ctp-blue);  /* Blue */
-}
-/* --- End Title Border Colors --- */
-
 
 /* Link List Styling */
-.link-box ul { 
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-  flex-grow: 1; 
-  text-align: center; /* ADDED: Center list items/links */
-}
-
-.link-box li { 
-  margin-bottom: 0.6em; 
-}
+.link-box ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; text-align: center; /* Center list items/links */ }
+.link-box li { margin-bottom: 0.6em; }
 
 /* Link Styling & Hover */
-.link-box a { 
-  color: var(--ctp-text); 
-  text-decoration: none; 
-  display: block; 
-  padding: 2px 0; 
-  transition: color 0.2s ease, font-weight 0.2s ease; 
-}
-
+.link-box a { color: var(--ctp-text); text-decoration: none; display: block; padding: 2px 0; transition: color 0.2s ease, font-weight 0.2s ease; }
 /* --- Category Link Hover Colors --- */
-#box-social a:hover { 
-  color: var(--ctp-mauve); 
-  font-weight: 700; 
-}
-#box-fun a:hover { 
-  color: var(--ctp-red); 
-  font-weight: 700; 
-}
-#box-web-apps a:hover { 
-  color: var(--ctp-yellow); 
-  font-weight: 700; 
-}
-#box-finances a:hover { 
-  color: var(--ctp-green); 
-  font-weight: 700; 
-}
-#box-other a:hover { 
-  color: var(--ctp-blue); 
-  font-weight: 700; 
-}
+#box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
+#box-fun a:hover { color: var(--ctp-red); font-weight: 700; }
+#box-web-apps a:hover { color: var(--ctp-yellow); font-weight: 700; }
+#box-finances a:hover { color: var(--ctp-green); font-weight: 700; }
+#box-other a:hover { color: var(--ctp-blue); font-weight: 700; }
 /* --- End Category Link Hover Colors --- */
 
 
 /* Footer styles */
-.footer { 
-  font-size: 0.9em; 
-  margin: auto auto 1em auto; 
-  padding: 0.5em; 
-  position: relative; 
-  text-align: center; 
-  width: 90%; 
-  color: var(--ctp-subtext0); }
-.footer a { 
-  color: var(--ctp-subtext1); 
-  text-decoration: none; 
-  transition: color 0.2s ease; 
-}
-.footer a:hover { 
-  color: var(--accentColor); 
-}
-#footer-inner { 
-  position: fixed; 
-  bottom: 1em; 
-  right: 1em; 
-}
-#footer-inner button { 
-  cursor: pointer; 
-  display: block; 
-  position: absolute; 
-  bottom: 0px; 
-  right: 0px; 
-  background-color: transparent; 
-  font-size: 1.5em; 
-  color: var(--ctp-overlay1); 
-  transition: color 0.2s ease; 
-}
-#footer-inner button:hover, 
-#footer-inner button:active { 
-  color: var(--ctp-text); 
-}
-#footer-inner > #hideDiv { 
-  display: none; 
-  position: fixed; 
-  bottom: 46px; 
-  right: 10px; 
-  width: 80%; 
-  font-size: 0.9em; 
-  font-weight: 300; 
-  max-width: 600px; 
-  background: var(--ctp-mantle); 
-  color: var(--ctp-subtext1); 
-  padding: 10px; 
-  border-radius: var(--bdradius); 
-  border: 1px solid var(--ctp-surface0); 
-  text-align: right; 
-}
+.footer { font-size: 0.9em; margin: auto auto 1em auto; padding: 0.5em; position: relative; text-align: center; width: 90%; color: var(--ctp-subtext0); }
+.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
+.footer a:hover { color: var(--accentColor); }
+#footer-inner { position: fixed; bottom: 1em; right: 1em; }
+#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
+#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
+#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
 
 
 /* --- Desktop Layout Override --- */
-@media screen and (min-width: 800px) { /* Adjust breakpoint if needed */
+@media screen and (min-width: 800px) { /* Apply desktop styles starting from this width */
 
   /* Hide mobile tabs on desktop */
   .tabs-mobile {
@@ -346,35 +227,20 @@ body {
 
   /* Restore desktop grid layout */
   .content-grid {
-    display: grid; /* Changed back to grid */
-    grid-template-columns: repeat(5, 1fr); /* 5 Columns */
-    gap: 20px; /* Restore gap */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;        /* Use the smaller gap */
     width: 90%;
-    max-width: 1000px;
-    margin: 0 auto 2em auto; /* Restore centering and bottom margin */
+    max-width: 1200px; /* Use the wider max-width */
+    margin: 0 auto 2em auto;
+    /* REMOVED gap/width overrides from nested media queries */
   }
 
   /* Show all link boxes on desktop */
   .link-box {
-    display: flex; /* Restore display type */
+    display: flex;
     margin-bottom: 0; /* Remove mobile stacking margin */
   }
 
-  /* Optional: Adjust grid gap/width for larger screens */
-  /* These nested media queries might be redundant if defined outside */
-  /* Keeping them for consistency with previous state if they worked */
-  /* Consider moving these adjustments outside this specific media query if preferred */
-  @media screen and (min-width: 800px) {
-     .content-grid { gap: 25px; }
-  }
-  @media screen and (min-width: 1024px) {
-     .content-grid { width: 80%; }
-  }
-  @media screen and (min-width: 1440px) {
-     .content-grid { width: 70%; max-width: 1200px; }
-  }
 }
 /* --- End Desktop Layout Override --- */
-
-
-/* REMOVED Waveform Styles */
