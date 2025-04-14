@@ -53,7 +53,7 @@ const cards = [
       "Google Calendar": "https://calendar.google.com/calendar/",
       "Google Drive": "https://drive.google.com",
       "Google Keep": "https://keep.google.com/",
-      "Google Maps": "https://www.google.se/maps"
+      "Google Maps": "https://www.google.se/maps",
       "Google Photos": "https://photos.google.com/"
     }
   },
