@@ -99,7 +99,7 @@ body {
 .header {
   text-align: center; /* Keep centered text */
   width: 90%;         /* Use relative width */
-  max-width: 1200px;  /* Match grid max-width */
+  max-width: 1500px;  /* Match grid max-width */
   margin: 0 auto 2.5em auto; /* Center block */
   padding: 0;
 }
@@ -218,7 +218,7 @@ body {
 
 
 /* --- Desktop Layout Override --- */
-@media screen and (min-width: 800px) { /* Apply desktop styles starting from this width */
+@media screen and (min-width: 800px) { /* Adjust breakpoint if needed */
 
   /* Hide mobile tabs on desktop */
   .tabs-mobile {
@@ -229,18 +229,22 @@ body {
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 15px;        /* Use the smaller gap */
+    gap: 25px;        /* UPDATED: Increased gap (e.g., to 25px) */
     width: 90%;
-    max-width: 1200px; /* Use the wider max-width */
+    max-width: 1500px; /* UPDATED: Increased max-width */
     margin: 0 auto 2em auto;
-    /* REMOVED gap/width overrides from nested media queries */
   }
 
   /* Show all link boxes on desktop */
   .link-box {
     display: flex;
-    margin-bottom: 0; /* Remove mobile stacking margin */
+    margin-bottom: 0;
   }
+
+  /* Remove or keep optional further overrides */
+  /* @media screen and (min-width: 1024px) { .content-grid { width: 80%; } } */
+  /* @media screen and (min-width: 1440px) { .content-grid { width: 70%; max-width: 1200px; } } */
+  /* Consider removing these nested/overriding width adjustments if you just want the 90% up to 1500px */
 
 }
 /* --- End Desktop Layout Override --- */
