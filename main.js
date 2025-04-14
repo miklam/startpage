@@ -167,11 +167,3 @@ function showScrollbar(e) {
         }, 1500);
     }
 }
-
-// --- Footer Info Toggle ---
-function buttonClicked() {
-    const hideDiv = document.getElementById('hideDiv');
-    if (hideDiv) {
-        hideDiv.style.display = (hideDiv.style.display === 'none' || hideDiv.style.display === '') ? 'block' : 'none';
-    }
-}
