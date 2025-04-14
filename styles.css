@@ -181,7 +181,7 @@ body {
   margin: 0 0 1em 0;
   padding-bottom: 0.5em;    /* Restore padding for bottom border */
   border-bottom: 1px solid var(--ctp-surface1); /* Restore bottom border */
-  text-transform: none;
+  text-transform: uppercase;
   text-align: center;     /* ADDED: Center the title text */
   /* REMOVED border-left-width, border-left-style, padding-left */
 }
