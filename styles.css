@@ -91,10 +91,27 @@ body {
   margin-bottom: 2.5em;
   padding: 0;
 }
-.header #greeting { font-family: var(--fontHeader); font-weight: 700; font-size: 2em; display: block; margin-bottom: 0.5em; color: var(--fg); }
-.time-date-stack { line-height: 1.4; }
-.header #time { font-size: 1.3em; font-weight: 400; color: var(--ctp-subtext1); }
-.header #date { font-size: 1em; color: var(--ctp-subtext0); text-transform: uppercase; }
+.header #greeting { 
+  font-family: var(--fontHeader); 
+  font-weight: 700; 
+  font-size: 2em; 
+  display: block; 
+  margin-bottom: 0.5em; 
+  color: var(--fg); 
+}
+.time-date-stack { 
+  line-height: 1.4; 
+}
+.header #time { 
+  font-size: 1.3em; 
+  font-weight: 400; 
+  color: var(--ctp-subtext1); 
+}
+.header #date { 
+  font-size: 1em; 
+  color: var(--ctp-subtext0); 
+  text-transform: uppercase; 
+}
 
 /* --- Mobile Tab Navigation Styles (Mobile Default) --- */
 .tabs-mobile {
@@ -119,8 +136,13 @@ body {
   white-space: nowrap;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
-.tab-button:hover { color: var(--ctp-text); }
-.tab-button.active { color: var(--accentColor); border-bottom-color: var(--accentColor); }
+.tab-button:hover { 
+  color: var(--ctp-text); 
+}
+.tab-button.active { 
+  color: var(--accentColor); 
+  border-bottom-color: var(--accentColor); 
+}
 /* --- End Mobile Tab Navigation Styles --- */
 
 
@@ -155,7 +177,6 @@ body {
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--ctp-text);     /* Consistent TEXT color */
   margin: 0 0 1em 0;
   padding-bottom: 0.2em;    /* Space below text */
   border-bottom: none;      /* NO bottom border */
@@ -163,8 +184,32 @@ body {
   border-left-width: 4px;   /* Thickness of side border */
   border-left-style: solid;
   /* Border color is set per category below */
-  text-transform: none;     /* Titles not uppercase */
+  text-transform: uppercase;     /* Titles not uppercase */
+  text-align: center;     /* ADDED: Center the title text */
 }
+
+/* --- Category Title Colors (Mocha Text Colors) --- */
+/* NOTE: Ensure these IDs match your index.html */
+#box-social .box-title {
+  color: var(--ctp-mauve); /* Set text color */
+}
+#box-fun .box-title,
+#box-media-tools .box-title { /* Use correct ID */
+  color: var(--ctp-red); /* Set text color */
+}
+#box-web-apps .box-title,
+#box-cloud-google .box-title { /* Use correct ID */
+  color: var(--ctp-yellow); /* Set text color */
+}
+#box-finances .box-title,
+#box-money .box-title { /* Use correct ID */
+  color: var(--ctp-green); /* Set text color */
+}
+#box-other .box-title,
+#box-services-shop .box-title { /* Use correct ID */
+  color: var(--ctp-blue); /* Set text color */
+}
+/* --- End Category Title Colors --- */
 
 /* --- Apply specific BORDER colors (Mocha) --- */
 /* NOTE: Ensure these IDs match your index.html */
@@ -191,28 +236,104 @@ body {
 
 
 /* Link List Styling */
-.link-box ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-.link-box li { margin-bottom: 0.6em; }
+.link-box ul { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  flex-grow: 1; 
+  text-align: center; /* ADDED: Center list items/links */
+}
+
+.link-box li { 
+  margin-bottom: 0.6em; 
+}
 
 /* Link Styling & Hover */
-.link-box a { color: var(--ctp-text); text-decoration: none; display: block; padding: 2px 0; transition: color 0.2s ease, font-weight 0.2s ease; }
+.link-box a { 
+  color: var(--ctp-text); 
+  text-decoration: none; 
+  display: block; 
+  padding: 2px 0; 
+  transition: color 0.2s ease, font-weight 0.2s ease; 
+}
+
 /* --- Category Link Hover Colors --- */
-#box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
-#box-fun a:hover, #box-media-tools a:hover { color: var(--ctp-red); font-weight: 700; }
-#box-web-apps a:hover, #box-cloud-google a:hover { color: var(--ctp-yellow); font-weight: 700; }
-#box-finances a:hover, #box-money a:hover { color: var(--ctp-green); font-weight: 700; }
-#box-other a:hover, #box-services-shop a:hover { color: var(--ctp-blue); font-weight: 700; }
+#box-social a:hover { 
+  color: var(--ctp-mauve); 
+  font-weight: 700; 
+}
+#box-fun a:hover { 
+  color: var(--ctp-red); 
+  font-weight: 700; 
+}
+#box-web-apps a:hover { 
+  color: var(--ctp-yellow); 
+  font-weight: 700; 
+}
+#box-finances a:hover { 
+  color: var(--ctp-green); 
+  font-weight: 700; 
+}
+#box-other a:hover { 
+  color: var(--ctp-blue); 
+  font-weight: 700; 
+}
 /* --- End Category Link Hover Colors --- */
 
 
 /* Footer styles */
-.footer { font-size: 0.9em; margin: auto auto 1em auto; padding: 0.5em; position: relative; text-align: center; width: 90%; color: var(--ctp-subtext0); }
-.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
-.footer a:hover { color: var(--accentColor); }
-#footer-inner { position: fixed; bottom: 1em; right: 1em; }
-#footer-inner button { cursor: pointer; display: block; position: absolute; bottom: 0px; right: 0px; background-color: transparent; font-size: 1.5em; color: var(--ctp-overlay1); transition: color 0.2s ease; }
-#footer-inner button:hover, #footer-inner button:active { color: var(--ctp-text); }
-#footer-inner > #hideDiv { display: none; position: fixed; bottom: 46px; right: 10px; width: 80%; font-size: 0.9em; font-weight: 300; max-width: 600px; background: var(--ctp-mantle); color: var(--ctp-subtext1); padding: 10px; border-radius: var(--bdradius); border: 1px solid var(--ctp-surface0); text-align: right; }
+.footer { 
+  font-size: 0.9em; 
+  margin: auto auto 1em auto; 
+  padding: 0.5em; 
+  position: relative; 
+  text-align: center; 
+  width: 90%; 
+  color: var(--ctp-subtext0); }
+.footer a { 
+  color: var(--ctp-subtext1); 
+  text-decoration: none; 
+  transition: color 0.2s ease; 
+}
+.footer a:hover { 
+  color: var(--accentColor); 
+}
+#footer-inner { 
+  position: fixed; 
+  bottom: 1em; 
+  right: 1em; 
+}
+#footer-inner button { 
+  cursor: pointer; 
+  display: block; 
+  position: absolute; 
+  bottom: 0px; 
+  right: 0px; 
+  background-color: transparent; 
+  font-size: 1.5em; 
+  color: var(--ctp-overlay1); 
+  transition: color 0.2s ease; 
+}
+#footer-inner button:hover, 
+#footer-inner button:active { 
+  color: var(--ctp-text); 
+}
+#footer-inner > #hideDiv { 
+  display: none; 
+  position: fixed; 
+  bottom: 46px; 
+  right: 10px; 
+  width: 80%; 
+  font-size: 0.9em; 
+  font-weight: 300; 
+  max-width: 600px; 
+  background: var(--ctp-mantle); 
+  color: var(--ctp-subtext1); 
+  padding: 10px; 
+  border-radius: var(--bdradius); 
+  border: 1px solid var(--ctp-surface0); 
+  text-align: right; 
+}
 
 
 /* --- Desktop Layout Override --- */
