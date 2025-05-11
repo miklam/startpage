@@ -85,11 +85,17 @@ function updateDateTime() {
 
     // --- Update Greeting ---
     if (greetingEl) {
-        let greetingText = "Hello!"; // Default
-        if (hour < 5) { greetingText = "Good night!"; } // [cite: 33]
-        else if (hour < 12) { greetingText = "Good morning!"; } // [cite: 34]
-        else if (hour < 18) { greetingText = "Good afternoon!"; } // [cite: 35]
-        else { greetingText = "Good evening!"; } // [cite: 36]
+        let greetingText = "Hello!"; // Default greeting
+
+        // Determine greeting based on current hour
+        if (hour < 5) { // Before 5 AM (e.g., 00:00 to 04:59)
+            greetingText = "Good night!"; } // [cite: 33]
+        else if (hour < 12) { // From 5 AM up to 11:59 AM
+            greetingText = "Good morning!"; } // [cite: 34]
+        else if (hour < 18) { // From 12 PM (noon) up to 5:59 PM
+            greetingText = "Good afternoon!"; } // [cite: 35]
+        else { // From 6 PM (18:00) up to midnight
+            greetingText = "Good evening!"; } // [cite: 36]
         greetingEl.textContent = greetingText; // [cite: 37]
     } // [cite: 32]
 } // [cite: 26]
