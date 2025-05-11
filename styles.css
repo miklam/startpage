@@ -1,7 +1,7 @@
 /* ==========================================================================
    styles.css
-   Catppuccin Mocha | 5-Box Layout | Wider Grid | Mobile Tabs | Colored Text Titles
-   Gapless Block Layout - May 11, 2025 - Hide Mobile Tabs on Desktop
+   Catppuccin Mocha | 5-Box Layout | Wider Grid | Unified Mobile Tabs & Desktop Titles
+   Last updated: May 11, 2025
    ========================================================================== */
 
 /* ==========================================================================
@@ -24,14 +24,14 @@
   --ctp-blue: #89b4fa;    /* Other Title/Hover */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
-  --ctp-subtext1: #bac2de; /* Header Time color (if re-added), footer link */
-  --ctp-subtext0: #a6adc8; /* Header Date color (if re-added), footer link */
+  --ctp-subtext1: #bac2de; /* Footer link text */
+  --ctp-subtext0: #a6adc8; /* Inactive mobile tab text, footer link */
   --ctp-overlay2: #9399b2;
   --ctp-overlay1: #7f849c;
   --ctp-overlay0: #6c7086;
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Box/Title borders, grid gap color */
-  --ctp-surface0: #313244; /* Individual Box backgrounds, mobile tabs bg */
+  --ctp-surface1: #45475a; /* Grid gap color, title bottom border on desktop */
+  --ctp-surface0: #313244; /* Mobile tabs bg, desktop title/tab bg */
   --ctp-base: #1e1e2e;     /* Main page background */
   --ctp-mantle: #181825;   /* Main content block background */
   --ctp-crust: #11111b;
@@ -39,7 +39,7 @@
   /* --- Core Variables --- */
   --bg: var(--ctp-base);
   --fg: var(--ctp-text);
-  --secondaryBg: var(--ctp-surface0); /* Individual Box backgrounds */
+  --secondaryBg: var(--ctp-surface0); /* Individual Box content backgrounds */
   --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --accentColor: var(--ctp-mauve);
@@ -72,10 +72,10 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center;   
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  padding: 2em 20px; 
+  padding: 2em 20px;
   width: 100%;
   min-height: 100vh;
 }
@@ -85,24 +85,24 @@ body {
    ========================================================================== */
 .main-content-block {
   width: 90%;
-  max-width: 1500px; 
-  margin-bottom: 2em; 
-  background-color: var(--ctp-mantle); 
-  border-radius: var(--bdradius); 
-  overflow: hidden; 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+  max-width: 1500px;
+  margin-bottom: 2em;
+  background-color: var(--ctp-mantle);
+  border-radius: var(--bdradius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 /* ==========================================================================
-   Header with Background Image (Adjusted for Gapless Layout)
+   Header with Background Image
    ========================================================================== */
 .header {
   padding: 0;
   position: relative;
   min-height: 300px;
-  background-image: url('assets/images/header-background.jpg'); 
+  background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,7 +115,7 @@ body {
 .header #greeting {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.3em 0.8em;
-  border-radius: calc(var(--bdradius) * 0.5); 
+  border-radius: calc(var(--bdradius) * 0.5);
   color: var(--ctp-text);
   font-family: var(--fontHeader);
   font-weight: 700;
@@ -123,56 +123,88 @@ body {
 }
 
 /* ==========================================================================
-   Mobile Tab Navigation (Inside main-content-block)
+   Mobile Tab Navigation / Desktop Titles
    ========================================================================== */
-.tabs-mobile {
-  display: flex; /* Default for mobile */
-  justify-content: space-around;
-  background-color: var(--ctp-surface0); 
-  padding: 0.2em 0;
-  overflow-x: auto;
+.tabs-mobile { /* This is now also the container for desktop titles */
+  display: flex; /* Default for mobile tabs */
+  justify-content: space-around; /* Mobile tab spacing */
+  background-color: var(--ctp-surface0); /* Background for mobile tabs */
+  padding: 0.2em 0; /* Mobile tab padding */
+  overflow-x: auto; /* Mobile scroll */
+  /* No margin-bottom, will touch content-grid for gapless look */
+  /* border-bottom: 1px solid var(--ctp-surface1); /* Optional line for mobile if needed */
 }
-.tab-button { padding: 0.8em 0.5em; background: none; border: none; border-bottom: 3px solid transparent; color: var(--ctp-subtext0); font-family: var(--fontHeader); font-size: 0.9em; font-weight: 700; white-space: nowrap; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
-.tab-button:hover { color: var(--ctp-text); }
-.tab-button.active { color: var(--accentColor); border-bottom-color: var(--accentColor); }
+
+.tab-button { /* Base style for both mobile tabs and desktop titles */
+  padding: 0.8em 0.5em;
+  background: none; /* Default to none, desktop will override cell background */
+  border: none;
+  font-family: var(--fontHeader);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  text-align: center;
+
+  /* Mobile tab specific styling */
+  border-bottom: 3px solid transparent;
+  color: var(--ctp-subtext0); /* Inactive tab color on mobile */
+  font-size: 0.9em; /* Mobile tab font size */
+}
+
+.tab-button:hover { /* General hover for both states */
+  color: var(--ctp-text); /* Brighter text on hover */
+}
+
+/* Category Text Colors for tab-buttons (used on both mobile and desktop) */
+/* These define the text color. Desktop will use these as title colors. */
+/* Mobile active tab will also use these for its text & border. */
+.tab-button[data-target="box-social"] { color: var(--ctp-mauve); }
+.tab-button[data-target="box-fun"] { color: var(--ctp-red); }
+.tab-button[data-target="box-web-apps"] { color: var(--ctp-yellow); }
+.tab-button[data-target="box-finances"] { color: var(--ctp-green); }
+.tab-button[data-target="box-other"] { color: var(--ctp-blue); }
+
+/* Mobile active tab style - uses its specific category color for text and border */
+.tab-button.active {
+  /* Color is already set by the [data-target] rules above */
+  /* Border color needs to match its text color */
+}
+.tab-button[data-target="box-social"].active { border-bottom-color: var(--ctp-mauve); }
+.tab-button[data-target="box-fun"].active { border-bottom-color: var(--ctp-red); }
+.tab-button[data-target="box-web-apps"].active { border-bottom-color: var(--ctp-yellow); }
+.tab-button[data-target="box-finances"].active { border-bottom-color: var(--ctp-green); }
+.tab-button[data-target="box-other"].active { border-bottom-color: var(--ctp-blue); }
+
 
 /* ==========================================================================
-   Content Layout (Mobile First Stack, Desktop Grid - Adjusted for Gapless)
+   Content Layout (Mobile First Stack, Desktop Grid)
    ========================================================================== */
 .content-grid {
-  /* Mobile Stack (Default) */
-  display: block;
+  display: block; /* Mobile Stack (Default) */
   width: 100%;
   max-width: none;
-  margin: 0; 
+  margin: 0;
   gap: 0;
 }
 
 /* ==========================================================================
-   Link Boxes (Adjusted for Gapless Layout)
+   Link Boxes
    ========================================================================== */
 .link-box {
-  display: none; 
-  margin-bottom: 0; 
-  background-color: var(--secondaryBg); 
-  border: none; 
-  border-radius: 0; 
+  display: none; /* Hidden by default on mobile */
+  margin-bottom: 0; /* No margin when stacked if tabs provide separation */
+  background-color: var(--secondaryBg); /* Individual box content background */
+  border: none; /* Borders handled by grid gap color on desktop */
+  border-radius: 0; /* Sharp corners, rounding handled by main-content-block */
   padding: 1.5em;
   flex-direction: column;
 }
 .link-box.active {
-  display: flex; 
+  display: flex; /* Show active box on mobile */
 }
 
-/* ==========================================================================
-   Link Box Titles & Category Colors
-   ========================================================================== */
-.box-title { margin: 0 0 1em 0; padding-bottom: 0.5em; border-bottom: 1px solid var(--ctp-surface1); font-family: var(--fontHeader); font-size: 1.2em; font-weight: 700; text-transform: uppercase; text-align: center; }
-#box-social .box-title { color: var(--ctp-mauve); }
-#box-fun .box-title { color: var(--ctp-red); }
-#box-web-apps .box-title { color: var(--ctp-yellow); }
-#box-finances .box-title { color: var(--ctp-green); }
-#box-other .box-title { color: var(--ctp-blue); }
+/* REMOVED .box-title styles as they are now handled by .tab-button on desktop */
 
 /* ==========================================================================
    Link Lists & Items
@@ -207,29 +239,46 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
   .container {
     padding-top: 2em;
   }
+
+  /* --- Desktop: .tabs-mobile becomes the title grid --- */
   .tabs-mobile {
-    display: none; /* CORRECTED: Hide mobile tabs on desktop */
+    display: grid; /* Change to grid for desktop */
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for titles */
+    gap: 1px; /* Line between title cells */
+    background-color: var(--ctp-surface1); /* This color becomes the grid lines */
+    padding: 0; /* Remove mobile padding */
+    overflow-x: visible; /* Not needed to scroll on desktop */
   }
-  .main-content-block {
-    /* width, max-width, margin-bottom already set */
+
+  .tab-button { /* Style buttons as titles on desktop */
+    font-size: 1.2em; /* Like old .box-title */
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1em 0.5em; /* Adjust padding for title look */
+    border-bottom: none; /* Remove mobile active tab indicator */
+    background-color: var(--ctp-surface0); /* Background for each title cell */
+    /* Text color is already set by specific [data-target] rules */
   }
-  .header {
-    /* min-height, background etc. already set */
+  .tab-button.active { /* Desktop doesn't need a different 'active' style for titles */
+    border-bottom: none; /* Ensure no bottom border from mobile */
+    /* Text color is already set by specific [data-target] rules */
   }
+  /* The specific color rules for .tab-button[data-target="..."] handle the text color */
+
+
+  /* --- Desktop: .content-grid is just for content boxes --- */
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1px; 
-    background-color: var(--ctp-surface1); 
+    gap: 1px;
+    background-color: var(--ctp-surface1); /* Grid lines */
   }
   .link-box {
-    display: flex !important; 
+    display: flex !important;
     margin-bottom: 0;
-    border-radius: 0; 
-    border: none; 
-  }
-  .link-box.active {
-    /* No special styling needed for .active on desktop if all are shown */
+    border-radius: 0;
+    border: none;
+    background-color: var(--secondaryBg); /* Ensure boxes have their background */
   }
 }
 
