@@ -41,14 +41,8 @@ Most configuration is done in the `config.js` file:
     * Add/edit/remove links within the `bookmarks` object for each category.
 
 ## Credits
-
-This project is a personalized version based on:
-
-* **GABEstart** by [GABEweb](https://github.com/gabeweb) (The direct fork source).
-* **GetStarted** by [MrAlpha786](https://github.com/MrAlpha786) (The original base template).
-
-It also uses:
-
+* **GABEstart** by [GABEweb](https://github.com/gabeweb) for the original inspiration.
 * **Catppuccin Theme Palette:** Colors adapted from the [Catppuccin Mocha theme](https://github.com/catppuccin/catppuccin).
 * **Inter Font:** Served via [Google Fonts](https://fonts.google.com/specimen/Inter).
+* **Header Image** from **Macrovector** on [Freepik](https://www.freepik.com/author/macrovector).
 ---
