@@ -1,7 +1,7 @@
 /* ==========================================================================
    styles.css
    Catppuccin Mocha | 5-Box Layout | Wider Grid | Mobile Tabs | Colored Text Titles
-   Final Review: April 14, 2025
+   Final Review: May 11, 2025
    ========================================================================== */
 
 /* ==========================================================================
@@ -20,21 +20,21 @@
   --ctp-yellow: #f9e2af;  /* Web-Apps Title/Hover */
   --ctp-green: #a6e3a1;   /* Finances Title/Hover */
   --ctp-teal: #94e2d5;
-  --ctp-sky: #89dceb;
+  --ctp-sky: #89dceb;     /* Used for tab button focus */
   --ctp-sapphire: #74c7ec;
   --ctp-blue: #89b4fa;    /* Other Title/Hover */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
   --ctp-subtext1: #bac2de; /* Header Time color */
-  --ctp-subtext0: #a6adc8; /* Header Date color */
+  --ctp-subtext0: #a6adc8; /* Header Date color, footer link */
   --ctp-overlay2: #9399b2;
-  --ctp-overlay1: #7f849c;
+  --ctp-overlay1: #7f849c; /* Footer button icon */
   --ctp-overlay0: #6c7086;
   --ctp-surface2: #585b70;
   --ctp-surface1: #45475a; /* Box/Title borders */
   --ctp-surface0: #313244; /* Box backgrounds */
   --ctp-base: #1e1e2e;     /* Main background */
-  --ctp-mantle: #181825;   /* Slightly darker bg */
+  --ctp-mantle: #181825;   /* Slightly darker bg, footer info bg */
   --ctp-crust: #11111b;    /* Darkest bg */
 
   /* --- Core Variables --- */
@@ -87,25 +87,45 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: auto;
+  padding: 1em 20px; /* Adjusted top padding for desktop in media query */
   width: 100%;
   min-height: 100vh;
-  margin: auto;
-  padding: 3vmax 20px 1em 20px;
 }
 
 /* ==========================================================================
-   Header
+   Header with Background Image
    ========================================================================== */
 
 .header {
   width: 90%;
-  max-width: 1500px; /* Match wider grid */
-  margin: 0 auto 2.5em auto; /* Center block */
+  max-width: 1500px; /* Matches .content-grid max-width */
+  margin: 0 auto 2.5em auto; /* Center block, space below */
   padding: 0;
+  position: relative;
+  min-height: 200px; /* ADJUST: Set a height for your header image area */
+  background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--bdradius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
-.header #greeting { display: block; margin-bottom: 0.5em; font-family: var(--fontHeader); font-size: 2em; font-weight: 700; color: var(--fg); }
-.time-date-stack { line-height: 1.4; }
+.header #greeting,
+.header .time-date-stack {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.3em 0.8em;
+  border-radius: calc(var(--bdradius) / 2);
+  margin-bottom: 0.5em;
+  color: var(--ctp-text);
+}
+.header #greeting { font-family: var(--fontHeader); font-weight: 700; font-size: 2em; }
+.time-date-stack { line-height: 1.4; margin-bottom: 0; }
 .header #time { font-size: 1.3em; font-weight: 400; color: var(--ctp-subtext1); }
 .header #date { font-size: 1em; color: var(--ctp-subtext0); text-transform: uppercase; }
 
@@ -144,11 +164,8 @@ body {
    ========================================================================== */
 
 .link-box {
-  /* Mobile: Hidden by default */
-  display: none;
-  margin-bottom: 1.5em;
-
-  /* Shared Box Styles */
+  display: none; /* Hidden by default on mobile */
+  margin-bottom: 1.5em; /* Space below active box on mobile */
   background-color: var(--secondaryBg);
   border: 1px solid var(--ctp-surface1);
   border-radius: var(--bdradius);
@@ -156,25 +173,25 @@ body {
   flex-direction: column;
 }
 .link-box.active {
-  /* Mobile: Show active box */
-  display: flex;
+  display: flex; /* Show active box on mobile */
 }
 
 /* ==========================================================================
    Link Box Titles & Category Colors
    ========================================================================== */
 
-/* Base style: Centered text, bottom border */
+/* CORRECTED Base style: Centered text, bottom border, uppercase */
 .box-title {
   margin: 0 0 1em 0;
   padding-bottom: 0.5em; /* Space for border */
-  border-bottom: 1px solid var(--ctp-surface1);
+  border-bottom: 1px solid var(--ctp-surface1); /* Bottom border */
   font-family: var(--fontHeader);
   font-size: 1.2em;
   font-weight: 700;
-  text-transform: uppercase; /* Titles NOT uppercase by default */
-  text-align: center;
+  text-transform: uppercase; /* Titles are uppercase */
+  text-align: center;     /* Center title text */
   /* Color is set per category below */
+  /* REMOVED border-left and padding-left properties */
 }
 
 /* Category Title Text Colors (Mocha) */
@@ -184,24 +201,14 @@ body {
 #box-finances .box-title { color: var(--ctp-green); }
 #box-other .box-title { color: var(--ctp-blue); }
 
-/* REMOVED block setting border-left-color */
+/* REMOVED the block that was setting border-left-color for titles */
 
 /* ==========================================================================
    Link Lists & Items
    ========================================================================== */
 
-.link-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1;
-  text-align: center; /* Center links */
-}
-.link-box li {
-  margin-bottom: 0.6em;
-}
-
-/* Link Styling & Hover Colors */
+.link-box ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; text-align: center; }
+.link-box li { margin-bottom: 0.6em; }
 .link-box a { display: block; padding: 2px 0; color: var(--ctp-text); text-decoration: none; transition: color 0.2s ease, font-weight 0.2s ease; }
 #box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
 #box-fun a:hover { color: var(--ctp-red); font-weight: 700; }
@@ -216,33 +223,41 @@ body {
 .footer { font-size: 0.9em; margin: auto auto 1em auto; padding: 0.5em; position: relative; text-align: center; width: 90%; color: var(--ctp-subtext0); }
 .footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
 .footer a:hover { color: var(--accentColor); }
-/* Removed styles for #footer-inner etc. */
+/* Removed styles for #footer-inner etc. as footer is simplified */
+
+/* ==========================================================================
+   Accessibility Focus Styles
+   ========================================================================== */
+
+a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor); }
+.tab-button:focus { outline: none; box-shadow: 0 0 0 2px var(--ctp-sky); }
+.footer a:focus { box-shadow: 0 0 0 2px var(--accentColor); }
 
 /* ==========================================================================
    Desktop Layout Override (min-width: 800px)
    ========================================================================== */
 
 @media screen and (min-width: 800px) {
-  /* Hide Mobile Tabs */
+  .container {
+    padding-top: 2em; /* Adjust if header is very tall */
+  }
   .tabs-mobile {
     display: none;
   }
-
-  /* Desktop Grid Layout */
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 25px; /* Use wider gap */
+    gap: 25px; /* Wider gap for desktop */
     width: 90%;
-    max-width: 1500px; /* Use wider max-width */
+    max-width: 1500px; /* Wider max-width for desktop */
     margin: 0 auto 2em auto;
   }
-
-  /* Show All Link Boxes */
   .link-box {
     display: flex;
     margin-bottom: 0;
   }
+  /* Removed nested media queries for 1024px/1440px for simplicity,
+     the 90%/1500px max-width will apply to all screens >= 800px */
 }
 
 /* ==========================================================================
