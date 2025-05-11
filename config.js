@@ -27,6 +27,7 @@ const cards = [
             "SVT Play": "https://www.svtplay.se/", // [cite: 3]
             "Crunchyroll": "https://crunchyroll.com", // [cite: 3]
             "Netflix": "https://www.netflix.com/browse", // [cite: 3]
+            "Disney+": "https://www.disneyplus.com/home",
             // --- Gaming ---
             "Foundry": "http://83.251.196.97:30000/join", // [cite: 3]
             "D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663", // [cite: 3]
@@ -40,6 +41,7 @@ const cards = [
             "Smashrun": "https://smashrun.com/miklam", // [cite: 4]
             // --- AI Tools ---
             "Gemini": "https://gemini.google.com/app", // [cite: 4]
+            "Designer": "https://designer.microsoft.com/",
             "ChatGPT": "https://chatgpt.com/", // [cite: 4]
             "Claude": "https://claude.ai/new", // [cite: 4]
             "Mistral": "https://chat.mistral.ai/chat" // [cite: 4]
@@ -50,11 +52,11 @@ const cards = [
         bookmarks: {
             // --- Email/Cloud ---
             "Proton Mail": "https://mail.proton.me", // [cite: 4]
-            "Gmail": "https://mail.google.com", // [cite: 4]
             "OneDrive": "https://onedrive.com", // [cite: 4]
             "SimpleLogin": "https://app.simplelogin.io/dashboard/", // [cite: 5]
             "Temp Mail": "https://temp-mail.org/en", // [cite: 5]
             // --- Google Apps ---
+            "Gmail": "https://mail.google.com", // [cite: 4]
             "Google Calendar": "https://calendar.google.com/calendar/", // [cite: 5]
             "Google Drive": "https://drive.google.com", // [cite: 5]
             "Google Keep": "https://keep.google.com/", // [cite: 5]
