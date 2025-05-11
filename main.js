@@ -83,31 +83,6 @@ function updateDateTime() {
     const dateEl = document.getElementById('date'); // [cite: 27]
     const greetingEl = document.getElementById('greeting'); // [cite: 27]
 
-    // --- Update Time ---
-    if (timeEl) {
-        try {
-            // Using sv-SE locale for HH:MM:SS format
-            timeEl.textContent = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); // [cite: 29]
-        } catch (e) {
-            console.error("Error formatting time:", e);
-            // Basic fallback format
-            timeEl.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`; // [cite: 30]
-        }
-    } // [cite: 28]
-
-    // --- Update Date ---
-    if (dateEl) {
-        try {
-            // Using en-GB locale for "Weekday, DD Month YYYY" format
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            dateEl.textContent = now.toLocaleDateString('en-GB', dateOptions); // [cite: 31]
-        } catch (e) {
-            console.error("Error formatting date:", e);
-            // Basic fallback format
-            dateEl.textContent = now.toDateString(); // [cite: 32]
-        }
-    } // [cite: 30]
-
     // --- Update Greeting ---
     if (greetingEl) {
         let greetingText = "Hello!"; // Default
