@@ -44,5 +44,5 @@ Most configuration is done in the `config.js` file:
 * **GABEstart** by [GABEweb](https://github.com/gabeweb) for the original inspiration.
 * **Catppuccin Theme Palette:** Colors adapted from the [Catppuccin Mocha theme](https://github.com/catppuccin/catppuccin).
 * **Inter Font:** Served via [Google Fonts](https://fonts.google.com/specimen/Inter).
-* **Header Image** from **Macrovector** on [Freepik](https://www.freepik.com/author/macrovector).
+* **Header Image** from [Macrovector](https://www.freepik.com/author/macrovector) on [Freepik]([https://www.freepik.com/author/macrovector](https://www.freepik.com/free-vector/mountains-landscape-sunset-background-with-lake-sunlit-dark-peaks-flat-vector-illustration_32074591.htm#fromView=search&page=4&position=46&uuid=9f98a3b8-ae59-4051-9f9f-d9d40f5641ad&query=mountain)).
 ---
