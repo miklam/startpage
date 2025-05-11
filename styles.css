@@ -1,7 +1,7 @@
 /* ==========================================================================
    styles.css
    Catppuccin Mocha | 5-Box Layout | Wider Grid | Mobile Tabs | Colored Text Titles
-   Final Review: May 11, 2025 - Header Simplified
+   Final Review: May 11, 2025 - Reduced Box Gap
    ========================================================================== */
 
 /* ==========================================================================
@@ -25,8 +25,8 @@
   --ctp-blue: #89b4fa;    /* Other Title/Hover */
   --ctp-lavender: #b4befe;
   --ctp-text: #cdd6f4;     /* Main text */
-  --ctp-subtext1: #bac2de; /* Was Header Time color */
-  --ctp-subtext0: #a6adc8; /* Was Header Date color, now footer link */
+  --ctp-subtext1: #bac2de; /* Header Time color */
+  --ctp-subtext0: #a6adc8; /* Header Date color, footer link */
   --ctp-overlay2: #9399b2;
   --ctp-overlay1: #7f849c; /* Footer button icon */
   --ctp-overlay0: #6c7086;
@@ -103,7 +103,7 @@ body {
   margin: 0 auto 2.5em auto; /* Center block, space below */
   padding: 0;
   position: relative;
-  min-height: 300px; /* User updated this */
+  min-height: 300px; 
   background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
   background-size: cover;
   background-position: center;
@@ -116,20 +116,15 @@ body {
   align-items: center;
   text-align: center;
 }
-
-/* Styling for the greeting text over the image */
 .header #greeting {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.5); 
   padding: 0.3em 0.8em;
   border-radius: calc(var(--bdradius) / 2);
-  /* margin-bottom: 0.5em; /* Removed as time/date stack is gone */
-  color: var(--ctp-text); /* Ensure text is bright */
+  color: var(--ctp-text); 
   font-family: var(--fontHeader);
   font-weight: 700;
-  font-size: 2em; /* Adjust as needed */
+  font-size: 2em; 
 }
-
-/* REMOVED styles for .time-date-stack, .header #time, .header #date */
 
 /* ==========================================================================
    Mobile Tab Navigation (Mobile First)
@@ -166,8 +161,8 @@ body {
    ========================================================================== */
 
 .link-box {
-  display: none; /* Hidden by default on mobile */
-  margin-bottom: 1.5em; /* Space below active box on mobile */
+  display: none; 
+  margin-bottom: 1.5em; 
   background-color: var(--secondaryBg);
   border: 1px solid var(--ctp-surface1);
   border-radius: var(--bdradius);
@@ -175,7 +170,7 @@ body {
   flex-direction: column;
 }
 .link-box.active {
-  display: flex; /* Show active box on mobile */
+  display: flex; 
 }
 
 /* ==========================================================================
@@ -233,7 +228,7 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
 
 @media screen and (min-width: 800px) {
   .container {
-    padding-top: 2em; /* Adjust if header is very tall */
+    padding-top: 2em; 
   }
   .tabs-mobile {
     display: none;
@@ -241,7 +236,7 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
+    gap: 1px; /* UPDATED: Reduced gap for a more packed look */
     width: 90%;
     max-width: 1500px;
     margin: 0 auto 2em auto;
