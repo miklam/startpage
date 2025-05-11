@@ -103,7 +103,7 @@ body {
   margin: 0 auto 2.5em auto; /* Center block, space below */
   padding: 0;
   position: relative;
-  min-height: 200px; /* ADJUST: Set a height for your header image area */
+  min-height: 400px; /* ADJUST: Set a height for your header image area */
   background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
   background-size: cover;
   background-position: center;
