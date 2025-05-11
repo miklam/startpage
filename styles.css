@@ -1,7 +1,7 @@
 /* ==========================================================================
    styles.css
    Catppuccin Mocha | 5-Box Layout | Wider Grid | Mobile Tabs | Colored Text Titles
-   Gapless Block Layout - May 11, 2025
+   Gapless Block Layout - May 11, 2025 - Hide Mobile Tabs on Desktop
    ========================================================================== */
 
 /* ==========================================================================
@@ -45,7 +45,6 @@
   --accentColor: var(--ctp-mauve);
   --scrollbar: var(--accentColor);
   --bdradius: 0.75em; /* Main block rounding */
-  /* --inner-bdradius: 0.35em; /* Optional: slight rounding for internal elements if gap > 0 */
 }
 
 /* ==========================================================================
@@ -73,10 +72,10 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center main-content-block and footer vertically if page is taller */
-  align-items: center;   /* Center main-content-block and footer horizontally */
+  justify-content: center; 
+  align-items: center;   
   margin: auto;
-  padding: 2em 20px; /* Padding around the main block and footer */
+  padding: 2em 20px; 
   width: 100%;
   min-height: 100vh;
 }
@@ -86,14 +85,14 @@ body {
    ========================================================================== */
 .main-content-block {
   width: 90%;
-  max-width: 1500px; /* Desired max width */
-  margin-bottom: 2em; /* Space before footer */
-  background-color: var(--ctp-mantle); /* Background for the whole block */
-  border-radius: var(--bdradius); /* Rounded corners for the whole block */
-  overflow: hidden; /* Clip children to rounded corners */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Optional shadow */
+  max-width: 1500px; 
+  margin-bottom: 2em; 
+  background-color: var(--ctp-mantle); 
+  border-radius: var(--bdradius); 
+  overflow: hidden; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
   display: flex;
-  flex-direction: column; /* Stack header, tabs, grid vertically */
+  flex-direction: column; 
 }
 
 /* ==========================================================================
@@ -103,7 +102,7 @@ body {
   padding: 0;
   position: relative;
   min-height: 300px;
-  background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
+  background-image: url('assets/images/header-background.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -112,13 +111,11 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* No margin-bottom, will touch tabs-mobile or content-grid */
-  /* No individual border-radius, clipped by main-content-block */
 }
 .header #greeting {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.3em 0.8em;
-  border-radius: calc(var(--bdradius) * 0.5); /* Relative to main radius */
+  border-radius: calc(var(--bdradius) * 0.5); 
   color: var(--ctp-text);
   font-family: var(--fontHeader);
   font-weight: 700;
@@ -129,15 +126,11 @@ body {
    Mobile Tab Navigation (Inside main-content-block)
    ========================================================================== */
 .tabs-mobile {
-  display: flex;
+  display: flex; /* Default for mobile */
   justify-content: space-around;
-  background-color: var(--ctp-surface0); /* Match box bg for seamlessness */
-  /* No border-radius, clipped by main-content-block */
-  /* No margin-bottom, will touch content-grid */
+  background-color: var(--ctp-surface0); 
   padding: 0.2em 0;
   overflow-x: auto;
-  /* Optional border to separate from grid if both have same bg */
-  /* border-bottom: 1px solid var(--ctp-surface1); */
 }
 .tab-button { padding: 0.8em 0.5em; background: none; border: none; border-bottom: 3px solid transparent; color: var(--ctp-subtext0); font-family: var(--fontHeader); font-size: 0.9em; font-weight: 700; white-space: nowrap; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
 .tab-button:hover { color: var(--ctp-text); }
@@ -151,27 +144,24 @@ body {
   display: block;
   width: 100%;
   max-width: none;
-  margin: 0; /* No margin, part of main-content-block */
+  margin: 0; 
   gap: 0;
-  /* background-color: var(--ctp-surface0); /* Or transparent if main-content-block has bg */
 }
 
 /* ==========================================================================
    Link Boxes (Adjusted for Gapless Layout)
    ========================================================================== */
 .link-box {
-  display: none; /* Hidden by default on mobile */
-  margin-bottom: 0; /* No margin when stacked if tabs provide separation */
-  background-color: var(--secondaryBg); /* Individual box background */
-  /* border: 1px solid var(--ctp-surface1); /* See desktop override */
-  border: none; /* Borders handled by grid gap color on desktop */
-  border-radius: 0; /* Sharp corners, rounding handled by main-content-block */
+  display: none; 
+  margin-bottom: 0; 
+  background-color: var(--secondaryBg); 
+  border: none; 
+  border-radius: 0; 
   padding: 1.5em;
   flex-direction: column;
 }
 .link-box.active {
-  display: flex; /* Show active box on mobile */
-  /* border-top: 1px solid var(--ctp-surface1); /* Optional: if tabs don't have bottom border */
+  display: flex; 
 }
 
 /* ==========================================================================
@@ -218,33 +208,25 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
     padding-top: 2em;
   }
   .tabs-mobile {
-    /* display: none; /* Keep tabs for now, can be hidden if design requires */
-    /* If keeping tabs on desktop but want them to look integrated: */
-    border-radius: 0;
-    margin-bottom: 0; /* Touch the grid */
-    /* border-bottom: 1px solid var(--ctp-surface1); /* Separator line */
+    display: none; /* CORRECTED: Hide mobile tabs on desktop */
   }
   .main-content-block {
     /* width, max-width, margin-bottom already set */
   }
   .header {
     /* min-height, background etc. already set */
-    /* border-radius: 0; /* Top part of the main block, so no individual rounding needed */
   }
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1px; /* This will be the color of the lines between boxes */
-    background-color: var(--ctp-surface1); /* Color of the 1px "gap" lines */
-    /* width, max-width, margin handled by .main-content-block */
-    /* No individual margin needed */
+    gap: 1px; 
+    background-color: var(--ctp-surface1); 
   }
   .link-box {
-    display: flex !important; /* Ensure all are shown, override .active */
+    display: flex !important; 
     margin-bottom: 0;
-    border-radius: 0; /* Sharp corners inside the main block */
-    border: none; /* Individual borders removed, gap color acts as border */
-    /* Background color is already var(--secondaryBg) */
+    border-radius: 0; 
+    border: none; 
   }
   .link-box.active {
     /* No special styling needed for .active on desktop if all are shown */
