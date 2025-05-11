@@ -1,7 +1,7 @@
 /* ==========================================================================
    styles.css
    Catppuccin Mocha | 5-Box Layout | Wider Grid | Unified Mobile Tabs & Desktop Titles
-   Last updated: May 11, 2025
+   Last updated: May 11, 2025 - Added divider below titles/tabs
    ========================================================================== */
 
 /* ==========================================================================
@@ -30,7 +30,7 @@
   --ctp-overlay1: #7f849c;
   --ctp-overlay0: #6c7086;
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Grid gap color, title bottom border on desktop */
+  --ctp-surface1: #45475a; /* Grid gap color, title bottom border on desktop, divider */
   --ctp-surface0: #313244; /* Mobile tabs bg, desktop title/tab bg */
   --ctp-base: #1e1e2e;     /* Main page background */
   --ctp-mantle: #181825;   /* Main content block background */
@@ -125,19 +125,18 @@ body {
 /* ==========================================================================
    Mobile Tab Navigation / Desktop Titles
    ========================================================================== */
-.tabs-mobile { /* This is now also the container for desktop titles */
-  display: flex; /* Default for mobile tabs */
-  justify-content: space-around; /* Mobile tab spacing */
-  background-color: var(--ctp-surface0); /* Background for mobile tabs */
-  padding: 0.2em 0; /* Mobile tab padding */
-  overflow-x: auto; /* Mobile scroll */
-  /* No margin-bottom, will touch content-grid for gapless look */
-  /* border-bottom: 1px solid var(--ctp-surface1); /* Optional line for mobile if needed */
+.tabs-mobile { 
+  display: flex; 
+  justify-content: space-around; 
+  background-color: var(--ctp-surface0); 
+  padding: 0.2em 0; 
+  overflow-x: auto; 
+  border-bottom: 1px solid var(--ctp-surface1); /* ADDED: Divider line */
 }
 
-.tab-button { /* Base style for both mobile tabs and desktop titles */
+.tab-button { 
   padding: 0.8em 0.5em;
-  background: none; /* Default to none, desktop will override cell background */
+  background: none; 
   border: none;
   font-family: var(--fontHeader);
   font-weight: 700;
@@ -147,25 +146,23 @@ body {
   text-align: center;
 
   /* Mobile tab specific styling */
-  border-bottom: 3px solid transparent;
-  color: var(--ctp-subtext0); /* Inactive tab color on mobile */
-  font-size: 0.9em; /* Mobile tab font size */
+  border-bottom: 3px solid transparent; /* This is for the active tab indicator line */
+  color: var(--ctp-subtext0); 
+  font-size: 0.9em; 
 }
 
-.tab-button:hover { /* General hover for both states */
-  color: var(--ctp-text); /* Brighter text on hover */
+.tab-button:hover { 
+  color: var(--ctp-text); 
 }
 
-/* Category Text Colors for tab-buttons (used on both mobile and desktop) */
-/* These define the text color. Desktop will use these as title colors. */
-/* Mobile active tab will also use these for its text & border. */
+/* Category Text Colors for tab-buttons */
 .tab-button[data-target="box-social"] { color: var(--ctp-mauve); }
 .tab-button[data-target="box-fun"] { color: var(--ctp-red); }
 .tab-button[data-target="box-web-apps"] { color: var(--ctp-yellow); }
 .tab-button[data-target="box-finances"] { color: var(--ctp-green); }
 .tab-button[data-target="box-other"] { color: var(--ctp-blue); }
 
-/* Mobile active tab style - uses its specific category color for text and border */
+/* Mobile active tab style - uses its specific category color for text and border indicator */
 .tab-button.active {
   /* Color is already set by the [data-target] rules above */
   /* Border color needs to match its text color */
@@ -192,19 +189,17 @@ body {
    Link Boxes
    ========================================================================== */
 .link-box {
-  display: none; /* Hidden by default on mobile */
-  margin-bottom: 0; /* No margin when stacked if tabs provide separation */
-  background-color: var(--secondaryBg); /* Individual box content background */
-  border: none; /* Borders handled by grid gap color on desktop */
-  border-radius: 0; /* Sharp corners, rounding handled by main-content-block */
+  display: none; 
+  margin-bottom: 0; 
+  background-color: var(--secondaryBg); 
+  border: none; 
+  border-radius: 0; 
   padding: 1.5em;
   flex-direction: column;
 }
 .link-box.active {
-  display: flex; /* Show active box on mobile */
+  display: flex; 
 }
-
-/* REMOVED .box-title styles as they are now handled by .tab-button on desktop */
 
 /* ==========================================================================
    Link Lists & Items
@@ -242,29 +237,26 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
 
   /* --- Desktop: .tabs-mobile becomes the title grid --- */
   .tabs-mobile {
-    display: grid; /* Change to grid for desktop */
-    grid-template-columns: repeat(5, 1fr); /* 5 columns for titles */
-    gap: 1px; /* Line between title cells */
-    background-color: var(--ctp-surface1); /* This color becomes the grid lines */
-    padding: 0; /* Remove mobile padding */
-    overflow-x: visible; /* Not needed to scroll on desktop */
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 1px; 
+    background-color: var(--ctp-surface1); /* This color becomes the grid lines between title cells */
+    padding: 0; 
+    overflow-x: visible; 
+    border-bottom: 1px solid var(--ctp-surface1); /* This creates the divider below the whole title row */
   }
 
-  .tab-button { /* Style buttons as titles on desktop */
-    font-size: 1.2em; /* Like old .box-title */
+  .tab-button { 
+    font-size: 1.2em; 
     font-weight: 700;
     text-transform: uppercase;
-    padding: 1em 0.5em; /* Adjust padding for title look */
-    border-bottom: none; /* Remove mobile active tab indicator */
+    padding: 1em 0.5em; 
+    border-bottom: none; /* Remove mobile active tab indicator line */
     background-color: var(--ctp-surface0); /* Background for each title cell */
-    /* Text color is already set by specific [data-target] rules */
   }
-  .tab-button.active { /* Desktop doesn't need a different 'active' style for titles */
-    border-bottom: none; /* Ensure no bottom border from mobile */
-    /* Text color is already set by specific [data-target] rules */
+  .tab-button.active { 
+    border-bottom: none; 
   }
-  /* The specific color rules for .tab-button[data-target="..."] handle the text color */
-
 
   /* --- Desktop: .content-grid is just for content boxes --- */
   .content-grid {
@@ -278,7 +270,7 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
     margin-bottom: 0;
     border-radius: 0;
     border: none;
-    background-color: var(--secondaryBg); /* Ensure boxes have their background */
+    background-color: var(--secondaryBg); 
   }
 }
 
