@@ -68,8 +68,8 @@ const cards = [
         name: "Finances",
         bookmarks: {
             "Swedbank": "https://online.swedbank.se/app/ib/logga-in",
-            "Budget 2025": "https://docs.google.com/spreadsheets/d/1ysoJcr2J0Tx0bMlGVVw5fr_dCdHJiI5YBNpFZSsGIc8/edit?resourcekey=&gid=586151987#gid=586151987",
-            "Budget Input 2025": "https://forms.gle/8okiuta8zQXnFEAs5",
+            "Budget 2026": "https://docs.google.com/spreadsheets/d/1vehHqsjwUVU4hACdnmTTLw4_zpo3SRhUf_yaraBA_jY/edit?gid=559709657#gid=559709657",
+            "Budget Input 2026": "https://docs.google.com/forms/d/e/1FAIpQLSdcb5mxe0PZlEDBBHauqvfG2J-p8V_-zrJu22F-nZDVD480bA/viewform?usp=header",
             "Folksam": "https://www.folksam.se/",
             "Vattenfall": "https://www.vattenfall.se/",
             "Mediateknik": "https://portal.mediateknik.net/authorization/index?username=&password=",
