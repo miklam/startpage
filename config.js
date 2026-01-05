@@ -68,7 +68,7 @@ const cards = [
         name: "Finances",
         bookmarks: {
             "Swedbank": "https://online.swedbank.se/app/ib/logga-in",
-            "Budget 2026": "https://docs.google.com/spreadsheets/d/1vehHqsjwUVU4hACdnmTTLw4_zpo3SRhUf_yaraBA_jY/edit?gid=559709657#gid=559709657",
+            "Budget 2026": "https://docs.google.com/spreadsheets/d/1vehHqsjwUVU4hACdnmTTLw4_zpo3SRhUf_yaraBA_jY/edit?usp=sharing",
             "Budget Input 2026": "https://docs.google.com/forms/d/e/1FAIpQLSdcb5mxe0PZlEDBBHauqvfG2J-p8V_-zrJu22F-nZDVD480bA/viewform?usp=header",
             "Folksam": "https://www.folksam.se/",
             "Vattenfall": "https://www.vattenfall.se/",
