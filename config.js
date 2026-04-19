@@ -92,7 +92,8 @@ const cards = [
             "Tradera": "https://www.tradera.com/",
             "Inet": "https://www.inet.se/",
             // --- Utility / Misc ---
-            "GitHub": "https://github.com"
+            "GitHub": "https://github.com",
+            "Norstatpanel": "https://www.norstatpanel.com/sv"
         }
     }
 ];
