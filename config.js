@@ -25,8 +25,10 @@ const cards = [
             // --- Streaming ---
             "YouTube": "https://www.youtube.com/feed/subscriptions",
             "SVT Play": "https://www.svtplay.se/",
-            "Crunchyroll": "https://crunchyroll.com",
             "Netflix": "https://www.netflix.com/browse",
+            "Tele2Play": "https://www.tele2play.se/",
+            "Crunchyroll": "https://crunchyroll.com",
+            "HBO Max": "https://play.hbomax.com/",
             "Disney+": "https://www.disneyplus.com/home",
             // --- Gaming ---
             "Foundry": "http://83.251.196.97:30000/join",
