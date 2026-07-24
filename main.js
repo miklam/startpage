@@ -1,14 +1,13 @@
 // ==========================================================================
-// main.js
-// Handles link population, date/time updates, mobile tab swiping, and swipe synchronization.
+// main.js - Direct Tap & Touch Swipe Implementation
 // ==========================================================================
 
-// ==========================================================================
-// Core Functions
-// ==========================================================================
+// --- Global Variables ---
+let currentCategoryIndex = 0;
+const categoryIds = ['box-social', 'box-fun', 'box-web-apps', 'box-finances', 'box-other'];
 
 /**
- * Populates link boxes based on the global 'cards' configuration object in config.js.
+ * Populates link boxes based on the 'cards' object in config.js
  */
 function populateLinkBoxes() {
     if (typeof cards === 'undefined') {
@@ -17,41 +16,30 @@ function populateLinkBoxes() {
     }
 
     cards.forEach(card => {
-        // Derive box ID from card name (e.g., "Web-Apps" -> "box-web-apps")
         const boxId = `box-${card.name.toLowerCase().replace(/\s*&\s*|\s+/g, '-')}`;
         const linkBox = document.getElementById(boxId);
 
-        if (!linkBox) {
-            return; // Skip if corresponding HTML element doesn't exist
-        }
+        if (!linkBox) return;
 
         const ul = linkBox.querySelector("ul");
-        if (!ul) {
-            console.error(`Could not find <ul> element inside #${boxId}.`);
-            return;
-        }
+        if (!ul) return;
 
-        ul.innerHTML = ''; // Clear existing list items
+        ul.innerHTML = '';
 
-        if (!card.bookmarks || typeof card.bookmarks !== 'object') {
-            console.warn(`No bookmarks found or format incorrect for category "${card.name}"`);
-            return;
-        }
+        if (!card.bookmarks || typeof card.bookmarks !== 'object') return;
 
-        // Populate list with bookmarks
         Object.entries(card.bookmarks).forEach(([siteName, siteUrl]) => {
             const li = document.createElement("li");
 
-            // Check for divider format: '--- Divider Text ---': null
             if (siteUrl === null && siteName.startsWith('---') && siteName.endsWith('---')) {
                 li.classList.add("sub-category-divider");
                 li.textContent = siteName.substring(3, siteName.length - 3).trim();
-            } else if (siteUrl !== null) { // Regular link
+            } else if (siteUrl !== null) {
                 const a = document.createElement("a");
                 a.textContent = siteName;
                 a.href = siteUrl;
                 a.target = "_blank";
-                a.rel = "noopener noreferrer"; // Security best practice
+                a.rel = "noopener noreferrer";
                 li.appendChild(a);
             }
 
@@ -63,7 +51,7 @@ function populateLinkBoxes() {
 }
 
 /**
- * Updates the greeting element on the page based on time of day.
+ * Updates greeting based on current time
  */
 function updateDateTime() {
     const now = new Date();
@@ -72,104 +60,114 @@ function updateDateTime() {
 
     if (greetingEl) {
         let greetingText = "Hello!";
-
-        if (hour < 5) {
-            greetingText = "Good night!";
-        } else if (hour < 12) {
-            greetingText = "Good morning!";
-        } else if (hour < 18) {
-            greetingText = "Good afternoon!";
-        } else {
-            greetingText = "Good evening!";
-        }
+        if (hour < 5) greetingText = "Good night!";
+        else if (hour < 12) greetingText = "Good morning!";
+        else if (hour < 18) greetingText = "Good afternoon!";
+        else greetingText = "Good evening!";
+        
         greetingEl.textContent = greetingText;
     }
 }
 
 /**
- * Handles clicks on the top mobile tab bar to scroll directly to the selected card.
- * @param {Event} event - The click event object.
+ * Switches the active tab and display box by array index
+ */
+function switchCategoryIndex(index) {
+    if (index < 0 || index >= categoryIds.length) return;
+
+    currentCategoryIndex = index;
+    const targetId = categoryIds[currentCategoryIndex];
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const linkBoxes = document.querySelectorAll('.link-box');
+
+    // Update Tab Buttons
+    tabButtons.forEach(button => {
+        const isMatch = button.dataset.target === targetId;
+        button.classList.toggle('active', isMatch);
+        if (isMatch) {
+            button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+
+    // Update Content Boxes
+    linkBoxes.forEach(box => {
+        box.classList.toggle('active', box.id === targetId);
+    });
+}
+
+/**
+ * Handles explicit tab button clicks
  */
 function handleMobileTabClick(event) {
     const clickedButton = event.target.closest('.tab-button');
     if (!clickedButton) return;
 
     const targetId = clickedButton.dataset.target;
-    const targetBox = document.getElementById(targetId);
-    
-    if (targetBox) {
-        // Smoothly scroll the content grid container to the target card
-        targetBox.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    const index = categoryIds.indexOf(targetId);
+
+    if (index !== -1) {
+        switchCategoryIndex(index);
     }
 }
 
 /**
- * Sets up an IntersectionObserver so that physically swiping left/right across cards 
- * automatically highlights and scrolls to the matching tab button at the top.
+ * Sets up horizontal touch gesture listeners across the content area
  */
-function setupSwipeObserver() {
+function setupTouchSwipe() {
     const contentGrid = document.querySelector('.content-grid');
-    const linkBoxes = document.querySelectorAll('.link-box');
-    const tabButtons = document.querySelectorAll('.tab-button');
+    if (!contentGrid) return;
 
-    if (!contentGrid || !linkBoxes.length) return;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // minimum swipe distance in pixels
 
-    const observerOptions = {
-        root: contentGrid,
-        threshold: 0.6 // Card must be 60% visible to trigger active state switch
-    };
+    contentGrid.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const activeId = entry.target.id;
+    contentGrid.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipeGesture();
+    }, { passive: true });
 
-                // Sync the tab button highlighting and scroll it into view if needed
-                tabButtons.forEach(button => {
-                    if (button.dataset.target === activeId) {
-                        button.classList.add('active');
-                        button.setAttribute('aria-selected', 'true');
-                        button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    } else {
-                        button.classList.remove('active');
-                        button.setAttribute('aria-selected', 'false');
-                    }
-                });
+    function handleSwipeGesture() {
+        const distance = touchEndX - touchStartX;
 
-                // Toggle active state class on boxes
-                linkBoxes.forEach(box => box.classList.toggle('active', box.id === activeId));
+        // Swiped Left -> Next Category
+        if (distance < -swipeThreshold) {
+            if (currentCategoryIndex < categoryIds.length - 1) {
+                switchCategoryIndex(currentCategoryIndex + 1);
             }
-        });
-    }, observerOptions);
-
-    linkBoxes.forEach(box => observer.observe(box));
+        }
+        // Swiped Right -> Previous Category
+        else if (distance > swipeThreshold) {
+            if (currentCategoryIndex > 0) {
+                switchCategoryIndex(currentCategoryIndex - 1);
+            }
+        }
+    }
 }
 
 // ==========================================================================
 // Initialization
 // ==========================================================================
-
 function initializeApp() {
-    // Populate Links from config.js
     populateLinkBoxes();
-
-    // Update greeting initially & setup interval
     updateDateTime();
     setInterval(updateDateTime, 1000);
 
-    // Mobile tab click setup
+    // Setup Tab Clicks
     const tabContainer = document.querySelector('.tabs-mobile');
     if (tabContainer) {
         tabContainer.addEventListener('click', handleMobileTabClick);
     }
 
-    // Touch swipe observer setup
-    setupSwipeObserver();
+    // Setup Touch Gestures
+    setupTouchSwipe();
+
+    // Default to first category
+    switchCategoryIndex(0);
 }
 
-// Run initialization after DOM is ready
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-// ==========================================================================
-// End of main.js
-// ==========================================================================
