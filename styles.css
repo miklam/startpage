@@ -1,10 +1,12 @@
 /* ==========================================================================
-   styles.css - Touch-Optimized Mobile & Flexoki Desktop Dashboard
+   styles.css - Modern Minimalist Startpage
+   Palette: Flexoki Dark (Inky Analog Theme)
    ========================================================================== */
 
-/* --- Custom Properties --- */
+/* --- Custom Properties / Themes --- */
 :root {
-  --bg-base: #100f0f;        /* Flexoki Black */
+  /* Flexoki Dark Palette */
+  --bg-base: #100f0f;        /* Flexoki Black / Paper Dark */
   --bg-surface: #1c1b1a;     /* Flexoki Base-950 */
   --bg-card: #282726;        /* Flexoki Base-900 */
   --border-color: #343331;   /* Flexoki Base-850 */
@@ -14,12 +16,13 @@
   --text-bright: #fffcf0;    /* Flexoki Paper Light */
   
   /* Flexoki Accent Colors */
-  --accent-social: #8b7ec8;   
-  --accent-fun: #d14d41;      
-  --accent-apps: #d0a215;     
-  --accent-finances: #879a39; 
-  --accent-other: #4385be;    
+  --accent-social: #8b7ec8;   /* Flexoki Purple */
+  --accent-fun: #d14d41;      /* Flexoki Red */
+  --accent-apps: #d0a215;     /* Flexoki Yellow */
+  --accent-finances: #879a39; /* Flexoki Green */
+  --accent-other: #4385be;    /* Flexoki Blue */
 
+  /* Global Metrics */
   --radius-lg: 16px;
   --radius-md: 10px;
   --radius-sm: 6px;
@@ -27,6 +30,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* --- Global Resets & Base --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -42,6 +46,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* --- Container Layout --- */
 .container {
   display: flex;
   flex-direction: column;
@@ -53,6 +58,7 @@ body {
   margin: 0 auto;
 }
 
+/* --- Main Content Block Wrapper --- */
 .main-content-block {
   width: 100%;
   background-color: var(--bg-surface);
@@ -90,7 +96,7 @@ body {
   text-align: center;
 }
 
-/* --- Mobile Horizontal Tab ScrollBar --- */
+/* --- Mobile Navigation Tab Row --- */
 .tabs-mobile {
   display: flex;
   background-color: var(--bg-card);
@@ -106,7 +112,7 @@ body {
 }
 
 .tab-button {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   padding: 0.9rem 1.2rem;
   background: transparent;
   border: none;
@@ -114,52 +120,55 @@ body {
   color: var(--text-muted);
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.95rem; /* Larger, touch-friendly tab labels */
+  font-size: 0.95rem;
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
   white-space: nowrap;
 }
 
-/* Active Mobile Indicators */
+/* Active Mobile Category Tab Indicators */
 .tab-button[data-target="box-social"].active { color: var(--accent-social); border-bottom-color: var(--accent-social); }
 .tab-button[data-target="box-fun"].active { color: var(--accent-fun); border-bottom-color: var(--accent-fun); }
 .tab-button[data-target="box-web-apps"].active { color: var(--accent-apps); border-bottom-color: var(--accent-apps); }
 .tab-button[data-target="box-finances"].active { color: var(--accent-finances); border-bottom-color: var(--accent-finances); }
 .tab-button[data-target="box-other"].active { color: var(--accent-other); border-bottom-color: var(--accent-other); }
 
-/* --- Mobile Swipeable Content Carousel --- */
+/* --- Content Grid & Links --- */
 .content-grid {
   display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory; /* Enables native horizontal gesture swipe */
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  flex-direction: column;
   background-color: var(--bg-surface);
 }
 
-.content-grid::-webkit-scrollbar {
-  display: none;
-}
-
 .link-box {
-  flex: 0 0 100%; /* Each category takes 100% width on mobile */
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  display: none; /* JS switches active box to display: flex */
   padding: 1.8rem 1rem;
   background-color: var(--bg-card);
   
-  min-height: 48vh;
-  max-height: 58vh;
+  /* Fixed height on mobile so category switching doesn't jump */
+  height: 52vh;
+  min-height: 52vh;
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+.link-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide any injected secondary titles inside cards */
 .link-box::before,
 .link-box h2,
 .link-box .visually-hidden {
   display: none !important;
+}
+
+.link-box.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .link-box ul {
@@ -180,7 +189,7 @@ body {
 
 .link-box a {
   display: inline-block;
-  padding: 0.5rem 1.2rem; /* Larger touch targets for mobile fingers */
+  padding: 0.4rem 1rem;
   color: var(--text-main);
   text-decoration: none;
   border-radius: var(--radius-sm);
@@ -196,6 +205,7 @@ body {
 #box-finances a:hover { color: var(--accent-finances); background-color: rgba(135, 154, 57, 0.12); }
 #box-other a:hover { color: var(--accent-other); background-color: rgba(67, 133, 190, 0.12); }
 
+/* Sub-category Dividers */
 .sub-category-divider {
   font-size: 0.8rem;
   font-weight: 700;
@@ -209,6 +219,13 @@ body {
   width: 100%;
 }
 
+/* --- Accessibility Focus Styles --- */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-other);
+  outline-offset: 2px;
+}
+
+/* --- Footer Landmark --- */
 .footer {
   margin-top: 1.2rem;
   font-size: 0.85rem;
@@ -219,10 +236,15 @@ body {
 .footer a {
   color: var(--text-muted);
   text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--accent-other);
 }
 
 /* ==========================================================================
-   Desktop Layout Override (≥ 768px)
+   Desktop / Tablet Breakpoint (≥ 768px)
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
@@ -230,6 +252,7 @@ body {
     min-height: 220px;
   }
 
+  /* Desktop Top Tab Title Bar */
   .tabs-mobile {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -249,30 +272,29 @@ body {
     cursor: default;
   }
 
-  /* Desktop Header Text Colors */
+  /* Desktop Title Bar Colors */
   .tab-button[data-target="box-social"] { color: var(--accent-social) !important; }
   .tab-button[data-target="box-fun"] { color: var(--accent-fun) !important; }
   .tab-button[data-target="box-web-apps"] { color: var(--accent-apps) !important; }
   .tab-button[data-target="box-finances"] { color: var(--accent-finances) !important; }
   .tab-button[data-target="box-other"] { color: var(--accent-other) !important; }
 
-  /* Desktop Grid Layout */
+  /* Desktop 5-Column Grid */
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1px;
-    overflow-x: visible;
-    scroll-snap-type: none;
     background-color: var(--border-color);
   }
 
   .link-box {
-    flex: initial;
-    display: flex !important;
+    display: flex !important; /* Always display all 5 columns on desktop */
     flex-direction: column;
     background-color: var(--bg-card);
     padding: 1.5rem 1rem;
     align-items: center;
+    
+    /* Lock height and allow independent column scrolling */
     min-height: 55vh;
     max-height: 55vh;
   }
