@@ -339,10 +339,14 @@ body {
     transform: none;
   }
 
-  /* --- Desktop Category Hover Markers --- */
-  #box-social a:hover { color: var(--accent-social); font-weight: 700; }
-  #box-fun a:hover { color: var(--accent-fun); font-weight: 700; }
-  #box-web-apps a:hover { color: var(--accent-apps); font-weight: 700; }
-  #box-finances a:hover { color: var(--accent-finances); font-weight: 700; }
-  #box-other a:hover { color: var(--accent-other); font-weight: 700; }
-}
+/* --- Desktop Modern Pill Hover Effects --- */
+  .link-box a {
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  #box-social a:hover   { color: var(--accent-social);   background-color: rgba(139, 126, 200, 0.12); }
+  #box-fun a:hover      { color: var(--accent-fun);      background-color: rgba(209, 77, 65, 0.12); }
+  #box-web-apps a:hover { color: var(--accent-apps);     background-color: rgba(208, 162, 21, 0.12); }
+  #box-finances a:hover { color: var(--accent-finances); background-color: rgba(135, 154, 57, 0.12); }
+  #box-other a:hover    { color: var(--accent-other);    background-color: rgba(67, 133, 190, 0.12); }
