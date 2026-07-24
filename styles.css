@@ -1,4 +1,341 @@
 /* ==========================================================================
+   styles.css - Flexoki Dark (Enhanced Touch Mobile & Desktop Grid)
+   ========================================================================== */
+
+:root {
+  --bg-base: #100f0f;        
+  --bg-surface: #1c1b1a;     
+  --bg-card: #282726;        
+  --border-color: #343331;   
+  
+  --text-main: #cecdc3;      
+  --text-muted: #878580;     
+  --text-bright: #fffcf0;    
+  
+  --accent-social: #8b7ec8;   
+  --accent-fun: #d14d41;      
+  --accent-apps: #d0a215;     
+  --accent-finances: #879a39; 
+  --accent-other: #4385be;    
+
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: clamp(0.5rem, 2vw, 2.5rem);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.main-content-block {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header Section --- */
+.header {
+  position: relative;
+  min-height: 160px;
+  background-image: url('assets/images/header-background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header #greeting {
+  background: rgba(16, 15, 15, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 252, 240, 0.1);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  color: var(--text-bright);
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* --- Mobile Navigation: Extra Large Centered Header --- */
+.tabs-mobile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.9rem 1rem;
+  overflow: hidden;
+  min-height: 60px;
+}
+
+.tab-button {
+  display: none;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.6rem; /* EVEN BIGGER MOBILE HEADER */
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.tab-button.active {
+  display: block;
+}
+
+/* Active Category Text Colors */
+.tab-button[data-target="box-social"].active { color: var(--accent-social); }
+.tab-button[data-target="box-fun"].active { color: var(--accent-fun); }
+.tab-button[data-target="box-web-apps"].active { color: var(--accent-apps); }
+.tab-button[data-target="box-finances"].active { color: var(--accent-finances); }
+.tab-button[data-target="box-other"].active { color: var(--accent-other); }
+
+/* Left / Right Chevron Side Indicators */
+.tabs-mobile::before,
+.tabs-mobile::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.25 ease;
+}
+
+.tabs-mobile::before {
+  content: '‹';
+  left: 1.5rem;
+}
+
+.tabs-mobile::after {
+  content: '›';
+  right: 1.5rem;
+}
+
+/* Hide left arrow on Social (at-start) & right arrow on Other (at-end) */
+.tabs-mobile.at-start::before {
+  opacity: 0;
+}
+
+.tabs-mobile.at-end::after {
+  opacity: 0;
+}
+
+/* --- Mobile Horizontal Swipe Track --- */
+.content-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: var(--bg-surface);
+}
+
+.content-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.link-box {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 1.8rem 1rem 2.5rem 1rem;
+  background-color: var(--bg-card);
+  
+  height: 52vh;
+  min-height: 52vh;
+  overflow-y: auto;
+
+  /* Mask Image: Creates a subtle bottom fade effect to signal scrollable content */
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.link-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide secondary headers */
+.link-box::before,
+.link-box h2,
+.link-box .visually-hidden {
+  display: none !important;
+}
+
+.link-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.link-box li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.link-box a {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
+  transition: var(--transition);
+  text-align: center;
+}
+
+/* Category Link Hover Effects */
+#box-social a:hover { color: var(--accent-social); background-color: rgba(139, 126, 200, 0.12); }
+#box-fun a:hover { color: var(--accent-fun); background-color: rgba(209, 77, 65, 0.12); }
+#box-web-apps a:hover { color: var(--accent-apps); background-color: rgba(208, 162, 21, 0.12); }
+#box-finances a:hover { color: var(--accent-finances); background-color: rgba(135, 154, 57, 0.12); }
+#box-other a:hover { color: var(--accent-other); background-color: rgba(67, 133, 190, 0.12); }
+
+.sub-category-divider {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+  list-style: none;
+  text-align: center;
+  width: 100%;
+}
+
+.footer {
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--accent-other);
+}
+
+/* ==========================================================================
+   Desktop Layout Override (≥ 768px)
+   ========================================================================== */
+@media screen and (min-width: 768px) {
+  
+  .header {
+    min-height: 220px;
+  }
+
+  .tabs-mobile {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    padding: 0;
+  }
+
+  .tabs-mobile::before,
+  .tabs-mobile::after {
+    display: none;
+  }
+
+  .tab-button {
+    display: block !important;
+    flex: 1;
+    background-color: var(--bg-card);
+    border-bottom: none;
+    font-size: 1rem;
+    padding: 1.1rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: default;
+  }
+
+  .tab-button[data-target="box-social"] { color: var(--accent-social) !important; }
+  .tab-button[data-target="box-fun"] { color: var(--accent-fun) !important; }
+  .tab-button[data-target="box-web-apps"] { color: var(--accent-apps) !important; }
+  .tab-button[data-target="box-finances"] { color: var(--accent-finances) !important; }
+  .tab-button[data-target="box-other"] { color: var(--accent-other) !important; }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    scroll-snap-type: none;
+    overflow-x: visible;
+    background-color: var(--border-color);
+  }
+
+  .link-box {
+    flex: initial;
+    width: auto;
+    display: flex !important;
+    flex-direction: column;
+    background-color: var(--bg-card);
+    padding: 1.5rem 1rem;
+    align-items: center;
+    
+    min-height: 55vh;
+    max-height: 55vh;
+
+    /* Remove bottom fade mask on desktop */
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .link-box a {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
+  }
+}/* ==========================================================================
    styles.css - Flexoki Dark (Mobile Single Header + Carousel & Desktop Grid)
    ========================================================================== */
 
