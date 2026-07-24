@@ -284,9 +284,10 @@ a:focus-visible, button:focus-visible {
     align-items: center;
   }
 
-  /* Remove any generated pseudo-header text inside cards */
+/* Hide the white duplicated titles inside each card */
   .link-box::before {
-    display: none !content;
+    display: none !important;
+    content: none !important;
   }
 
   .link-box ul {
