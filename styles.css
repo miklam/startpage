@@ -147,29 +147,16 @@ body {
   padding: 1.5rem;
   background-color: var(--bg-card);
   
-  /* Scrollable Container Settings */
+  /* Scrollable container with completely hidden scrollbars */
   max-height: 60vh;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-color) transparent;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;  /* IE / Edge */
 }
 
-/* Custom Scrollbars for WebKit (Chrome, Edge, Safari) */
+/* Hide scrollbars for Chrome, Safari, and Opera */
 .link-box::-webkit-scrollbar {
-  width: 5px;
-}
-
-.link-box::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.link-box::-webkit-scrollbar-thumb {
-  background-color: var(--border-color);
-  border-radius: var(--radius-sm);
-}
-
-.link-box::-webkit-scrollbar-thumb:hover {
-  background-color: var(--text-muted);
+  display: none;
 }
 
 .link-box.active {
@@ -307,9 +294,15 @@ a:focus-visible, button:focus-visible {
     padding: 1.5rem 1rem;
     align-items: center;
 
-    /* Lock desktop box height & allow independent column scroll */
+    /* Desktop scrolling without scrollbar */
     max-height: 55vh;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .link-box::-webkit-scrollbar {
+    display: none;
   }
 
   /* Hide white duplicate headers */
