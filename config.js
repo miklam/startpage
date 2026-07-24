@@ -31,7 +31,7 @@ const cards = [
             "HBO Max": "https://play.hbomax.com/",
             "Disney+": "https://www.disneyplus.com/home",
             // --- Gaming ---
-            "Foundry": "http://83.251.196.97:30000/join",
+            // "Foundry": "http://83.251.196.97:30000/join",
             "D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663",
             "Nexus Mods": "https://www.nexusmods.com/",
             // --- Entertainment ---
@@ -43,9 +43,9 @@ const cards = [
             "Smashrun": "https://smashrun.com/miklam",
             // --- AI Tools ---
             "Gemini": "https://gemini.google.com/app",
+            "Claude": "https://claude.ai/new",
             "Designer": "https://designer.microsoft.com/",
             "ChatGPT": "https://chatgpt.com/",
-            "Claude": "https://claude.ai/new",
             "Mistral": "https://chat.mistral.ai/chat"
         }
     },
@@ -71,7 +71,7 @@ const cards = [
         bookmarks: {
             "Swedbank": "https://online.swedbank.se/app/ib/logga-in",
             "Budget 2026": "https://docs.google.com/spreadsheets/d/1vehHqsjwUVU4hACdnmTTLw4_zpo3SRhUf_yaraBA_jY/edit?usp=sharing",
-            "Budget Input 2026": "https://docs.google.com/forms/d/e/1FAIpQLSdcb5mxe0PZlEDBBHauqvfG2J-p8V_-zrJu22F-nZDVD480bA/viewform?usp=header",
+            "Budget Input 2026": "https://script.google.com/macros/s/AKfycbwFVUTFtppoDU3KWAKGhVBbuZsoUWztB7ZwWBsuSYY0Hd6RI5gcW49CldtJt-STV8nB/exec",
             "Folksam": "https://www.folksam.se/",
             "Vattenfall": "https://www.vattenfall.se/",
             "Mediateknik": "https://portal.mediateknik.net/authorization/index?username=&password=",
