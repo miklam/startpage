@@ -53,7 +53,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: clamp(0.75rem, 2vw, 2.5rem);
+  padding: clamp(0.5rem, 2vw, 2.5rem);
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -96,32 +96,28 @@ body {
   text-align: center;
 }
 
-/* --- Tab Navigation (Mobile: Equal 5 Columns, Fits Screen) --- */
+/* --- Mobile Navigation: Fixed 5 Columns --- */
 .tabs-mobile {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  width: 100%;
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
-  width: 100%;
 }
 
 .tab-button {
-  padding: 0.8rem 0.2rem;
+  padding: 0.75rem 0.1rem;
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   color: var(--text-muted);
   font-family: inherit;
   font-weight: 700;
-  font-size: clamp(0.7rem, 2.8vw, 0.9rem); /* Scale down text slightly on tiny phone screens */
+  font-size: clamp(0.65rem, 2.5vw, 0.85rem); /* Prevents overflow on mobile screens */
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
   white-space: nowrap;
-}
-
-.tab-button:hover {
-  color: var(--text-main);
 }
 
 /* Mobile Active Tab Indicator Lines */
@@ -143,26 +139,29 @@ body {
   padding: 1.5rem 1rem;
   background-color: var(--bg-card);
   
-  /* Fixed Height on Mobile so Switching Categories Doesn't Shift Layout */
-  height: 50vh;
+  /* Fixed height on mobile to stop box jumping between tabs */
+  height: 55vh;
+  min-height: 55vh;
   overflow-y: auto;
-  scrollbar-width: none;       /* Firefox */
-  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Hide Scrollbar Track */
 .link-box::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide Any Injected Secondary Titles */
+/* Strictly hide duplicate white header text inside cards */
 .link-box::before,
-.link-box h2 {
+.link-box h2,
+.link-box .visually-hidden {
   display: none !important;
 }
 
 .link-box.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .link-box ul {
@@ -172,6 +171,7 @@ body {
   gap: 0.6rem;
   text-align: center;
   align-items: center;
+  width: 100%;
 }
 
 .link-box li {
@@ -236,21 +236,8 @@ a:focus-visible, button:focus-visible {
   color: var(--accent-other);
 }
 
-/* --- Screen Reader Helper --- */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* ==========================================================================
-   Desktop / Tablet Breakpoint (≥ 768px)
+   Desktop Breakpoint (≥ 768px)
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
@@ -258,7 +245,6 @@ a:focus-visible, button:focus-visible {
     min-height: 220px;
   }
 
-  /* Desktop Top Tab Title Bar */
   .tabs-mobile {
     gap: 1px;
     background-color: var(--border-color);
@@ -274,7 +260,14 @@ a:focus-visible, button:focus-visible {
     cursor: default;
   }
 
-  /* Desktop Content Grid */
+  /* Force desktop headers to ALWAYS display their category colors */
+  .tab-button[data-target="box-social"] { color: var(--accent-social) !important; }
+  .tab-button[data-target="box-fun"] { color: var(--accent-fun) !important; }
+  .tab-button[data-target="box-web-apps"] { color: var(--accent-apps) !important; }
+  .tab-button[data-target="box-finances"] { color: var(--accent-finances) !important; }
+  .tab-button[data-target="box-other"] { color: var(--accent-other) !important; }
+
+  /* Desktop Grid Layout */
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -288,8 +281,7 @@ a:focus-visible, button:focus-visible {
     background-color: var(--bg-card);
     padding: 1.5rem 1rem;
     align-items: center;
-    
-    /* Desktop Fixed Height */
     height: 55vh;
+    min-height: 55vh;
   }
 }
