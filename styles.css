@@ -12,6 +12,7 @@
   --text-muted: #878580;     
   --text-bright: #fffcf0;    
   
+  /* Category Accent Colors */
   --accent-social: #8b7ec8;   
   --accent-fun: #d14d41;      
   --accent-apps: #d0a215;     
@@ -166,9 +167,6 @@ body {
   padding: 1.2rem 1.2rem 2.5rem 1.2rem;
   background-color: var(--bg-card);
   overflow-y: auto;
-
-  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
 .link-box::-webkit-scrollbar {
@@ -209,7 +207,7 @@ body {
   font-size: 1.1rem;
   font-weight: 500;
   transition: var(--transition);
-  text-align: center; /* Enforces center alignment on multi-line links */
+  text-align: center;
 }
 
 .link-box a:active {
@@ -256,13 +254,11 @@ body {
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
-  /* Restores centered desktop container with padding & rounded corners */
   .container {
     padding: clamp(1rem, 3vw, 2.5rem);
     justify-content: center;
   }
 
-  /* Restores outer rounded border for main block */
   .main-content-block {
     min-height: auto;
     border: 1px solid var(--border-color);
@@ -326,11 +322,9 @@ body {
     
     min-height: 55vh;
     max-height: 55vh;
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 
-  /* Restores simple text links without button background on desktop */
+  /* Simple text links without mobile button boxes */
   .link-box a {
     background-color: transparent;
     border: none;
@@ -338,9 +332,17 @@ body {
     padding: 0.3rem 0.8rem;
     min-height: auto;
     text-align: center;
+    transition: color 0.2s ease, font-weight 0.2s ease;
   }
 
   .link-box a:active {
     transform: none;
   }
+
+  /* --- Desktop Category Hover Markers --- */
+  #box-social a:hover { color: var(--accent-social); font-weight: 700; }
+  #box-fun a:hover { color: var(--accent-fun); font-weight: 700; }
+  #box-web-apps a:hover { color: var(--accent-apps); font-weight: 700; }
+  #box-finances a:hover { color: var(--accent-finances); font-weight: 700; }
+  #box-other a:hover { color: var(--accent-other); font-weight: 700; }
 }
