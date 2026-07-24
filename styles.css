@@ -1,12 +1,10 @@
 /* ==========================================================================
-   styles.css - Modern Minimalist Startpage
-   Palette: Flexoki Dark (Inky Analog Theme)
+   styles.css - Touch-Optimized Mobile & Flexoki Desktop Dashboard
    ========================================================================== */
 
-/* --- Custom Properties / Themes --- */
+/* --- Custom Properties --- */
 :root {
-  /* Flexoki Dark Palette */
-  --bg-base: #100f0f;        /* Flexoki Black / Paper Dark */
+  --bg-base: #100f0f;        /* Flexoki Black */
   --bg-surface: #1c1b1a;     /* Flexoki Base-950 */
   --bg-card: #282726;        /* Flexoki Base-900 */
   --border-color: #343331;   /* Flexoki Base-850 */
@@ -16,13 +14,12 @@
   --text-bright: #fffcf0;    /* Flexoki Paper Light */
   
   /* Flexoki Accent Colors */
-  --accent-social: #8b7ec8;   /* Flexoki Purple */
-  --accent-fun: #d14d41;      /* Flexoki Red */
-  --accent-apps: #d0a215;     /* Flexoki Yellow */
-  --accent-finances: #879a39; /* Flexoki Green */
-  --accent-other: #4385be;    /* Flexoki Blue */
+  --accent-social: #8b7ec8;   
+  --accent-fun: #d14d41;      
+  --accent-apps: #d0a215;     
+  --accent-finances: #879a39; 
+  --accent-other: #4385be;    
 
-  /* Global Metrics */
   --radius-lg: 16px;
   --radius-md: 10px;
   --radius-sm: 6px;
@@ -30,7 +27,6 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* --- Global Resets & Base --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -46,7 +42,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Container Layout --- */
 .container {
   display: flex;
   flex-direction: column;
@@ -58,7 +53,6 @@ body {
   margin: 0 auto;
 }
 
-/* --- Main Block Wrapper --- */
 .main-content-block {
   width: 100%;
   background-color: var(--bg-surface);
@@ -73,7 +67,7 @@ body {
 /* --- Header Section --- */
 .header {
   position: relative;
-  min-height: 180px;
+  min-height: 160px;
   background-image: url('assets/images/header-background.jpg');
   background-size: cover;
   background-position: center;
@@ -96,79 +90,83 @@ body {
   text-align: center;
 }
 
-/* --- Mobile Navigation: Fixed 5 Columns --- */
+/* --- Mobile Horizontal Tab ScrollBar --- */
 .tabs-mobile {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 100%;
+  display: flex;
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 0.5rem;
+}
+
+.tabs-mobile::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-button {
-  padding: 0.75rem 0.1rem;
+  flex: 0 0 auto;
+  padding: 0.9rem 1.2rem;
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
   color: var(--text-muted);
   font-family: inherit;
   font-weight: 700;
-  font-size: clamp(0.65rem, 2.5vw, 0.85rem); /* Prevents overflow on mobile screens */
+  font-size: 0.95rem; /* Larger, touch-friendly tab labels */
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
   white-space: nowrap;
 }
 
-/* Mobile Active Tab Indicator Lines */
+/* Active Mobile Indicators */
 .tab-button[data-target="box-social"].active { color: var(--accent-social); border-bottom-color: var(--accent-social); }
 .tab-button[data-target="box-fun"].active { color: var(--accent-fun); border-bottom-color: var(--accent-fun); }
 .tab-button[data-target="box-web-apps"].active { color: var(--accent-apps); border-bottom-color: var(--accent-apps); }
 .tab-button[data-target="box-finances"].active { color: var(--accent-finances); border-bottom-color: var(--accent-finances); }
 .tab-button[data-target="box-other"].active { color: var(--accent-other); border-bottom-color: var(--accent-other); }
 
-/* --- Content Grid & Links --- */
+/* --- Mobile Swipeable Content Carousel --- */
 .content-grid {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Enables native horizontal gesture swipe */
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background-color: var(--bg-surface);
 }
 
-.link-box {
+.content-grid::-webkit-scrollbar {
   display: none;
-  padding: 1.5rem 1rem;
+}
+
+.link-box {
+  flex: 0 0 100%; /* Each category takes 100% width on mobile */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 1.8rem 1rem;
   background-color: var(--bg-card);
   
-  /* Fixed height on mobile to stop box jumping between tabs */
-  height: 55vh;
-  min-height: 55vh;
+  min-height: 48vh;
+  max-height: 58vh;
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
-.link-box::-webkit-scrollbar {
-  display: none;
-}
-
-/* Strictly hide duplicate white header text inside cards */
 .link-box::before,
 .link-box h2,
 .link-box .visually-hidden {
   display: none !important;
 }
 
-.link-box.active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .link-box ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
   text-align: center;
   align-items: center;
   width: 100%;
@@ -182,11 +180,11 @@ body {
 
 .link-box a {
   display: inline-block;
-  padding: 0.3rem 0.8rem;
+  padding: 0.5rem 1.2rem; /* Larger touch targets for mobile fingers */
   color: var(--text-main);
   text-decoration: none;
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   transition: var(--transition);
   text-align: center;
 }
@@ -198,9 +196,8 @@ body {
 #box-finances a:hover { color: var(--accent-finances); background-color: rgba(135, 154, 57, 0.12); }
 #box-other a:hover { color: var(--accent-other); background-color: rgba(67, 133, 190, 0.12); }
 
-/* Sub-category Dividers */
 .sub-category-divider {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -212,13 +209,6 @@ body {
   width: 100%;
 }
 
-/* --- Accessibility Focus Styles --- */
-a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--accent-other);
-  outline-offset: 2px;
-}
-
-/* --- Footer --- */
 .footer {
   margin-top: 1.2rem;
   font-size: 0.85rem;
@@ -229,15 +219,10 @@ a:focus-visible, button:focus-visible {
 .footer a {
   color: var(--text-muted);
   text-decoration: none;
-  transition: var(--transition);
-}
-
-.footer a:hover {
-  color: var(--accent-other);
 }
 
 /* ==========================================================================
-   Desktop Breakpoint (≥ 768px)
+   Desktop Layout Override (≥ 768px)
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
@@ -246,11 +231,15 @@ a:focus-visible, button:focus-visible {
   }
 
   .tabs-mobile {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 1px;
     background-color: var(--border-color);
+    padding: 0;
   }
 
   .tab-button {
+    flex: 1;
     background-color: var(--bg-card);
     border-bottom: none;
     font-size: 1rem;
@@ -260,7 +249,7 @@ a:focus-visible, button:focus-visible {
     cursor: default;
   }
 
-  /* Force desktop headers to ALWAYS display their category colors */
+  /* Desktop Header Text Colors */
   .tab-button[data-target="box-social"] { color: var(--accent-social) !important; }
   .tab-button[data-target="box-fun"] { color: var(--accent-fun) !important; }
   .tab-button[data-target="box-web-apps"] { color: var(--accent-apps) !important; }
@@ -272,16 +261,24 @@ a:focus-visible, button:focus-visible {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1px;
+    overflow-x: visible;
+    scroll-snap-type: none;
     background-color: var(--border-color);
   }
 
   .link-box {
+    flex: initial;
     display: flex !important;
     flex-direction: column;
     background-color: var(--bg-card);
     padding: 1.5rem 1rem;
     align-items: center;
-    height: 55vh;
     min-height: 55vh;
+    max-height: 55vh;
+  }
+
+  .link-box a {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
   }
 }
