@@ -1,281 +1,219 @@
 /* ==========================================================================
-   styles.css
-   Catppuccin Mocha | 5-Box Layout | Wider Grid | Unified Mobile Tabs & Desktop Titles
-   Last updated: May 11, 2025 - Added divider below titles/tabs
+   styles.css - Modern Minimalist Startpage
+   Palette: Tokyo Night (Storm Variant)
    ========================================================================== */
 
-/* ==========================================================================
-   Root Variables (Catppuccin Mocha & Custom)
-   ========================================================================== */
+/* --- Custom Properties / Themes --- */
 :root {
-  /* --- Catppuccin Mocha Palette --- */
-  --ctp-rosewater: #f5e0dc;
-  --ctp-flamingo: #f2cdcd;
-  --ctp-pink: #f5c2e7;
-  --ctp-mauve: #cba6f7;   /* Accent & Social Title/Hover */
-  --ctp-red: #f38ba8;     /* Fun Title/Hover */
-  --ctp-maroon: #eba0ac;
-  --ctp-peach: #fab387;
-  --ctp-yellow: #f9e2af;  /* Web-Apps Title/Hover */
-  --ctp-green: #a6e3a1;   /* Finances Title/Hover */
-  --ctp-teal: #94e2d5;
-  --ctp-sky: #89dceb;     /* Used for tab button focus */
-  --ctp-sapphire: #74c7ec;
-  --ctp-blue: #89b4fa;    /* Other Title/Hover */
-  --ctp-lavender: #b4befe;
-  --ctp-text: #cdd6f4;     /* Main text */
-  --ctp-subtext1: #bac2de; /* Footer link text */
-  --ctp-subtext0: #a6adc8; /* Inactive mobile tab text, footer link */
-  --ctp-overlay2: #9399b2;
-  --ctp-overlay1: #7f849c;
-  --ctp-overlay0: #6c7086;
-  --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a; /* Grid gap color, title bottom border on desktop, divider */
-  --ctp-surface0: #313244; /* Mobile tabs bg, desktop title/tab bg */
-  --ctp-base: #1e1e2e;     /* Main page background */
-  --ctp-mantle: #181825;   /* Main content block background */
-  --ctp-crust: #11111b;
+  /* Tokyo Night Palette */
+  --bg-base: #1a1b26;        /* Deep night background */
+  --bg-surface: #24283b;     /* Card / Block background */
+  --bg-card: #1f2335;        /* Sub-card background */
+  --border-color: #2f354f;   /* Subtle divider border */
+  
+  --text-main: #c0caf5;      /* Primary readable text */
+  --text-muted: #787c99;     /* Secondary / inactive tab text */
+  --text-bright: #ffffff;
+  
+  /* Category Accent Colors */
+  --accent-social: #bb9af7;   /* Soft Purple */
+  --accent-fun: #f7768e;      /* Coral Red */
+  --accent-apps: #e0af68;     /* Amber Gold */
+  --accent-finances: #73daca; /* Mint Green */
+  --accent-other: #7aa2f7;    /* Sky Blue */
 
-  /* --- Core Variables --- */
-  --bg: var(--ctp-base);
-  --fg: var(--ctp-text);
-  --secondaryBg: var(--ctp-surface0); /* Individual Box content backgrounds */
-  --fontBody: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --fontHeader: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --accentColor: var(--ctp-mauve);
-  --scrollbar: var(--accentColor);
-  --bdradius: 0.75em; /* Main block rounding */
+  /* Global Metrics */
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* ==========================================================================
-   Global Resets & Base Styles
-   ========================================================================== */
-* { margin: 0; padding: 0; border: 0; box-sizing: border-box; color: var(--fg); outline-style: none; text-decoration: none; -webkit-tap-highlight-color: transparent; -ms-overflow-style: none; scrollbar-width: thin; scrollbar-color: transparent transparent; }
-::-webkit-scrollbar { width: 0.3em; }
-::-webkit-scrollbar-track { background: transparent; margin-bottom: 0.75em; }
-::-webkit-scrollbar-thumb { background-color: transparent; border-radius: 1em; }
-:hover::-webkit-scrollbar-thumb, .visible-scrollbar::-webkit-scrollbar-thumb { background-color: var(--scrollbar); }
-:hover, .visible-scrollbar { scrollbar-color: var(--scrollbar) transparent; }
+/* --- Global Resets & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  font-family: var(--fontBody);
-  font-weight: 400;
-  background-color: var(--bg);
-  color: var(--fg);
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-main);
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ==========================================================================
-   Main Layout Container
-   ========================================================================== */
+/* --- Container Layout --- */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: auto;
-  padding: 2em 20px;
-  width: 100%;
+  justify-content: center;
   min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* ==========================================================================
-   Main Content Block (Wrapper for Header, Tabs & Grid)
-   ========================================================================== */
+/* --- Main Block Wrapper --- */
 .main-content-block {
-  width: 90%;
-  max-width: 1500px;
-  margin-bottom: 2em;
-  background-color: var(--ctp-mantle);
-  border-radius: var(--bdradius);
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
 }
 
-/* ==========================================================================
-   Header with Background Image
-   ========================================================================== */
+/* --- Header Section --- */
 .header {
-  padding: 0;
   position: relative;
-  min-height: 300px;
-  background-image: url('assets/images/header-background.jpg'); /* YOUR IMAGE PATH */
+  min-height: 220px;
+  background-image: url('assets/images/header-background.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
+
 .header #greeting {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.3em 0.8em;
-  border-radius: calc(var(--bdradius) * 0.5);
-  color: var(--ctp-text);
-  font-family: var(--fontHeader);
+  background: rgba(26, 27, 38, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1.8rem;
+  border-radius: var(--radius-md);
+  color: var(--text-bright);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 700;
-  font-size: 2em;
+  letter-spacing: -0.02em;
 }
 
-/* ==========================================================================
-   Mobile Tab Navigation / Desktop Titles
-   ========================================================================== */
-.tabs-mobile { 
-  display: flex; 
-  justify-content: space-around; 
-  background-color: var(--ctp-surface0); 
-  padding: 0.2em 0; 
-  overflow-x: auto; 
-  border-bottom: 1px solid var(--ctp-surface1); /* ADDED: Divider line */
+/* --- Tab Navigation (Mobile Default) --- */
+.tabs-mobile {
+  display: flex;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for tabs */
 }
 
-.tab-button { 
-  padding: 0.8em 0.5em;
-  background: none; 
+.tabs-mobile::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-button {
+  flex: 1 0 auto;
+  padding: 0.9rem 1.2rem;
+  background: transparent;
   border: none;
-  font-family: var(--fontHeader);
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: inherit;
   font-weight: 700;
-  white-space: nowrap;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: var(--transition);
   text-align: center;
-
-  /* Mobile tab specific styling */
-  border-bottom: 3px solid transparent; /* This is for the active tab indicator line */
-  color: var(--ctp-subtext0); 
-  font-size: 0.9em; 
 }
 
-.tab-button:hover { 
-  color: var(--ctp-text); 
+.tab-button:hover {
+  color: var(--text-main);
 }
 
-/* Category Text Colors for tab-buttons */
-.tab-button[data-target="box-social"] { color: var(--ctp-mauve); }
-.tab-button[data-target="box-fun"] { color: var(--ctp-red); }
-.tab-button[data-target="box-web-apps"] { color: var(--ctp-yellow); }
-.tab-button[data-target="box-finances"] { color: var(--ctp-green); }
-.tab-button[data-target="box-other"] { color: var(--ctp-blue); }
+/* Tab Accent Mapping */
+.tab-button[data-target="box-social"].active { color: var(--accent-social); border-bottom-color: var(--accent-social); }
+.tab-button[data-target="box-fun"].active { color: var(--accent-fun); border-bottom-color: var(--accent-fun); }
+.tab-button[data-target="box-web-apps"].active { color: var(--accent-apps); border-bottom-color: var(--accent-apps); }
+.tab-button[data-target="box-finances"].active { color: var(--accent-finances); border-bottom-color: var(--accent-finances); }
+.tab-button[data-target="box-other"].active { color: var(--accent-other); border-bottom-color: var(--accent-other); }
 
-/* Mobile active tab style - uses its specific category color for text and border indicator */
-.tab-button.active {
-  /* Color is already set by the [data-target] rules above */
-  /* Border color needs to match its text color */
-}
-.tab-button[data-target="box-social"].active { border-bottom-color: var(--ctp-mauve); }
-.tab-button[data-target="box-fun"].active { border-bottom-color: var(--ctp-red); }
-.tab-button[data-target="box-web-apps"].active { border-bottom-color: var(--ctp-yellow); }
-.tab-button[data-target="box-finances"].active { border-bottom-color: var(--ctp-green); }
-.tab-button[data-target="box-other"].active { border-bottom-color: var(--ctp-blue); }
-
-
-/* ==========================================================================
-   Content Layout (Mobile First Stack, Desktop Grid)
-   ========================================================================== */
+/* --- Content Grid & Links --- */
 .content-grid {
-  display: block; /* Mobile Stack (Default) */
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  gap: 0;
-}
-
-/* ==========================================================================
-   Link Boxes
-   ========================================================================== */
-.link-box {
-  display: none; 
-  margin-bottom: 0; 
-  background-color: var(--secondaryBg); 
-  border: none; 
-  border-radius: 0; 
-  padding: 1.5em;
+  display: flex;
   flex-direction: column;
+  background-color: var(--bg-surface);
 }
+
+.link-box {
+  display: none;
+  padding: 1.5rem;
+  background-color: var(--bg-card);
+}
+
 .link-box.active {
-  display: flex; 
+  display: block;
 }
 
-/* ==========================================================================
-   Link Lists & Items
-   ========================================================================== */
-.link-box ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; text-align: center; }
-.link-box li { margin-bottom: 0.6em; }
-.link-box a { display: block; padding: 2px 0; color: var(--ctp-text); text-decoration: none; transition: color 0.2s ease, font-weight 0.2s ease; }
-#box-social a:hover { color: var(--ctp-mauve); font-weight: 700; }
-#box-fun a:hover { color: var(--ctp-red); font-weight: 700; }
-#box-web-apps a:hover { color: var(--ctp-yellow); font-weight: 700; }
-#box-finances a:hover { color: var(--ctp-green); font-weight: 700; }
-#box-other a:hover { color: var(--ctp-blue); font-weight: 700; }
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.footer { font-size: 0.9em; margin: 0 auto 1em auto; padding: 0.5em; text-align: center; width: 90%; max-width: 1500px; color: var(--ctp-subtext0); }
-.footer a { color: var(--ctp-subtext1); text-decoration: none; transition: color 0.2s ease; }
-.footer a:hover { color: var(--accentColor); }
-
-/* ==========================================================================
-   Accessibility Focus Styles
-   ========================================================================== */
-a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor); }
-.tab-button:focus { outline: none; box-shadow: 0 0 0 2px var(--ctp-sky); }
-.footer a:focus { box-shadow: 0 0 0 2px var(--accentColor); }
-
-/* ==========================================================================
-   Desktop Layout Override (min-width: 800px)
-   ========================================================================== */
-@media screen and (min-width: 800px) {
-  .container {
-    padding-top: 2em;
-  }
-
-  /* --- Desktop: .tabs-mobile becomes the title grid --- */
-  .tabs-mobile {
-    display: grid; 
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 1px; 
-    background-color: var(--ctp-surface1); /* This color becomes the grid lines between title cells */
-    padding: 0; 
-    overflow-x: visible; 
-    border-bottom: 1px solid var(--ctp-surface1); /* This creates the divider below the whole title row */
-  }
-
-  .tab-button { 
-    font-size: 1.2em; 
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 1em 0.5em; 
-    border-bottom: none; /* Remove mobile active tab indicator line */
-    background-color: var(--ctp-surface0); /* Background for each title cell */
-  }
-  .tab-button.active { 
-    border-bottom: none; 
-  }
-
-  /* --- Desktop: .content-grid is just for content boxes --- */
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background-color: var(--ctp-surface1); /* Grid lines */
-  }
-  .link-box {
-    display: flex !important;
-    margin-bottom: 0;
-    border-radius: 0;
-    border: none;
-    background-color: var(--secondaryBg); 
-  }
+.link-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: center;
 }
 
-/* Screen-reader only utility class */
-.sr-only {
+.link-box a {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+/* Category Link Hover Effects */
+#box-social a:hover { color: var(--accent-social); background-color: rgba(187, 154, 247, 0.1); }
+#box-fun a:hover { color: var(--accent-fun); background-color: rgba(247, 118, 142, 0.1); }
+#box-web-apps a:hover { color: var(--accent-apps); background-color: rgba(224, 175, 104, 0.1); }
+#box-finances a:hover { color: var(--accent-finances); background-color: rgba(115, 218, 202, 0.1); }
+#box-other a:hover { color: var(--accent-other); background-color: rgba(122, 162, 247, 0.1); }
+
+/* Sub-category Dividers in Link Lists */
+.sub-category-divider {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  margin-bottom: 0.2rem;
+  list-style: none;
+}
+
+/* --- Accessibility Focus Styles --- */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-other);
+  outline-offset: 2px;
+}
+
+/* --- Footer --- */
+.footer {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--accent-other);
+}
+
+/* --- Screen Reader Helper --- */
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -288,5 +226,55 @@ a:focus, button:focus { outline: none; box-shadow: 0 0 0 2px var(--accentColor);
 }
 
 /* ==========================================================================
-   End of styles.css
+   Desktop / Tablet Breakpoint (≥ 768px)
    ========================================================================== */
+@media screen and (min-width: 768px) {
+  
+  /* Desktop Title Grid */
+  .tabs-mobile {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+  }
+
+  .tab-button {
+    background-color: var(--bg-card);
+    border-bottom: none;
+    font-size: 1rem;
+    padding: 1.1rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: default;
+  }
+
+  /* Desktop Header Text Colors matching Categories */
+  .tab-button[data-target="box-social"] { color: var(--accent-social); }
+  .tab-button[data-target="box-fun"] { color: var(--accent-fun); }
+  .tab-button[data-target="box-web-apps"] { color: var(--accent-apps); }
+  .tab-button[data-target="box-finances"] { color: var(--accent-finances); }
+  .tab-button[data-target="box-other"] { color: var(--accent-other); }
+
+  /* Desktop Content Grid */
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+  }
+
+  .link-box {
+    display: flex !important;
+    flex-direction: column;
+    background-color: var(--bg-card);
+    padding: 1.5rem 1rem;
+  }
+
+  .link-box ul {
+    text-align: left;
+  }
+
+  .link-box a {
+    padding: 0.3rem 0.6rem;
+  }
+}
