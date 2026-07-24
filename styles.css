@@ -1,26 +1,26 @@
 /* ==========================================================================
    styles.css - Modern Minimalist Startpage
-   Palette: Tokyo Night (Storm Variant)
+   Palette: Flexoki Dark (Inky Analog Theme)
    ========================================================================== */
 
 /* --- Custom Properties / Themes --- */
 :root {
-  /* Tokyo Night Palette */
-  --bg-base: #1a1b26;        /* Deep night background */
-  --bg-surface: #24283b;     /* Card / Block background */
-  --bg-card: #1f2335;        /* Sub-card background */
-  --border-color: #2f354f;   /* Subtle divider border */
+  /* Flexoki Dark Palette */
+  --bg-base: #100f0f;        /* Flexoki Black / Paper Dark */
+  --bg-surface: #1c1b1a;     /* Flexoki Base-950 */
+  --bg-card: #282726;        /* Flexoki Base-900 */
+  --border-color: #343331;   /* Flexoki Base-850 */
   
-  --text-main: #c0caf5;      /* Primary readable text */
-  --text-muted: #787c99;     /* Secondary / inactive tab text */
-  --text-bright: #ffffff;
+  --text-main: #cecdc3;      /* Flexoki Base-200 */
+  --text-muted: #878580;     /* Flexoki Base-500 */
+  --text-bright: #fffcf0;    /* Flexoki Paper Light */
   
-  /* Category Accent Colors */
-  --accent-social: #bb9af7;   /* Soft Purple */
-  --accent-fun: #f7768e;      /* Coral Red */
-  --accent-apps: #e0af68;     /* Amber Gold */
-  --accent-finances: #73daca; /* Mint Green */
-  --accent-other: #7aa2f7;    /* Sky Blue */
+  /* Flexoki Accent Colors */
+  --accent-social: #8b7ec8;   /* Flexoki Purple */
+  --accent-fun: #d14d41;      /* Flexoki Red */
+  --accent-apps: #d0a215;     /* Flexoki Yellow */
+  --accent-finances: #879a39; /* Flexoki Green */
+  --accent-other: #4385be;    /* Flexoki Blue */
 
   /* Global Metrics */
   --radius-lg: 16px;
@@ -65,7 +65,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
 }
@@ -83,16 +83,17 @@ body {
 }
 
 .header #greeting {
-  background: rgba(26, 27, 38, 0.65);
+  background: rgba(16, 15, 15, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 252, 240, 0.1);
   padding: 0.6rem 1.8rem;
   border-radius: var(--radius-md);
   color: var(--text-bright);
   font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 /* --- Tab Navigation (Mobile Default) --- */
@@ -101,7 +102,7 @@ body {
   background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
-  scrollbar-width: none; /* Hide scrollbar for tabs */
+  scrollbar-width: none;
 }
 
 .tabs-mobile::-webkit-scrollbar {
@@ -156,25 +157,33 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  text-align: center;
+  text-align: center; /* CENTER ALIGNED LINKS */
+  align-items: center;
+}
+
+.link-box li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .link-box a {
-  display: block;
-  padding: 0.3rem 0.5rem;
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
   color: var(--text-main);
   text-decoration: none;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   transition: var(--transition);
+  text-align: center;
 }
 
 /* Category Link Hover Effects */
-#box-social a:hover { color: var(--accent-social); background-color: rgba(187, 154, 247, 0.1); }
-#box-fun a:hover { color: var(--accent-fun); background-color: rgba(247, 118, 142, 0.1); }
-#box-web-apps a:hover { color: var(--accent-apps); background-color: rgba(224, 175, 104, 0.1); }
-#box-finances a:hover { color: var(--accent-finances); background-color: rgba(115, 218, 202, 0.1); }
-#box-other a:hover { color: var(--accent-other); background-color: rgba(122, 162, 247, 0.1); }
+#box-social a:hover { color: var(--accent-social); background-color: rgba(139, 126, 200, 0.12); }
+#box-fun a:hover { color: var(--accent-fun); background-color: rgba(209, 77, 65, 0.12); }
+#box-web-apps a:hover { color: var(--accent-apps); background-color: rgba(208, 162, 21, 0.12); }
+#box-finances a:hover { color: var(--accent-finances); background-color: rgba(135, 154, 57, 0.12); }
+#box-other a:hover { color: var(--accent-other); background-color: rgba(67, 133, 190, 0.12); }
 
 /* Sub-category Dividers in Link Lists */
 .sub-category-divider {
@@ -183,9 +192,11 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   margin-bottom: 0.2rem;
   list-style: none;
+  text-align: center;
+  width: 100%;
 }
 
 /* --- Accessibility Focus Styles --- */
@@ -246,6 +257,7 @@ a:focus-visible, button:focus-visible {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     cursor: default;
+    text-align: center;
   }
 
   /* Desktop Header Text Colors matching Categories */
@@ -268,13 +280,10 @@ a:focus-visible, button:focus-visible {
     flex-direction: column;
     background-color: var(--bg-card);
     padding: 1.5rem 1rem;
+    align-items: center; /* Centering content block in column */
   }
 
   .link-box ul {
-    text-align: left;
-  }
-
-  .link-box a {
-    padding: 0.3rem 0.6rem;
+    text-align: center; /* Center links on desktop */
   }
 }
