@@ -126,42 +126,39 @@ function handleScrollbarVisibility(e) {
  * @param {Event} event - The click event object.
  */
 function handleMobileTabClick(event) {
-    const clickedButton = event.target.closest('.tab-button'); // Ensure click is on button or child [cite: 4]
+    const clickedButton = event.target.closest('.tab-button');
+    if (!clickedButton) return;
 
-    if (!clickedButton) {
-        return; // Exit if the click was not on a tab button [cite: 5]
-    }
-
-    const targetId = clickedButton.dataset.target; // Get target box ID from data attribute [cite: 6]
-    if (!targetId) {
-        console.error("Clicked tab button is missing 'data-target' attribute.");
-        return;
-    }
+    const targetId = clickedButton.dataset.target;
+    if (!targetId) return;
 
     const tabContainer = clickedButton.closest('.tabs-mobile');
-    if (!tabContainer) return; // Should not happen if initial check passed, but safe check
+    const contentGrid = document.querySelector('.content-grid');
+    
+    if (!tabContainer || !contentGrid) return;
 
     const allTabButtons = tabContainer.querySelectorAll('.tab-button');
-    const contentGrid = document.querySelector('.content-grid'); // Adjust selector if needed
-    if (!contentGrid) {
-        console.error("Cannot find '.content-grid' element.");
-        return;
-    }
     const allLinkBoxes = contentGrid.querySelectorAll('.link-box');
 
-    // Remove 'active' class from all tabs and boxes
-    allTabButtons.forEach(button => button.classList.remove('active')); // [cite: 7]
-    allLinkBoxes.forEach(box => box.classList.remove('active')); // [cite: 7]
+    // Reset all tabs & panels
+    allTabButtons.forEach(button => {
+        button.classList.remove('active');
+        button.setAttribute('aria-selected', 'false');
+        button.setAttribute('tabindex', '-1');
+    });
 
-    // Add 'active' class to the clicked tab
-    clickedButton.classList.add('active'); // [cite: 8]
+    allLinkBoxes.forEach(box => {
+        box.classList.remove('active');
+    });
 
-    // Add 'active' class to the corresponding content box
-    const targetBox = document.getElementById(targetId); // [cite: 9]
+    // Activate selected tab & panel
+    clickedButton.classList.add('active');
+    clickedButton.setAttribute('aria-selected', 'true');
+    clickedButton.removeAttribute('tabindex');
+
+    const targetBox = document.getElementById(targetId);
     if (targetBox) {
-        targetBox.classList.add('active'); // [cite: 10]
-    } else {
-        console.error(`Target content box with ID #${targetId} not found.`); // [cite: 11]
+        targetBox.classList.add('active');
     }
 }
 
