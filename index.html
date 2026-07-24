@@ -5,144 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     
-    <!-- Privacy/SEO: Prevent search engine indexing for personal startpage -->
+    <!-- Prevent search engines from indexing your personal dashboard -->
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="Personal browser startpage for Mikael" />
-    
-    <!-- Mobile Browser Chrome Color (Catppuccin Mocha Base) -->
-    <meta name="theme-color" content="#1e1e2e" />
+
+    <title>Mikael's Startpage</title>
 
     <link rel="icon" href="./favicon.ico" />
-    <title>Mikael's Homepage</title>
-    
-    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="styles.css?v=8">
+    <!-- Increment version parameter to bypass mobile CSS cache -->
+    <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
     <div class="container">
-        <!-- Main Content Wrapper -->
         <main class="main-content-block">
             
             <!-- Header Section -->
             <header class="header">
-                <h1 id="greeting" aria-live="polite">Hello!</h1>
+                <h1 id="greeting"></h1>
             </header>
 
-            <!-- Navigation Tabs (Mobile Tablist / Desktop Grid Header) -->
+            <!-- Mobile Navigation & Page Indicator Dots -->
             <nav class="tabs-mobile" role="tablist" aria-label="Bookmark Categories">
-                <button 
-                    class="tab-button active" 
-                    id="tab-social"
-                    role="tab" 
-                    aria-selected="true" 
-                    aria-controls="box-social"
-                    data-target="box-social">Social</button>
-                
-                <button 
-                    class="tab-button" 
-                    id="tab-fun"
-                    role="tab" 
-                    aria-selected="false" 
-                    aria-controls="box-fun"
-                    tabindex="-1"
-                    data-target="box-fun">Fun</button>
-                
-                <button 
-                    class="tab-button" 
-                    id="tab-web-apps"
-                    role="tab" 
-                    aria-selected="false" 
-                    aria-controls="box-web-apps"
-                    tabindex="-1"
-                    data-target="box-web-apps">Web-Apps</button>
-                
-                <button 
-                    class="tab-button" 
-                    id="tab-finances"
-                    role="tab" 
-                    aria-selected="false" 
-                    aria-controls="box-finances"
-                    tabindex="-1"
-                    data-target="box-finances">Finances</button>
-                
-                <button 
-                    class="tab-button" 
-                    id="tab-other"
-                    role="tab" 
-                    aria-selected="false" 
-                    aria-controls="box-other"
-                    tabindex="-1"
-                    data-target="box-other">Other</button>
+                <button class="tab-button active" id="tab-social" data-target="box-social" role="tab" aria-selected="true" aria-controls="box-social">Social</button>
+                <button class="tab-button" id="tab-fun" data-target="box-fun" role="tab" aria-selected="false" aria-controls="box-fun">Fun</button>
+                <button class="tab-button" id="tab-web-apps" data-target="box-web-apps" role="tab" aria-selected="false" aria-controls="box-web-apps">Web-Apps</button>
+                <button class="tab-button" id="tab-finances" data-target="box-finances" role="tab" aria-selected="false" aria-controls="box-finances">Finances</button>
+                <button class="tab-button" id="tab-other" data-target="box-other" role="tab" aria-selected="false" aria-controls="box-other">Other</button>
+
+                <!-- Page Indicator Dots for Mobile View -->
+                <div class="page-dots" aria-hidden="true">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
             </nav>
 
-            <!-- Category Grid Panels -->
+            <!-- Swipeable Mobile Carousel / Desktop 5-Column Grid -->
             <div class="content-grid">
-                
-                <section 
-                    class="link-box active" 
-                    id="box-social" 
-                    role="tabpanel" 
-                    aria-labelledby="tab-social" 
-                    tabindex="0">
-                    <h2 class="sr-only">Social</h2>
-                    <ul aria-live="polite"></ul>
+                <section class="link-box active" id="box-social" role="tabpanel" aria-labelledby="tab-social">
+                    <ul></ul>
                 </section>
 
-                <section 
-                    class="link-box" 
-                    id="box-fun" 
-                    role="tabpanel" 
-                    aria-labelledby="tab-fun" 
-                    tabindex="0">
-                    <h2 class="sr-only">Fun</h2>
-                    <ul aria-live="polite"></ul>
+                <section class="link-box" id="box-fun" role="tabpanel" aria-labelledby="tab-fun">
+                    <ul></ul>
                 </section>
 
-                <section 
-                    class="link-box" 
-                    id="box-web-apps" 
-                    role="tabpanel" 
-                    aria-labelledby="tab-web-apps" 
-                    tabindex="0">
-                    <h2 class="sr-only">Web-Apps</h2>
-                    <ul aria-live="polite"></ul>
+                <section class="link-box" id="box-web-apps" role="tabpanel" aria-labelledby="tab-web-apps">
+                    <ul></ul>
                 </section>
 
-                <section 
-                    class="link-box" 
-                    id="box-finances" 
-                    role="tabpanel" 
-                    aria-labelledby="tab-finances" 
-                    tabindex="0">
-                    <h2 class="sr-only">Finances</h2>
-                    <ul aria-live="polite"></ul>
+                <section class="link-box" id="box-finances" role="tabpanel" aria-labelledby="tab-finances">
+                    <ul></ul>
                 </section>
 
-                <section 
-                    class="link-box" 
-                    id="box-other" 
-                    role="tabpanel" 
-                    aria-labelledby="tab-other" 
-                    tabindex="0">
-                    <h2 class="sr-only">Other</h2>
-                    <ul aria-live="polite"></ul>
+                <section class="link-box" id="box-other" role="tabpanel" aria-labelledby="tab-other">
+                    <ul></ul>
                 </section>
-
             </div>
+
         </main>
 
-        <!-- Page Footer -->
+        <!-- Footer Landmark -->
         <footer class="footer">
             <a href="https://github.com/miklam/startpage" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
         </footer>
     </div>
 
-    <!-- Scripts -->
     <script src="config.js"></script>
     <script src="main.js"></script>
 </body>
