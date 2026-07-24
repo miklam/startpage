@@ -1,31 +1,19 @@
 // ==========================================================================
-// main.js - Direct Tap & Touch Swipe Implementation
+// main.js - Native Horizontal Scroll & Tab Sync
 // ==========================================================================
 
-// --- Global Variables ---
-let currentCategoryIndex = 0;
-const categoryIds = ['box-social', 'box-fun', 'box-web-apps', 'box-finances', 'box-other'];
-
-/**
- * Populates link boxes based on the 'cards' object in config.js
- */
 function populateLinkBoxes() {
-    if (typeof cards === 'undefined') {
-        console.error("Link configuration ('cards' variable) is missing or not loaded before main.js.");
-        return;
-    }
+    if (typeof cards === 'undefined') return;
 
     cards.forEach(card => {
         const boxId = `box-${card.name.toLowerCase().replace(/\s*&\s*|\s+/g, '-')}`;
         const linkBox = document.getElementById(boxId);
-
         if (!linkBox) return;
 
         const ul = linkBox.querySelector("ul");
         if (!ul) return;
 
         ul.innerHTML = '';
-
         if (!card.bookmarks || typeof card.bookmarks !== 'object') return;
 
         Object.entries(card.bookmarks).forEach(([siteName, siteUrl]) => {
@@ -50,9 +38,6 @@ function populateLinkBoxes() {
     });
 }
 
-/**
- * Updates greeting based on current time
- */
 function updateDateTime() {
     const now = new Date();
     const hour = now.getHours();
@@ -70,104 +55,63 @@ function updateDateTime() {
 }
 
 /**
- * Switches the active tab and display box by array index
+ * Sync active tab highlighting based on current scroll position
  */
-function switchCategoryIndex(index) {
-    if (index < 0 || index >= categoryIds.length) return;
-
-    currentCategoryIndex = index;
-    const targetId = categoryIds[currentCategoryIndex];
-
+function syncTabsOnScroll() {
+    const contentGrid = document.querySelector('.content-grid');
     const tabButtons = document.querySelectorAll('.tab-button');
     const linkBoxes = document.querySelectorAll('.link-box');
 
-    // Update Tab Buttons
-    tabButtons.forEach(button => {
-        const isMatch = button.dataset.target === targetId;
-        button.classList.toggle('active', isMatch);
-        if (isMatch) {
-            button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-    });
+    if (!contentGrid || !linkBoxes.length) return;
 
-    // Update Content Boxes
-    linkBoxes.forEach(box => {
-        box.classList.toggle('active', box.id === targetId);
-    });
+    // Calculate index based on horizontal scroll position
+    const cardWidth = contentGrid.clientWidth;
+    if (cardWidth === 0) return;
+
+    const activeIndex = Math.round(contentGrid.scrollLeft / cardWidth);
+
+    if (linkBoxes[activeIndex]) {
+        const activeId = linkBoxes[activeIndex].id;
+
+        tabButtons.forEach(button => {
+            const isMatch = button.dataset.target === activeId;
+            button.classList.toggle('active', isMatch);
+            if (isMatch) {
+                button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        });
+    }
 }
 
 /**
- * Handles explicit tab button clicks
+ * Scroll to target box when tapping top tab button
  */
 function handleMobileTabClick(event) {
     const clickedButton = event.target.closest('.tab-button');
     if (!clickedButton) return;
 
     const targetId = clickedButton.dataset.target;
-    const index = categoryIds.indexOf(targetId);
-
-    if (index !== -1) {
-        switchCategoryIndex(index);
+    const targetBox = document.getElementById(targetId);
+    
+    if (targetBox) {
+        targetBox.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     }
 }
 
-/**
- * Sets up horizontal touch gesture listeners across the content area
- */
-function setupTouchSwipe() {
-    const contentGrid = document.querySelector('.content-grid');
-    if (!contentGrid) return;
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const swipeThreshold = 50; // minimum swipe distance in pixels
-
-    contentGrid.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    contentGrid.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipeGesture();
-    }, { passive: true });
-
-    function handleSwipeGesture() {
-        const distance = touchEndX - touchStartX;
-
-        // Swiped Left -> Next Category
-        if (distance < -swipeThreshold) {
-            if (currentCategoryIndex < categoryIds.length - 1) {
-                switchCategoryIndex(currentCategoryIndex + 1);
-            }
-        }
-        // Swiped Right -> Previous Category
-        else if (distance > swipeThreshold) {
-            if (currentCategoryIndex > 0) {
-                switchCategoryIndex(currentCategoryIndex - 1);
-            }
-        }
-    }
-}
-
-// ==========================================================================
-// Initialization
-// ==========================================================================
 function initializeApp() {
     populateLinkBoxes();
     updateDateTime();
     setInterval(updateDateTime, 1000);
 
-    // Setup Tab Clicks
     const tabContainer = document.querySelector('.tabs-mobile');
     if (tabContainer) {
         tabContainer.addEventListener('click', handleMobileTabClick);
     }
 
-    // Setup Touch Gestures
-    setupTouchSwipe();
-
-    // Default to first category
-    switchCategoryIndex(0);
+    const contentGrid = document.querySelector('.content-grid');
+    if (contentGrid) {
+        contentGrid.addEventListener('scroll', syncTabsOnScroll, { passive: true });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
