@@ -146,6 +146,30 @@ body {
   display: none;
   padding: 1.5rem;
   background-color: var(--bg-card);
+  
+  /* Scrollable Container Settings */
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+/* Custom Scrollbars for WebKit (Chrome, Edge, Safari) */
+.link-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.link-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.link-box::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.link-box::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
 }
 
 .link-box.active {
@@ -276,12 +300,16 @@ a:focus-visible, button:focus-visible {
     background-color: var(--border-color);
   }
 
-  .link-box {
+.link-box {
     display: flex !important;
     flex-direction: column;
     background-color: var(--bg-card);
     padding: 1.5rem 1rem;
     align-items: center;
+
+    /* Lock desktop box height & allow independent column scroll */
+    max-height: 55vh;
+    overflow-y: auto;
   }
 
   /* Hide white duplicate headers */
