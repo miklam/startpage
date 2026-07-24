@@ -1,5 +1,5 @@
 // ==========================================================================
-// main.js - Native Horizontal Scroll & Tab Sync
+// main.js - Native Horizontal Scroll, Tab Sync & Chevron Bounds Control
 // ==========================================================================
 
 function populateLinkBoxes() {
@@ -55,16 +55,16 @@ function updateDateTime() {
 }
 
 /**
- * Sync active tab highlighting based on current scroll position
+ * Sync active tab highlighting & toggle left/right chevron visibility bounds
  */
 function syncTabsOnScroll() {
     const contentGrid = document.querySelector('.content-grid');
+    const tabContainer = document.querySelector('.tabs-mobile');
     const tabButtons = document.querySelectorAll('.tab-button');
     const linkBoxes = document.querySelectorAll('.link-box');
 
     if (!contentGrid || !linkBoxes.length) return;
 
-    // Calculate index based on horizontal scroll position
     const cardWidth = contentGrid.clientWidth;
     if (cardWidth === 0) return;
 
@@ -76,16 +76,16 @@ function syncTabsOnScroll() {
         tabButtons.forEach(button => {
             const isMatch = button.dataset.target === activeId;
             button.classList.toggle('active', isMatch);
-            if (isMatch) {
-                button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
         });
+
+        // Hide left arrow on first item, hide right arrow on last item
+        if (tabContainer) {
+            tabContainer.classList.toggle('at-start', activeIndex === 0);
+            tabContainer.classList.toggle('at-end', activeIndex === linkBoxes.length - 1);
+        }
     }
 }
 
-/**
- * Scroll to target box when tapping top tab button
- */
 function handleMobileTabClick(event) {
     const clickedButton = event.target.closest('.tab-button');
     if (!clickedButton) return;
@@ -111,6 +111,8 @@ function initializeApp() {
     const contentGrid = document.querySelector('.content-grid');
     if (contentGrid) {
         contentGrid.addEventListener('scroll', syncTabsOnScroll, { passive: true });
+        // Initial check on page load
+        syncTabsOnScroll();
     }
 }
 
