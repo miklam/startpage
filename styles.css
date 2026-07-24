@@ -241,10 +241,32 @@ a:focus-visible, button:focus-visible {
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
-  /* Hide top mobile tab bar on desktop so titles aren't repeated */
+  /* Top Colored Header Row */
   .tabs-mobile {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
+
+  .tab-button {
+    background-color: var(--bg-card);
+    border-bottom: none;
+    font-size: 1rem;
+    padding: 1.1rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: default;
+    text-align: center;
+  }
+
+  /* Desktop Header Text Colors matching Categories */
+  .tab-button[data-target="box-social"] { color: var(--accent-social); }
+  .tab-button[data-target="box-fun"] { color: var(--accent-fun); }
+  .tab-button[data-target="box-web-apps"] { color: var(--accent-apps); }
+  .tab-button[data-target="box-finances"] { color: var(--accent-finances); }
+  .tab-button[data-target="box-other"] { color: var(--accent-other); }
 
   /* Desktop Content Grid */
   .content-grid {
@@ -262,25 +284,12 @@ a:focus-visible, button:focus-visible {
     align-items: center;
   }
 
+  /* Remove any generated pseudo-header text inside cards */
+  .link-box::before {
+    display: none !content;
+  }
+
   .link-box ul {
     text-align: center;
   }
-
-  /* Single Title Bar inside each card box on desktop */
-  .link-box::before {
-    display: block;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.2rem;
-    text-align: center;
-  }
-
-  /* Assign Category Accent Colors to Box Titles */
-  #box-social::before { content: "Social"; color: var(--accent-social); }
-  #box-fun::before { content: "Fun"; color: var(--accent-fun); }
-  #box-web-apps::before { content: "Web-Apps"; color: var(--accent-apps); }
-  #box-finances::before { content: "Finances"; color: var(--accent-finances); }
-  #box-other::before { content: "Other"; color: var(--accent-other); }
 }
