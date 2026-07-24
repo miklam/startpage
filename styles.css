@@ -1,5 +1,5 @@
 /* ==========================================================================
-   styles.css - Native Mobile First Startpage (Flexoki Theme)
+   styles.css - Flexoki Dark (Touch Mobile & Desktop Dashboard)
    ========================================================================== */
 
 :root {
@@ -47,7 +47,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding: 0; /* Edge to edge on mobile */
+  padding: 0;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -55,18 +55,18 @@ body {
 
 .main-content-block {
   width: 100%;
-  min-height: 100vh; /* Fills mobile viewport height */
+  min-height: 100vh;
   background-color: var(--bg-surface);
   border: none;
-  border-radius: 0; /* Flat edges on mobile */
+  border-radius: 0;
   display: flex;
   flex-direction: column;
 }
 
-/* --- Compact Mobile Header --- */
+/* --- Header Section --- */
 .header {
   position: relative;
-  min-height: 140px; /* Reduced height to leave room for links */
+  min-height: 160px;
   background-image: url('assets/images/header-background.jpg');
   background-size: cover;
   background-position: center;
@@ -88,7 +88,7 @@ body {
   text-align: center;
 }
 
-/* --- Mobile App Title Bar & Indicator Dots --- */
+/* --- Mobile Navigation & Page Dots --- */
 .tabs-mobile {
   display: flex;
   flex-direction: column;
@@ -105,7 +105,7 @@ body {
   border: none;
   font-family: inherit;
   font-weight: 700;
-  font-size: 1.5rem; /* Large Bold Native Title */
+  font-size: 1.5rem;
   text-align: center;
   letter-spacing: 0.01em;
 }
@@ -120,7 +120,6 @@ body {
 .tab-button[data-target="box-finances"].active { color: var(--accent-finances); }
 .tab-button[data-target="box-other"].active { color: var(--accent-other); }
 
-/* Native Page Dots Container */
 .page-dots {
   display: flex;
   gap: 6px;
@@ -137,13 +136,13 @@ body {
 }
 
 .dot.active {
-  width: 18px; /* Expands into pill when active */
+  width: 18px;
   border-radius: 4px;
   opacity: 1;
   background-color: var(--text-main);
 }
 
-/* --- Touch-Optimized Link List --- */
+/* --- Touch-Optimized Content Grid --- */
 .content-grid {
   display: flex;
   flex-direction: row;
@@ -164,7 +163,7 @@ body {
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  padding: 1.2rem 1.2rem 2rem 1.2rem;
+  padding: 1.2rem 1.2rem 2.5rem 1.2rem;
   background-color: var(--bg-card);
   overflow-y: auto;
 
@@ -194,26 +193,27 @@ body {
   width: 100%;
 }
 
-/* Native Touch Button Style (Large 48px Touch Target) */
+/* Mobile Button Links */
 .link-box a {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 48px; /* Native mobile touch target height */
+  min-height: 48px;
   padding: 0.6rem 1rem;
   color: var(--text-main);
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.04);
   text-decoration: none;
   border-radius: var(--radius-sm);
-  font-size: 1.1rem; /* Larger readable text */
+  font-size: 1.1rem;
   font-weight: 500;
   transition: var(--transition);
+  text-align: center; /* Enforces center alignment on multi-line links */
 }
 
 .link-box a:active {
-  background-color: rgba(255, 255, 255, 0.08); /* Active touch feedback */
+  background-color: rgba(255, 255, 255, 0.08);
   transform: scale(0.98);
 }
 
@@ -228,17 +228,27 @@ body {
   text-align: center;
 }
 
+/* --- Footer --- */
 .footer {
-  padding: 1rem;
+  padding: 1.2rem;
   font-size: 0.85rem;
   color: var(--text-muted);
   text-align: center;
-  background-color: var(--bg-card);
 }
 
 .footer a {
+  display: inline-block;
   color: var(--text-muted);
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: auto;
   text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--accent-other);
 }
 
 /* ==========================================================================
@@ -246,21 +256,25 @@ body {
    ========================================================================== */
 @media screen and (min-width: 768px) {
   
+  /* Restores centered desktop container with padding & rounded corners */
   .container {
     padding: clamp(1rem, 3vw, 2.5rem);
     justify-content: center;
   }
 
+  /* Restores outer rounded border for main block */
   .main-content-block {
     min-height: auto;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
   .header {
     min-height: 220px;
   }
 
+  /* Desktop Top Header Bar */
   .tabs-mobile {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -270,7 +284,7 @@ body {
   }
 
   .page-dots {
-    display: none; /* Hide dots on desktop */
+    display: none;
   }
 
   .tab-button {
@@ -291,6 +305,7 @@ body {
   .tab-button[data-target="box-finances"] { color: var(--accent-finances) !important; }
   .tab-button[data-target="box-other"] { color: var(--accent-other) !important; }
 
+  /* Desktop 5-Column Grid */
   .content-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -315,11 +330,17 @@ body {
     mask-image: none;
   }
 
+  /* Restores simple text links without button background on desktop */
   .link-box a {
     background-color: transparent;
     border: none;
     font-size: 0.95rem;
     padding: 0.3rem 0.8rem;
     min-height: auto;
+    text-align: center;
+  }
+
+  .link-box a:active {
+    transform: none;
   }
 }
