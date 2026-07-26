@@ -181,6 +181,7 @@ body {
   display: none !important;
 }
 
+/* --- Base Hover Pill --- */
 .kanban-lane a {
   display: block;
   padding: 0.4rem 0.6rem;
@@ -190,6 +191,13 @@ body {
   border-radius: 4px;
   transition: var(--transition);
 }
+
+/* Category-Specific Soft Glow Pills on Hover */
+#box-social a:hover   { color: var(--text-bright); background-color: rgba(139, 126, 200, 0.15); }
+#box-fun a:hover      { color: var(--text-bright); background-color: rgba(209, 77, 65, 0.15); }
+#box-web-apps a:hover { color: var(--text-bright); background-color: rgba(208, 162, 21, 0.15); }
+#box-finances a:hover { color: var(--text-bright); background-color: rgba(135, 154, 57, 0.15); }
+#box-other a:hover    { color: var(--text-bright); background-color: rgba(67, 133, 190, 0.15); }
 
 .kanban-lane a:hover {
   background-color: var(--bg-surface);
