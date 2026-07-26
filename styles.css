@@ -233,10 +233,10 @@ body {
   border-left: 3px solid var(--text-main);
 }
 
-/* Remove line on the far left column */
-.kanban-lane:first-child {
-  border-left: none;
-  padding-left: 0;
+/* Add line on the far right column */
+.kanban-lane:last-child {
+  border-right: 1px solid var(--border-color);
+  padding-right: 1rem;
 }
 
 #box-social a.selected   { border-left-color: var(--accent-social); }
