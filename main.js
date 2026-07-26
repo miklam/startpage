@@ -55,6 +55,60 @@ function updateGreeting() {
 let selectedMatchIndex = 0;
 
 /**
+ * Live Digital Clock (HH:MM)
+ */
+function startClock() {
+    const clockEl = document.getElementById('live-clock');
+    if (!clockEl) return;
+
+    function update() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        clockEl.textContent = `${hours}:${minutes}`;
+    }
+
+    update();
+    setInterval(update, 1000); // Keeps it synced smoothly every minute
+}
+
+/**
+ * 2. Fetch Weather via Open-Meteo (No API key needed)
+ */
+async function fetchWeather() {
+    const weatherEl = document.getElementById('weather-widget');
+    if (!weatherEl) return;
+
+    // Set coordinates for your location (e.g. Kinna / Gothenburg area approx: lat=57.5, lon=12.69)
+    const lat = 57.50; 
+    const lon = 12.69;
+
+    try {
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+        const data = await res.json();
+        
+        if (data && data.current_weather) {
+            const temp = Math.round(data.current_weather.temperature);
+            const code = data.current_weather.weathercode;
+            
+            // Map basic WMO weather codes to simple icons/labels
+            let condition = "🌤️";
+            if (code === 0) condition = "☀️"; // Clear
+            else if (code >= 1 && code <= 3) condition = "⛅"; // Partly cloudy
+            else if (code >= 45 && code <= 48) condition = "🌫️"; // Fog
+            else if (code >= 51 && code <= 67) condition = "🌧️"; // Rain/Drizzle
+            else if (code >= 71 && code <= 77) condition = "❄️"; // Snow
+
+            weatherEl.textContent = `${condition} ${temp}°C`;
+        } else {
+            weatherEl.textContent = "--°C";
+        }
+    } catch (err) {
+        weatherEl.textContent = "Weather unavailable";
+    }
+}
+
+/**
  * Handle Command Input & Keyboard Arrow/Tab Selection
  */
 function setupCommandInput() {
