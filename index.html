@@ -3,81 +3,78 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-    <!-- Prevent search engines from indexing your personal dashboard -->
     <meta name="robots" content="noindex, nofollow" />
 
-    <title>Mikael's Startpage</title>
+    <title>Mikael's CLI Dashboard</title>
 
     <link rel="icon" href="./favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Increment version parameter to bypass mobile CSS cache -->
-    <link rel="stylesheet" href="styles.css?v=11">
+    <link rel="stylesheet" href="styles.css?v=kanban_v1">
 </head>
 <body>
 
     <div class="container">
-        <main class="main-content-block">
-            
-            <!-- Header Section -->
-            <header class="header">
-                <h1 id="greeting"></h1>
-            </header>
-
-            <!-- Mobile Navigation & Page Indicator Dots -->
-            <nav class="tabs-mobile" role="tablist" aria-label="Bookmark Categories">
-                <button class="tab-button active" id="tab-social" data-target="box-social" role="tab" aria-selected="true" aria-controls="box-social">Social</button>
-                <button class="tab-button" id="tab-fun" data-target="box-fun" role="tab" aria-selected="false" aria-controls="box-fun">Fun</button>
-                <button class="tab-button" id="tab-web-apps" data-target="box-web-apps" role="tab" aria-selected="false" aria-controls="box-web-apps">Web-Apps</button>
-                <button class="tab-button" id="tab-finances" data-target="box-finances" role="tab" aria-selected="false" aria-controls="box-finances">Finances</button>
-                <button class="tab-button" id="tab-other" data-target="box-other" role="tab" aria-selected="false" aria-controls="box-other">Other</button>
-
-                <!-- Page Indicator Dots for Mobile View -->
-                <div class="page-dots" aria-hidden="true">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </nav>
-
-            <!-- Swipeable Mobile Carousel / Desktop 5-Column Grid -->
-            <div class="content-grid">
-                <section class="link-box active" id="box-social" role="tabpanel" aria-labelledby="tab-social">
-                    <ul></ul>
-                </section>
-
-                <section class="link-box" id="box-fun" role="tabpanel" aria-labelledby="tab-fun">
-                    <ul></ul>
-                </section>
-
-                <section class="link-box" id="box-web-apps" role="tabpanel" aria-labelledby="tab-web-apps">
-                    <ul></ul>
-                </section>
-
-                <section class="link-box" id="box-finances" role="tabpanel" aria-labelledby="tab-finances">
-                    <ul></ul>
-                </section>
-
-                <section class="link-box" id="box-other" role="tabpanel" aria-labelledby="tab-other">
-                    <ul></ul>
-                </section>
+        
+        <!-- Minimalist Header & Command Bar -->
+        <header class="header-section">
+            <div class="top-bar">
+                <span class="system-status"><span class="status-dot"></span> MIKAEL // STARTPAGE</span>
+                <span id="greeting" class="greeting-text"></span>
             </div>
 
+            <!-- Spotlight Command Bar -->
+            <div class="command-bar-wrapper">
+                <span class="prompt-symbol">&gt;_</span>
+                <input 
+                    type="text" 
+                    id="command-input" 
+                    placeholder="Type to filter, or 'g', 'yt', 'r' to search... (Press '/' to focus)" 
+                    autocomplete="off" 
+                    spellcheck="false" 
+                    autofocus 
+                />
+                <span class="shortcut-hint">CTRL+K</span>
+            </div>
+        </header>
+
+        <!-- Minimalist Kanban Lanes -->
+        <main class="kanban-grid" id="kanban-grid">
+            <div class="kanban-lane" id="box-social">
+                <div class="lane-header"><span class="tag tag-social">●</span> SOCIAL</div>
+                <ul></ul>
+            </div>
+
+            <div class="kanban-lane" id="box-fun">
+                <div class="lane-header"><span class="tag tag-fun">●</span> FUN</div>
+                <ul></ul>
+            </div>
+
+            <div class="kanban-lane" id="box-web-apps">
+                <div class="lane-header"><span class="tag tag-apps">●</span> WEB-APPS</div>
+                <ul></ul>
+            </div>
+
+            <div class="kanban-lane" id="box-finances">
+                <div class="lane-header"><span class="tag tag-finances">●</span> FINANCES</div>
+                <ul></ul>
+            </div>
+
+            <div class="kanban-lane" id="box-other">
+                <div class="lane-header"><span class="tag tag-other">●</span> OTHER</div>
+                <ul></ul>
+            </div>
         </main>
 
         <!-- Footer Landmark -->
         <footer class="footer">
-            <a href="https://github.com/miklam/startpage" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+            <a href="https://github.com/miklam/startpage" target="_blank" rel="noopener noreferrer">github repo</a>
         </footer>
     </div>
 
     <script src="config.js"></script>
-    <script src="main.js"></script>
+    <script src="main.js?v=kanban_v1"></script>
 </body>
 </html>
