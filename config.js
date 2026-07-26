@@ -20,7 +20,7 @@ const cards = [
         }
     },
     {
-        name: "Fun",
+        name: "Life",
         bookmarks: {
             // --- Streaming ---
             "YouTube": "https://www.youtube.com/feed/subscriptions",
@@ -50,7 +50,7 @@ const cards = [
         }
     },
     {
-        name: "Web-Apps",
+        name: "Apps",
         bookmarks: {
             // --- Email/Cloud ---
             "Proton Mail": "https://mail.proton.me",
@@ -79,7 +79,7 @@ const cards = [
         }
     },
     {
-        name: "Other",
+        name: "Services",
         bookmarks: {
             // --- Services ---
             "Kivra": "https://accounts.kivra.com/?locale=sv",
