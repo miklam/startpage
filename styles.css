@@ -13,10 +13,10 @@
   --text-bright: #fffcf0;    
   
   --accent-social: #8b7ec8;   
-  --accent-life: #d14d41;      
+  --accent-life: #d14d41;     
   --accent-apps: #d0a215;     
   --accent-finances: #879a39; 
-  --accent-services: #4385be;    
+  --accent-services: #4385be; 
 
   --font-mono: 'Fira Code', monospace;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -89,7 +89,7 @@ body {
 }
 
 .command-bar-wrapper:focus-within {
-  border-color: var(--accent-other);
+  border-color: var(--accent-services);
   box-shadow: 0 0 0 2px rgba(67, 133, 190, 0.2);
 }
 
@@ -160,11 +160,12 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
-.tag-social { color: var(--accent-social); }
-.tag-fun { color: var(--accent-fun); }
-.tag-apps { color: var(--accent-apps); }
+/* Dot Tag Colors */
+.tag-social   { color: var(--accent-social); }
+.tag-life     { color: var(--accent-life); }
+.tag-apps     { color: var(--accent-apps); }
 .tag-finances { color: var(--accent-finances); }
-.tag-other { color: var(--accent-other); }
+.tag-services { color: var(--accent-services); }
 
 .kanban-lane ul {
   list-style: none;
@@ -181,7 +182,7 @@ body {
   display: none !important;
 }
 
-/* --- Base Hover Pill --- */
+/* --- Base Link Styles --- */
 .kanban-lane a {
   display: block;
   padding: 0.4rem 0.6rem;
@@ -194,15 +195,10 @@ body {
 
 /* Category-Specific Soft Glow Pills on Hover */
 #box-social a:hover   { color: var(--text-bright); background-color: rgba(139, 126, 200, 0.15); }
-#box-life a:hover      { color: var(--text-bright); background-color: rgba(209, 77, 65, 0.15); }
-#box-apps a:hover { color: var(--text-bright); background-color: rgba(208, 162, 21, 0.15); }
+#box-life a:hover     { color: var(--text-bright); background-color: rgba(209, 77, 65, 0.15); }
+#box-apps a:hover     { color: var(--text-bright); background-color: rgba(208, 162, 21, 0.15); }
 #box-finances a:hover { color: var(--text-bright); background-color: rgba(135, 154, 57, 0.15); }
-#box-services a:hover    { color: var(--text-bright); background-color: rgba(67, 133, 190, 0.15); }
-
-.kanban-lane a:hover {
-  background-color: var(--bg-surface);
-  color: var(--text-bright);
-}
+#box-services a:hover { color: var(--text-bright); background-color: rgba(67, 133, 190, 0.15); }
 
 /* Secondary Search Matches */
 .kanban-lane a.match-dimmed {
@@ -220,10 +216,10 @@ body {
 }
 
 #box-social a.selected   { border-left-color: var(--accent-social); }
-#box-life a.selected      { border-left-color: var(--accent-life); }
-#box-apps a.selected { border-left-color: var(--accent-apps); }
+#box-life a.selected     { border-left-color: var(--accent-life); }
+#box-apps a.selected     { border-left-color: var(--accent-apps); }
 #box-finances a.selected { border-left-color: var(--accent-finances); }
-#box-services a.selected    { border-left-color: var(--accent-services); }
+#box-services a.selected { border-left-color: var(--accent-services); }
 
 .sub-category-divider {
   font-family: var(--font-mono);
@@ -249,5 +245,5 @@ body {
 }
 
 .footer a:hover {
-  color: var(--accent-other);
+  color: var(--accent-services);
 }
