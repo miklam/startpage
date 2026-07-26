@@ -66,6 +66,24 @@ body {
   padding-bottom: 0.5rem;
 }
 
+.header-widgets {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.widget-separator {
+  color: var(--border-bright);
+  font-size: 0.75rem;
+}
+
+.widget-item {
+  color: var(--text-main);
+}
+
 .status-dot {
   display: inline-block;
   width: 7px;
