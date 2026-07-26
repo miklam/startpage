@@ -1,7 +1,7 @@
 # My Customised Browser Startpage
 
 ![Screenshot of Homepage](assets//images/startpage-screenshot-v3.png)
-A clean, responsive, personalized startpage based on GABEstart/GetStarted. Displays categorized links and dynamic time/date information with a Catppuccin Mocha theme.
+A clean, responsive, personalized startpage based on GABEstart/GetStarted. Displays categorized links and dynamic time/date information with a Flexoki Dark theme.
 
 ## Features
 
