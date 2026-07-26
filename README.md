@@ -1,48 +1,62 @@
-# My Customised Browser Startpage
+# Mikael's Custom Browser Startpage
 
-![Screenshot of Homepage](assets//images/startpage-screenshot-v3.png)
-A clean, responsive, personalized startpage based on GABEstart/GetStarted. Displays categorized links and dynamic time/date information with a Flexoki Dark theme.
+![Screenshot of Startpage](assets/images/startpage-screenshot-v3.png)
 
-## Features
+A fast, minimalist, keyboard-first CLI browser startpage. Built with a Kanban layout, dynamic greetings, live link filtering, search engine shortcuts, and a dark **Flexoki** color palette.
 
-* **Theme:** Uses the **Catppuccin Mocha** color palette, defined via CSS variables in `styles.css`.
-* **Layout:**
-    * **Desktop:** Displays 5 category boxes in a centered grid layout.
-    * **Mobile:** Shows one category at a time with tabs for navigation.
-* **Content:**
-    * **5 Categories:** Links are organized into 5 main categories.
-    * **Configurable Links:** Categories and bookmarks are easily customized by editing the `config.js` file.
-    * **Dynamic Header:** Shows a time-based greeting (Good morning/afternoon/etc.), the current time (Swedish format), and the current date (English format, uppercase).
-* **Font:** Uses the "Inter" font from Google Fonts.
+> ⚡ **Vibe Coded with Gemini** — Collaboratively designed and refined through interactive prompts and live feedback.
 
-## Configuration
-
-Most configuration is done in the `config.js` file:
-
-1.  **`userName`:** Set the `userName` variable to change the name potentially used in greetings (though currently only the greeting itself is shown).
-    ```javascript
-    const userName = "YourName";
-    ```
-2.  **`cards`:** This array holds the configuration for the 5 category boxes. Each object in the array represents one box:
-    ```javascript
-    const cards = [
-      {
-        name: "Category Title", // This MUST match the id="box-..." in index.html (lowercase, hyphens for spaces) and the <h2> text
-        bookmarks: {
-          "Link Display Name": "[https://link-url.com/](https://link-url.com/)",
-          "Another Link": "[https://another-url.com/](https://another-url.com/)"
-          // Add more bookmarks here
-        }
-      },
-      // ... more category objects (exactly 5 total) ...
-    ];
-    ```
-    * Make sure the `name` property exactly matches the intended category title and corresponds to the `id` used in `index.html` (e.g., `name: "Web-Apps"` corresponds to `id="box-web-apps"`).
-    * Add/edit/remove links within the `bookmarks` object for each category.
-
-## Credits
-* **GABEstart** by [GABEweb](https://github.com/gabeweb) for the original inspiration.
-* **Flexoki Dark Palette:** Colors adapted from the [Flexoki Dark theme](https://stephango.com/flexoki).
-* **Inter Font:** Served via [Google Fonts](https://fonts.google.com/specimen/Inter).
-* **Header Image** from [Macrovector](https://www.freepik.com/author/macrovector) on [Freepik](https://www.freepik.com/author/macrovector](https://www.freepik.com/free-vector/mountains-landscape-sunset-background-with-lake-sunlit-dark-peaks-flat-vector-illustration_32074591.htm#fromView=search&page=4&position=46&uuid=9f98a3b8-ae59-4051-9f9f-d9d40f5641ad&query=mountain)).
 ---
+
+## ✨ Features
+
+* **⌨️ Command-Line First (CLI) Interface:**
+  * **Auto-Focus:** Ready to type immediately when you open a new tab.
+  * **Spotlight Filter:** Real-time search filtering across all bookmarks as you type.
+  * **Keyboard Navigation:** Use `Arrow Up` / `Arrow Down` or `Tab` to cycle through filtered results and press `Enter` to open.
+  * **Global Hotkey:** Press `/` or `Ctrl+K` (`Cmd+K`) from anywhere on the page to focus the search bar.
+* **🔍 Search Engine Prefixes:**
+  * `g <query>` → Instant Google search.
+  * `yt <query>` → Instant YouTube search.
+  * `r <subreddit>` → Jump directly to any subreddit (e.g., `r mechanicalkeyboards`).
+  * *Fallback:* Pressing `Enter` on any query that doesn't match a bookmark defaults to a Google search.
+* **📋 Minimalist Kanban Layout:**
+  * Clean, 5-column desktop layout separated by subtle vertical lane dividers.
+  * Category-specific accent glows on hover and keyboard selection.
+  * Responsive mobile-friendly view.
+* **🎨 Flexoki Dark Palette:** Warm, low-contrast dark theme designed for easy reading.
+* **🕒 Dynamic Greeting:** Time-based greeting system (`Good morning!`, `Good afternoon!`, etc.).
+
+---
+
+## ⚙️ Configuration
+
+All bookmarks and categories are managed in `config.js`:
+
+```javascript
+const cards = [
+  {
+    name: "Social",
+    bookmarks: {
+      "Facebook": "[https://facebook.com](https://facebook.com)",
+      "Instagram": "[https://instagram.com](https://instagram.com)",
+      "--- Sub Category ---": null, // Dividers
+      "Reddit": "[https://reddit.com](https://reddit.com)"
+    }
+  },
+  // ... configure up to 5 categories ...
+];
+```
+
+* Adding Dividers: Use `--- Divider Name ---: null` inside `bookmarks` to create subtle section breaks within a category lane.
+* Custom Categories: The `name` property automatically maps to the corresponding Kanban lane ID (`box-<category-name>`).
+
+## 🛠️ Built With
+* **Fonts:** Fira Code & Inter via Google Fonts.
+* **Palette:** Flexoki Dark by Steph Ango.
+* **Inspiration:** Minimalist CLI tools, Raycast, and GABEstart.
+
+## 🤝 Credits & Acknowledgments
+* Vibe Coded with Google Gemini 🤖
+* Original base inspired by GABEstart by [GABEweb](https://github.com/gabeweb).
+* Flexoki Theme Palette by [Steph Ango](https://stephango.com/flexoki).
