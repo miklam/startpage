@@ -252,6 +252,8 @@ function initializeApp() {
     populateKanban();
     updateGreeting();
     setupCommandInput();
+    startClock();
+    fetchWeather();
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
