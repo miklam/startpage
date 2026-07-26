@@ -1,5 +1,5 @@
 /* ==========================================================================
-   styles.css - Minimalist Kanban & CLI Dashboard (Flexoki Dark)
+   styles.css - Centered Minimalist Kanban & CLI Dashboard
    ========================================================================== */
 
 :root {
@@ -12,7 +12,6 @@
   --text-muted: #878580;     
   --text-bright: #fffcf0;    
   
-  /* Flexoki Accent Tags */
   --accent-social: #8b7ec8;   
   --accent-fun: #d14d41;      
   --accent-apps: #d0a215;     
@@ -35,12 +34,16 @@ body {
   background-color: var(--bg-base);
   color: var(--text-main);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
   padding: 1.5rem;
   -webkit-font-smoothing: antialiased;
 }
 
 .container {
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -180,7 +183,7 @@ body {
 
 .kanban-lane a {
   display: block;
-  padding: 0.3rem 0.5rem;
+  padding: 0.4rem 0.6rem;
   color: var(--text-main);
   text-decoration: none;
   font-size: 0.95rem;
@@ -188,16 +191,24 @@ body {
   transition: var(--transition);
 }
 
-.kanban-lane a:hover,
+.kanban-lane a:hover {
+  background-color: var(--bg-surface);
+  color: var(--text-bright);
+}
+
+/* Secondary Search Matches */
+.kanban-lane a.match-dimmed {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+}
+
+/* Primary Active Search Match (Selected for Enter Key) */
 .kanban-lane a.selected {
   background-color: var(--bg-surface);
   color: var(--text-bright);
-  padding-left: 0.8rem; /* Subtle arrow jump on hover */
-}
-
-/* Highlight matching search selection */
-.kanban-lane a.selected {
-  border-left: 2px solid var(--accent-other);
+  border-left: 3px solid var(--accent-other);
+  padding-left: 0.8rem;
+  font-weight: 600;
 }
 
 .sub-category-divider {
@@ -211,7 +222,7 @@ body {
 }
 
 .footer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   text-align: center;
