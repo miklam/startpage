@@ -29,14 +29,14 @@ const cards = [
             "Tele2Play": "https://www.tele2play.se/",
             "Crunchyroll": "https://crunchyroll.com",
             "HBO Max": "https://play.hbomax.com/",
-            "Disney+": "https://www.disneyplus.com/home",
+            // "Disney+": "https://www.disneyplus.com/home",
             // --- Gaming ---
             // "Foundry": "http://83.251.196.97:30000/join",
             "D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663",
-            "Nexus Mods": "https://www.nexusmods.com/",
+            // "Nexus Mods": "https://www.nexusmods.com/",
             // --- Entertainment ---
-            "Last FM": "https://www.last.fm",
-            "The StoryGraph": "https://app.thestorygraph.com/",
+            // "Last FM": "https://www.last.fm",
+            // "The StoryGraph": "https://app.thestorygraph.com/",
             // --- Health/Fitness ---
             "Garmin Connect": "https://connect.garmin.com/modern/",
             "Strava": "https://www.strava.com/dashboard",
