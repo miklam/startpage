@@ -13,10 +13,10 @@
   --text-bright: #fffcf0;    
   
   --accent-social: #8b7ec8;   
-  --accent-fun: #d14d41;      
+  --accent-life: #d14d41;      
   --accent-apps: #d0a215;     
   --accent-finances: #879a39; 
-  --accent-other: #4385be;    
+  --accent-services: #4385be;    
 
   --font-mono: 'Fira Code', monospace;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -194,10 +194,10 @@ body {
 
 /* Category-Specific Soft Glow Pills on Hover */
 #box-social a:hover   { color: var(--text-bright); background-color: rgba(139, 126, 200, 0.15); }
-#box-fun a:hover      { color: var(--text-bright); background-color: rgba(209, 77, 65, 0.15); }
-#box-web-apps a:hover { color: var(--text-bright); background-color: rgba(208, 162, 21, 0.15); }
+#box-life a:hover      { color: var(--text-bright); background-color: rgba(209, 77, 65, 0.15); }
+#box-apps a:hover { color: var(--text-bright); background-color: rgba(208, 162, 21, 0.15); }
 #box-finances a:hover { color: var(--text-bright); background-color: rgba(135, 154, 57, 0.15); }
-#box-other a:hover    { color: var(--text-bright); background-color: rgba(67, 133, 190, 0.15); }
+#box-services a:hover    { color: var(--text-bright); background-color: rgba(67, 133, 190, 0.15); }
 
 .kanban-lane a:hover {
   background-color: var(--bg-surface);
@@ -220,10 +220,10 @@ body {
 }
 
 #box-social a.selected   { border-left-color: var(--accent-social); }
-#box-fun a.selected      { border-left-color: var(--accent-fun); }
-#box-web-apps a.selected { border-left-color: var(--accent-apps); }
+#box-life a.selected      { border-left-color: var(--accent-life); }
+#box-apps a.selected { border-left-color: var(--accent-apps); }
 #box-finances a.selected { border-left-color: var(--accent-finances); }
-#box-other a.selected    { border-left-color: var(--accent-other); }
+#box-services a.selected    { border-left-color: var(--accent-services); }
 
 .sub-category-divider {
   font-family: var(--font-mono);
