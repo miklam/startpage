@@ -1,5 +1,5 @@
 // ==========================================================================
-// main.js - Minimalist Kanban & Command-Line Search Logic
+// main.js - Minimalist Kanban & Keyboard Navigation
 // ==========================================================================
 
 function populateKanban() {
@@ -52,14 +52,22 @@ function updateGreeting() {
     greetingEl.textContent = text;
 }
 
+let selectedMatchIndex = 0;
+
 /**
- * Handle Command Input (Filtering & CLI Engine Prefixes)
+ * Handle Command Input & Keyboard Arrow/Tab Selection
  */
 function setupCommandInput() {
     const input = document.getElementById('command-input');
     if (!input) return;
 
-    // Hotkey listener for '/' or 'Ctrl+K'
+    // Force focus immediately on load
+    setTimeout(() => {
+        input.focus();
+        input.select();
+    }, 50);
+
+    // Global Hotkey listener for '/' or 'Ctrl+K'
     document.addEventListener('keydown', (e) => {
         if (e.key === '/' && document.activeElement !== input) {
             e.preventDefault();
@@ -72,14 +80,30 @@ function setupCommandInput() {
         }
     });
 
+    // Real-time filtering on typing
     input.addEventListener('input', () => {
-        const query = input.value.trim().toLowerCase();
-        filterLinks(query);
+        selectedMatchIndex = 0; // Reset index on new input
+        filterLinks(input.value.trim().toLowerCase());
     });
 
+    // Keyboard navigation (Arrow keys & Enter)
     input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            executeCommand(input.value.trim());
+        const visibleLinks = Array.from(document.querySelectorAll('.kanban-lane a:not(.hidden-link)'));
+
+        if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
+            if (visibleLinks.length > 0) {
+                e.preventDefault();
+                selectedMatchIndex = (selectedMatchIndex + 1) % visibleLinks.length;
+                updateSelectedHighlight(visibleLinks);
+            }
+        } else if (e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey)) {
+            if (visibleLinks.length > 0) {
+                e.preventDefault();
+                selectedMatchIndex = (selectedMatchIndex - 1 + visibleLinks.length) % visibleLinks.length;
+                updateSelectedHighlight(visibleLinks);
+            }
+        } else if (e.key === 'Enter') {
+            executeCommand(input.value.trim(), visibleLinks);
         }
     });
 }
@@ -89,79 +113,87 @@ function setupCommandInput() {
  */
 function filterLinks(query) {
     const allLinks = document.querySelectorAll('.kanban-lane a');
-    const allListItems = document.querySelectorAll('.kanban-lane li');
     
-    // Clear previous selected highlights
-    allLinks.forEach(link => link.classList.remove('selected'));
+    // Clear previous highlights
+    allLinks.forEach(link => {
+        link.classList.remove('selected', 'hidden-link', 'match-dimmed');
+        const li = link.closest('li');
+        if (li) li.classList.remove('hidden');
+    });
 
     if (!query || query.startsWith('g ') || query.startsWith('yt ') || query.startsWith('r ')) {
-        // Reset view if input is empty or using search prefixes
-        allListItems.forEach(li => li.classList.remove('hidden'));
-        return;
+        return; // Full list visible when query is empty or using search engines
     }
 
-    let firstMatch = null;
+    const visibleLinks = [];
 
     allLinks.forEach(link => {
         const name = link.dataset.name;
         const li = link.closest('li');
 
         if (name && name.includes(query)) {
-            li.classList.remove('hidden');
-            if (!firstMatch) {
-                firstMatch = link;
-            }
+            link.classList.remove('hidden-link');
+            visibleLinks.push(link);
         } else if (li && !li.classList.contains('sub-category-divider')) {
+            link.classList.add('hidden-link');
             li.classList.add('hidden');
         }
     });
 
-    // Automatically highlight first matching result
-    if (firstMatch) {
-        firstMatch.classList.add('selected');
-    }
+    updateSelectedHighlight(visibleLinks);
+}
+
+/**
+ * Updates selected state across matching search results cleanly
+ */
+function updateSelectedHighlight(visibleLinks) {
+    const allLinks = document.querySelectorAll('.kanban-lane a');
+    allLinks.forEach(link => link.classList.remove('selected', 'match-dimmed'));
+
+    if (visibleLinks.length === 0) return;
+
+    // Boundary check
+    if (selectedMatchIndex >= visibleLinks.length) selectedMatchIndex = 0;
+
+    visibleLinks.forEach((link, index) => {
+        if (index === selectedMatchIndex) {
+            link.classList.add('selected'); // Active focused match
+        } else {
+            link.classList.add('match-dimmed'); // Secondary matches styled uniformly
+        }
+    });
 }
 
 /**
  * Executes action on 'Enter' key press
  */
-function executeCommand(rawQuery) {
+function executeCommand(rawQuery, visibleLinks) {
     if (!rawQuery) return;
 
-    // 1. Google Search Prefix: "g <query>"
     if (rawQuery.startsWith('g ')) {
-        const searchTerm = rawQuery.substring(2).trim();
-        window.open(`https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`, '_blank');
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(rawQuery.substring(2).trim())}`, '_blank');
         return;
     }
 
-    // 2. YouTube Search Prefix: "yt <query>"
     if (rawQuery.startsWith('yt ')) {
-        const searchTerm = rawQuery.substring(3).trim();
-        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`, '_blank');
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(rawQuery.substring(3).trim())}`, '_blank');
         return;
     }
 
-    // 3. Reddit Subreddit Prefix: "r <subreddit>"
     if (rawQuery.startsWith('r ')) {
-        const subreddit = rawQuery.substring(2).trim();
-        window.open(`https://www.reddit.com/r/${encodeURIComponent(subreddit)}`, '_blank');
+        window.open(`https://www.reddit.com/r/${encodeURIComponent(rawQuery.substring(2).trim())}`, '_blank');
         return;
     }
 
-    // 4. Fallback: Open currently selected/top-matching filtered link
-    const selectedLink = document.querySelector('.kanban-lane a.selected');
+    // Open active selected link
+    const selectedLink = visibleLinks[selectedMatchIndex] || visibleLinks[0];
     if (selectedLink) {
         window.open(selectedLink.href, '_blank');
     } else {
-        // Standard Google Search fallback
         window.open(`https://www.google.com/search?q=${encodeURIComponent(rawQuery)}`, '_blank');
     }
 }
 
-// ==========================================================================
-// Initializer
-// ==========================================================================
 function initializeApp() {
     populateKanban();
     updateGreeting();
