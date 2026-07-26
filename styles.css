@@ -233,6 +233,12 @@ body {
   border-left: 3px solid var(--text-main);
 }
 
+/* Remove line on the far left column */
+.kanban-lane:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
 #box-social a.selected   { border-left-color: var(--accent-social); }
 #box-life a.selected     { border-left-color: var(--accent-life); }
 #box-apps a.selected     { border-left-color: var(--accent-apps); }
