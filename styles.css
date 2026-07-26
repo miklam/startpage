@@ -202,14 +202,21 @@ body {
   color: var(--text-main);
 }
 
-/* Primary Active Search Match (Selected for Enter Key) */
+/* --- Dynamic Active Search Selection Highlights --- */
 .kanban-lane a.selected {
   background-color: var(--bg-surface);
   color: var(--text-bright);
-  border-left: 3px solid var(--accent-other);
   padding-left: 0.8rem;
   font-weight: 600;
+  border-left: 3px solid var(--text-main); /* Default fallback border */
 }
+
+/* Category Accent Borders */
+#box-social a.selected   { border-left-color: var(--accent-social); }
+#box-fun a.selected      { border-left-color: var(--accent-fun); }
+#box-web-apps a.selected { border-left-color: var(--accent-apps); }
+#box-finances a.selected { border-left-color: var(--accent-finances); }
+#box-other a.selected    { border-left-color: var(--accent-other); }
 
 .sub-category-divider {
   font-family: var(--font-mono);
