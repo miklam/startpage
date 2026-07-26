@@ -1,43 +1,34 @@
 // ==========================================================================
-// main.js
-// Handles link population, greeting updates, mobile touch navigation & page dots.
+// main.js - Minimalist Kanban & Command-Line Search Logic
 // ==========================================================================
 
-/**
- * Populates link boxes based on the global 'cards' configuration object in config.js.
- */
-function populateLinkBoxes() {
-    if (typeof cards === 'undefined') {
-        console.error("Link configuration ('cards' variable) is missing or not loaded before main.js.");
-        return;
-    }
+function populateKanban() {
+    if (typeof cards === 'undefined') return;
 
     cards.forEach(card => {
         const boxId = `box-${card.name.toLowerCase().replace(/\s*&\s*|\s+/g, '-')}`;
-        const linkBox = document.getElementById(boxId);
+        const lane = document.getElementById(boxId);
+        if (!lane) return;
 
-        if (!linkBox) return;
-
-        const ul = linkBox.querySelector("ul");
+        const ul = lane.querySelector("ul");
         if (!ul) return;
 
         ul.innerHTML = '';
-
         if (!card.bookmarks || typeof card.bookmarks !== 'object') return;
 
         Object.entries(card.bookmarks).forEach(([siteName, siteUrl]) => {
             const li = document.createElement("li");
 
-            // Handle divider format: '--- Divider Text ---': null
             if (siteUrl === null && siteName.startsWith('---') && siteName.endsWith('---')) {
                 li.classList.add("sub-category-divider");
                 li.textContent = siteName.substring(3, siteName.length - 3).trim();
-            } else if (siteUrl !== null) { // Standard Bookmark Link
+            } else if (siteUrl !== null) {
                 const a = document.createElement("a");
                 a.textContent = siteName;
                 a.href = siteUrl;
+                a.dataset.name = siteName.toLowerCase();
                 a.target = "_blank";
-                a.rel = "noopener noreferrer"; // Security best practice
+                a.rel = "noopener noreferrer";
                 li.appendChild(a);
             }
 
@@ -48,104 +39,133 @@ function populateLinkBoxes() {
     });
 }
 
-/**
- * Updates the time-based greeting element on the page.
- */
-function updateDateTime() {
-    const now = new Date();
-    const hour = now.getHours();
+function updateGreeting() {
+    const hour = new Date().getHours();
     const greetingEl = document.getElementById('greeting');
+    if (!greetingEl) return;
 
-    if (greetingEl) {
-        let greetingText = "Hello!";
+    let text = "Good night!";
+    if (hour >= 5 && hour < 12) text = "Good morning!";
+    else if (hour >= 12 && hour < 18) text = "Good afternoon!";
+    else if (hour >= 18) text = "Good evening!";
 
-        if (hour < 5) {
-            greetingText = "Good night!";
-        } else if (hour < 12) {
-            greetingText = "Good morning!";
-        } else if (hour < 18) {
-            greetingText = "Good afternoon!";
-        } else {
-            greetingText = "Good evening!";
+    greetingEl.textContent = text;
+}
+
+/**
+ * Handle Command Input (Filtering & CLI Engine Prefixes)
+ */
+function setupCommandInput() {
+    const input = document.getElementById('command-input');
+    if (!input) return;
+
+    // Hotkey listener for '/' or 'Ctrl+K'
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== input) {
+            e.preventDefault();
+            input.focus();
+            input.select();
+        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            input.focus();
+            input.select();
         }
-        greetingEl.textContent = greetingText;
-    }
+    });
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
+        filterLinks(query);
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            executeCommand(input.value.trim());
+        }
+    });
 }
 
 /**
- * Syncs active tab title highlighting and page indicator dots based on horizontal scroll position.
+ * Filter links visually as user types
  */
-function syncTabsOnScroll() {
-    const contentGrid = document.querySelector('.content-grid');
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const linkBoxes = document.querySelectorAll('.link-box');
-    const dots = document.querySelectorAll('.dot');
-
-    if (!contentGrid || !linkBoxes.length) return;
-
-    const cardWidth = contentGrid.clientWidth;
-    if (cardWidth === 0) return;
-
-    // Calculate active category index from scroll position
-    const activeIndex = Math.round(contentGrid.scrollLeft / cardWidth);
-
-    if (linkBoxes[activeIndex]) {
-        const activeId = linkBoxes[activeIndex].id;
-
-        // Update active tab button text
-        tabButtons.forEach(button => {
-            const isMatch = button.dataset.target === activeId;
-            button.classList.toggle('active', isMatch);
-            button.setAttribute('aria-selected', isMatch ? 'true' : 'false');
-        });
-
-        // Update active page dot indicator
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === activeIndex);
-        });
-    }
-}
-
-/**
- * Handles explicit tab clicks on desktop/tablet to scroll to category
- */
-function handleMobileTabClick(event) {
-    const clickedButton = event.target.closest('.tab-button');
-    if (!clickedButton) return;
-
-    const targetId = clickedButton.dataset.target;
-    const targetBox = document.getElementById(targetId);
+function filterLinks(query) {
+    const allLinks = document.querySelectorAll('.kanban-lane a');
+    const allListItems = document.querySelectorAll('.kanban-lane li');
     
-    if (targetBox) {
-        targetBox.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    // Clear previous selected highlights
+    allLinks.forEach(link => link.classList.remove('selected'));
+
+    if (!query || query.startsWith('g ') || query.startsWith('yt ') || query.startsWith('r ')) {
+        // Reset view if input is empty or using search prefixes
+        allListItems.forEach(li => li.classList.remove('hidden'));
+        return;
+    }
+
+    let firstMatch = null;
+
+    allLinks.forEach(link => {
+        const name = link.dataset.name;
+        const li = link.closest('li');
+
+        if (name && name.includes(query)) {
+            li.classList.remove('hidden');
+            if (!firstMatch) {
+                firstMatch = link;
+            }
+        } else if (li && !li.classList.contains('sub-category-divider')) {
+            li.classList.add('hidden');
+        }
+    });
+
+    // Automatically highlight first matching result
+    if (firstMatch) {
+        firstMatch.classList.add('selected');
+    }
+}
+
+/**
+ * Executes action on 'Enter' key press
+ */
+function executeCommand(rawQuery) {
+    if (!rawQuery) return;
+
+    // 1. Google Search Prefix: "g <query>"
+    if (rawQuery.startsWith('g ')) {
+        const searchTerm = rawQuery.substring(2).trim();
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`, '_blank');
+        return;
+    }
+
+    // 2. YouTube Search Prefix: "yt <query>"
+    if (rawQuery.startsWith('yt ')) {
+        const searchTerm = rawQuery.substring(3).trim();
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(searchTerm)}`, '_blank');
+        return;
+    }
+
+    // 3. Reddit Subreddit Prefix: "r <subreddit>"
+    if (rawQuery.startsWith('r ')) {
+        const subreddit = rawQuery.substring(2).trim();
+        window.open(`https://www.reddit.com/r/${encodeURIComponent(subreddit)}`, '_blank');
+        return;
+    }
+
+    // 4. Fallback: Open currently selected/top-matching filtered link
+    const selectedLink = document.querySelector('.kanban-lane a.selected');
+    if (selectedLink) {
+        window.open(selectedLink.href, '_blank');
+    } else {
+        // Standard Google Search fallback
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(rawQuery)}`, '_blank');
     }
 }
 
 // ==========================================================================
-// Initialization
+// Initializer
 // ==========================================================================
-
 function initializeApp() {
-    populateLinkBoxes();
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-
-    // Tab Clicks Listener
-    const tabContainer = document.querySelector('.tabs-mobile');
-    if (tabContainer) {
-        tabContainer.addEventListener('click', handleMobileTabClick);
-    }
-
-    // Scroll Sync Listener (Mobile Gestures)
-    const contentGrid = document.querySelector('.content-grid');
-    if (contentGrid) {
-        contentGrid.addEventListener('scroll', syncTabsOnScroll, { passive: true });
-        syncTabsOnScroll(); // Run initially on load
-    }
+    populateKanban();
+    updateGreeting();
+    setupCommandInput();
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-// ==========================================================================
-// End of main.js
-// ==========================================================================
