@@ -56,7 +56,7 @@ const cards = [
             "Proton Mail": "https://mail.proton.me",
             "OneDrive": "https://onedrive.com",
             "SimpleLogin": "https://app.simplelogin.io/dashboard/",
-            "Temp Mail": "https://temp-mail.org/en",
+            // "Temp Mail": "https://temp-mail.org/en",
             // --- Google Apps ---
             "Gmail": "https://mail.google.com",
             "Google Calendar": "https://calendar.google.com/calendar/",
@@ -74,7 +74,7 @@ const cards = [
             "Budget Input 2026": "https://script.google.com/macros/s/AKfycbwFVUTFtppoDU3KWAKGhVBbuZsoUWztB7ZwWBsuSYY0Hd6RI5gcW49CldtJt-STV8nB/exec",
             "Folksam": "https://www.folksam.se/",
             "Vattenfall": "https://www.vattenfall.se/",
-            "Mediateknik": "https://portal.mediateknik.net/authorization/index?username=&password=",
+            "Mediateknik": "https://portal.mediateknik.net/login",
             "Försäkringskassan": "https://www.forsakringskassan.se/logga-in#/"
         }
     },
