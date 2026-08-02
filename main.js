@@ -189,8 +189,8 @@ function setupCommandInput() {
 function filterBookmarks(query) {
     const links = document.querySelectorAll('.kanban-lane a');
 
-    // Check if user is typing a shortcut prefix ('g ', 'yt ', 'r ')
-    const isShortcut = /^(g|yt|r)\s+/i.test(query);
+    // Check if user is typing a shortcut prefix ('yt ', 'r ')
+    const isShortcut = /^(yt|r)\s+/i.test(query);
 
     links.forEach(a => {
         const text = a.textContent.toLowerCase();
@@ -232,27 +232,20 @@ function handleSearch(query) {
     const prefix = parts[0].toLowerCase();
     const prompt = parts.slice(1).join(' ');
 
-    // 1. Gemini Search Prompt (g <prompt>)
-    if (prefix === 'g') {
-        const searchPrompt = prompt || trimmed;
-        window.location.href = `https://gemini.google.com/prompt?q=${encodeURIComponent(searchPrompt)}`;
-        return;
-    }
-
-    // 2. YouTube Search (yt <query>)
+    // 1. YouTube Search (yt <query>)
     if (prefix === 'yt') {
         const searchPrompt = prompt || trimmed;
         window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchPrompt)}`;
         return;
     }
 
-    // 3. Subreddit Jump (r <subreddit>)
+    // 2. Reddit Sitewide Search (r <query>)
     if (prefix === 'r') {
-        const sub = prompt || trimmed;
-        window.location.href = `https://reddit.com/r/${encodeURIComponent(sub)}`;
+        const searchPrompt = prompt || trimmed;
+        window.location.href = `https://www.reddit.com/search/?q=${encodeURIComponent(searchPrompt)}`;
         return;
     }
 
-    // 4. Default Fallback -> Google Search
+    // 3. Default Fallback -> Google Search (with AI Overviews)
     window.location.href = `https://www.google.com/search?q=${encodeURIComponent(trimmed)}`;
 }
