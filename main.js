@@ -1,61 +1,80 @@
 // ==========================================================================
-// main.js - Minimalist Kanban & Keyboard Navigation
+// main.js - Minimalist CLI / Kanban Startpage Logic
 // ==========================================================================
 
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+});
+
+function initializeApp() {
+    populateKanban();
+    updateGreeting();
+    setupCommandInput();
+    startClock();
+    fetchWeather();
+}
+
+/**
+ * 1. Build Kanban Columns and Links from config.js
+ */
 function populateKanban() {
     if (typeof cards === 'undefined') return;
 
     cards.forEach(card => {
-        const boxId = `box-${card.name.toLowerCase().replace(/\s*&\s*|\s+/g, '-')}`;
-        const lane = document.getElementById(boxId);
-        if (!lane) return;
+        const laneId = `box-${card.name.toLowerCase()}`;
+        const laneEl = document.getElementById(laneId);
+        if (!laneEl) return;
 
-        const ul = lane.querySelector("ul");
-        if (!ul) return;
+        const ulEl = laneEl.querySelector('ul');
+        if (!ulEl) return;
 
-        ul.innerHTML = '';
-        if (!card.bookmarks || typeof card.bookmarks !== 'object') return;
+        ulEl.innerHTML = ''; // Clear existing list items
 
-        Object.entries(card.bookmarks).forEach(([siteName, siteUrl]) => {
-            const li = document.createElement("li");
+        Object.entries(card.bookmarks).forEach(([label, url]) => {
+            const li = document.createElement('li');
 
-            if (siteUrl === null && siteName.startsWith('---') && siteName.endsWith('---')) {
-                li.classList.add("sub-category-divider");
-                li.textContent = siteName.substring(3, siteName.length - 3).trim();
-            } else if (siteUrl !== null) {
-                const a = document.createElement("a");
-                a.textContent = siteName;
-                a.href = siteUrl;
-                a.dataset.name = siteName.toLowerCase();
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
+            // Handle Sub-Category Dividers (label starts/ends with --- or url is null)
+            if (url === null || label.startsWith('---')) {
+                li.className = 'sub-category-divider';
+                li.textContent = label.replace(/^-+\s*|\s*-+$/g, ''); // Clean dashes
+            } else {
+                const a = document.createElement('a');
+                a.href = url;
+                a.textContent = label;
                 li.appendChild(a);
             }
 
-            if (li.hasChildNodes() || li.classList.contains('sub-category-divider')) {
-                ul.appendChild(li);
-            }
+            ulEl.appendChild(li);
         });
     });
 }
 
+/**
+ * 2. Time-based Greeting
+ */
 function updateGreeting() {
-    const hour = new Date().getHours();
     const greetingEl = document.getElementById('greeting');
     if (!greetingEl) return;
 
-    let text = "Good night!";
-    if (hour >= 5 && hour < 12) text = "Good morning!";
-    else if (hour >= 12 && hour < 18) text = "Good afternoon!";
-    else if (hour >= 18) text = "Good evening!";
+    const hour = new Date().getHours();
+    const name = typeof userName !== 'undefined' ? userName : '';
+    let greetingText = 'Good day';
 
-    greetingEl.textContent = text;
+    if (hour >= 5 && hour < 12) {
+        greetingText = 'Good morning';
+    } else if (hour >= 12 && hour < 18) {
+        greetingText = 'Good afternoon';
+    } else if (hour >= 18 && hour < 22) {
+        greetingText = 'Good evening';
+    } else {
+        greetingText = 'Good night';
+    }
+
+    greetingEl.textContent = name ? `${greetingText}, ${name}!` : `${greetingText}!`;
 }
 
-let selectedMatchIndex = 0;
-
 /**
- * Live Digital Clock (HH:MM)
+ * 3. Live Digital Clock (HH:MM)
  */
 function startClock() {
     const clockEl = document.getElementById('live-clock');
@@ -69,17 +88,17 @@ function startClock() {
     }
 
     update();
-    setInterval(update, 1000); // Keeps it synced smoothly every minute
+    setInterval(update, 1000);
 }
 
 /**
- * 2. Fetch Weather via Open-Meteo (No API key needed)
+ * 4. Weather Widget (Open-Meteo API)
  */
 async function fetchWeather() {
     const weatherEl = document.getElementById('weather-widget');
     if (!weatherEl) return;
 
-    // Set coordinates for your location (e.g. Kinna / Gothenburg area approx: lat=57.5, lon=12.69)
+    // Kinna / Västra Götaland coordinates
     const lat = 57.50; 
     const lon = 12.69;
 
@@ -91,13 +110,12 @@ async function fetchWeather() {
             const temp = Math.round(data.current_weather.temperature);
             const code = data.current_weather.weathercode;
             
-            // Map basic WMO weather codes to simple icons/labels
             let condition = "🌤️";
-            if (code === 0) condition = "☀️"; // Clear
-            else if (code >= 1 && code <= 3) condition = "⛅"; // Partly cloudy
-            else if (code >= 45 && code <= 48) condition = "🌫️"; // Fog
-            else if (code >= 51 && code <= 67) condition = "🌧️"; // Rain/Drizzle
-            else if (code >= 71 && code <= 77) condition = "❄️"; // Snow
+            if (code === 0) condition = "☀️";
+            else if (code >= 1 && code <= 3) condition = "⛅";
+            else if (code >= 45 && code <= 48) condition = "🌫️";
+            else if (code >= 51 && code <= 67) condition = "🌧️";
+            else if (code >= 71 && code <= 77) condition = "❄️";
 
             weatherEl.textContent = `${condition} ${temp}°C`;
         } else {
@@ -109,151 +127,132 @@ async function fetchWeather() {
 }
 
 /**
- * Handle Command Input & Keyboard Arrow/Tab Selection
+ * 5. Spotlight Search Input & Navigation
  */
 function setupCommandInput() {
     const input = document.getElementById('command-input');
     if (!input) return;
 
-    // Force focus immediately on load
-    setTimeout(() => {
-        input.focus();
-        input.select();
-    }, 50);
+    let selectedIndex = -1;
 
-    // Global Hotkey listener for '/' or 'Ctrl+K'
+    // Global Hotkeys: '/' or 'Ctrl+K' / 'Cmd+K' to focus input
     document.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement !== input) {
-            e.preventDefault();
-            input.focus();
-            input.select();
-        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        if ((e.key === '/' || (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey))) && document.activeElement !== input) {
             e.preventDefault();
             input.focus();
             input.select();
         }
     });
 
-    // Real-time filtering on typing
+    // Real-time filtering & Keyboard navigation
     input.addEventListener('input', () => {
-        selectedMatchIndex = 0; // Reset index on new input
-        filterLinks(input.value.trim().toLowerCase());
+        selectedIndex = -1;
+        filterBookmarks(input.value.trim().toLowerCase());
     });
 
-    // Keyboard navigation (Arrow keys & Enter)
     input.addEventListener('keydown', (e) => {
-        const visibleLinks = Array.from(document.querySelectorAll('.kanban-lane a:not(.hidden-link)'));
+        const matches = Array.from(document.querySelectorAll('.kanban-lane a')).filter(a => {
+            const li = a.closest('li');
+            return li && !li.classList.contains('hidden');
+        });
 
         if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
-            if (visibleLinks.length > 0) {
-                e.preventDefault();
-                selectedMatchIndex = (selectedMatchIndex + 1) % visibleLinks.length;
-                updateSelectedHighlight(visibleLinks);
+            e.preventDefault();
+            if (matches.length > 0) {
+                selectedIndex = (selectedIndex + 1) % matches.length;
+                updateSelection(matches, selectedIndex);
             }
         } else if (e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey)) {
-            if (visibleLinks.length > 0) {
-                e.preventDefault();
-                selectedMatchIndex = (selectedMatchIndex - 1 + visibleLinks.length) % visibleLinks.length;
-                updateSelectedHighlight(visibleLinks);
+            e.preventDefault();
+            if (matches.length > 0) {
+                selectedIndex = (selectedIndex - 1 + matches.length) % matches.length;
+                updateSelection(matches, selectedIndex);
             }
         } else if (e.key === 'Enter') {
-            executeCommand(input.value.trim(), visibleLinks);
+            e.preventDefault();
+            if (selectedIndex >= 0 && matches[selectedIndex]) {
+                window.location.href = matches[selectedIndex].href;
+            } else {
+                handleSearch(input.value);
+            }
+        } else if (e.key === 'Escape') {
+            input.value = '';
+            filterBookmarks('');
+            input.blur();
         }
     });
 }
 
 /**
- * Filter links visually as user types
+ * Filter Links in Kanban Lanes
  */
-function filterLinks(query) {
-    const allLinks = document.querySelectorAll('.kanban-lane a');
-    
-    // Clear previous highlights
-    allLinks.forEach(link => {
-        link.classList.remove('selected', 'hidden-link', 'match-dimmed');
-        const li = link.closest('li');
-        if (li) li.classList.remove('hidden');
-    });
+function filterBookmarks(query) {
+    const links = document.querySelectorAll('.kanban-lane a');
 
-    if (!query || query.startsWith('g ') || query.startsWith('yt ') || query.startsWith('r ')) {
-        return; // Full list visible when query is empty or using search engines
-    }
+    // Check if user is typing a shortcut prefix ('g ', 'yt ', 'r ')
+    const isShortcut = /^(g|yt|r)\s+/i.test(query);
 
-    const visibleLinks = [];
+    links.forEach(a => {
+        const text = a.textContent.toLowerCase();
+        const li = a.closest('li');
+        a.classList.remove('selected', 'match-dimmed');
 
-    allLinks.forEach(link => {
-        const name = link.dataset.name;
-        const li = link.closest('li');
-
-        if (name && name.includes(query)) {
-            link.classList.remove('hidden-link');
-            visibleLinks.push(link);
-        } else if (li && !li.classList.contains('sub-category-divider')) {
-            link.classList.add('hidden-link');
+        if (!query) {
+            li.classList.remove('hidden');
+        } else if (isShortcut) {
+            li.classList.add('hidden'); // Hide links when active search prefix is typed
+        } else if (text.includes(query)) {
+            li.classList.remove('hidden');
+            a.classList.add('match-dimmed');
+        } else {
             li.classList.add('hidden');
         }
     });
-
-    updateSelectedHighlight(visibleLinks);
 }
 
 /**
- * Updates selected state across matching search results cleanly
+ * Highlight Active Selected Link
  */
-function updateSelectedHighlight(visibleLinks) {
-    const allLinks = document.querySelectorAll('.kanban-lane a');
-    allLinks.forEach(link => link.classList.remove('selected', 'match-dimmed'));
-
-    if (visibleLinks.length === 0) return;
-
-    // Boundary check
-    if (selectedMatchIndex >= visibleLinks.length) selectedMatchIndex = 0;
-
-    visibleLinks.forEach((link, index) => {
-        if (index === selectedMatchIndex) {
-            link.classList.add('selected'); // Active focused match
-        } else {
-            link.classList.add('match-dimmed'); // Secondary matches styled uniformly
-        }
-    });
+function updateSelection(matches, index) {
+    matches.forEach(a => a.classList.remove('selected'));
+    if (index >= 0 && matches[index]) {
+        matches[index].classList.add('selected');
+        matches[index].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
 }
 
 /**
- * Executes action on 'Enter' key press
+ * Handle Search Prefixes & Default Fallback Search
  */
-function executeCommand(rawQuery, visibleLinks) {
-    if (!rawQuery) return;
+function handleSearch(query) {
+    const trimmed = query.trim();
+    if (!trimmed) return;
 
-    if (rawQuery.startsWith('g ')) {
-        window.open(`https://www.google.com/search?q=${encodeURIComponent(rawQuery.substring(2).trim())}`, '_blank');
+    const parts = trimmed.split(' ');
+    const prefix = parts[0].toLowerCase();
+    const prompt = parts.slice(1).join(' ');
+
+    // 1. Gemini Search Prompt (g <prompt>)
+    if (prefix === 'g') {
+        const searchPrompt = prompt || trimmed;
+        window.location.href = `https://gemini.google.com/app?q=${encodeURIComponent(searchPrompt)}`;
         return;
     }
 
-    if (rawQuery.startsWith('yt ')) {
-        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(rawQuery.substring(3).trim())}`, '_blank');
+    // 2. YouTube Search (yt <query>)
+    if (prefix === 'yt') {
+        const searchPrompt = prompt || trimmed;
+        window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(searchPrompt)}`;
         return;
     }
 
-    if (rawQuery.startsWith('r ')) {
-        window.open(`https://www.reddit.com/r/${encodeURIComponent(rawQuery.substring(2).trim())}`, '_blank');
+    // 3. Subreddit Jump (r <subreddit>)
+    if (prefix === 'r') {
+        const sub = prompt || trimmed;
+        window.location.href = `https://reddit.com/r/${encodeURIComponent(sub)}`;
         return;
     }
 
-    // Open active selected link
-    const selectedLink = visibleLinks[selectedMatchIndex] || visibleLinks[0];
-    if (selectedLink) {
-        window.open(selectedLink.href, '_blank');
-    } else {
-        window.open(`https://www.google.com/search?q=${encodeURIComponent(rawQuery)}`, '_blank');
-    }
+    // 4. Default Fallback -> Google Search
+    window.location.href = `https://www.google.com/search?q=${encodeURIComponent(trimmed)}`;
 }
-
-function initializeApp() {
-    populateKanban();
-    updateGreeting();
-    setupCommandInput();
-    startClock();
-    fetchWeather();
-}
-
-document.addEventListener('DOMContentLoaded', initializeApp);
