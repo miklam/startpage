@@ -235,7 +235,7 @@ function handleSearch(query) {
     // 1. Gemini Search Prompt (g <prompt>)
     if (prefix === 'g') {
         const searchPrompt = prompt || trimmed;
-        window.location.href = `https://gemini.google.com/app?q=${encodeURIComponent(searchPrompt)}`;
+        window.location.href = `https://gemini.google.com/prompt?q=${encodeURIComponent(searchPrompt)}`;
         return;
     }
 
