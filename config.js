@@ -30,6 +30,7 @@ const cards = [
             "Crunchyroll": "https://crunchyroll.com",
             "HBO Max": "https://play.hbomax.com/",
             // "Disney+": "https://www.disneyplus.com/home",
+            "JustWatch": "https://www.justwatch.com/",
             // --- Gaming ---
             // "Foundry": "http://83.251.196.97:30000/join",
             "D&D Beyond": "https://www.dndbeyond.com/campaigns/4780663",
